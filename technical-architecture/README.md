@@ -15,4 +15,5 @@ System design, architecture diagrams, tech-stack decisions, ADRs, ARB records, i
 
 <!-- Claude maintains this list -->
 
-_(empty)_
+- [`system-overview.md`](./system-overview.md) — 3-layer MVP architecture (mobile app + BFF + RemitONE); Flutter vs React Native open question
+- [`integrations/remitone.md`](./integrations/remitone.md) — RemitONE API v3.3 reference and integration constraints

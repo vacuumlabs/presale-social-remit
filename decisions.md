@@ -71,3 +71,19 @@ Claude appends entries here whenever a decision surfaces during `/ingest` or whi
 - **Made by:** Boris Vida
 - **Refines:** "Drop AI-assisted vs baseline comparison from estimates" (2026-05-13). Both decisions are active together.
 - **Status:** active
+
+## 2025-12-17 — React Native selected as mobile tech stack (December 2025 proposal)
+
+- **Decision:** React Native (TypeScript) chosen for the SocialRemit mobile app — single codebase for iOS and Android.
+- **Context:** Matched VL's standard remittance app delivery pattern and the team's expertise at time of proposal. Cross-platform from one codebase, distributed via App Store / Google Play.
+- **Made by:** Boris Vida (SA), in the December 2025 proposal.
+- **Sources:** [`team-inputs/2025-12-17-fe-build-proposal.md`](team-inputs/2025-12-17-fe-build-proposal.md)
+- **Status:** Under review — SocialRemit expressed a preference for Flutter in May 2026. Re-evaluation required before a new engagement is signed.
+
+## 2025-12-17 — BFF pattern adopted: NestJS + Redis on AWS ECS Fargate
+
+- **Decision:** A Backend-for-Frontend layer (NestJS, Redis caching, ECS Fargate) sits between the mobile app and RemitONE, handling XML↔JSON translation, RSA encryption, session management, and UISettings caching.
+- **Context:** RemitONE's API is XML-over-POST and uses RSA-encrypted fields — not suitable for direct mobile consumption. The BFF abstracts this complexity, keeps credentials out of the app, and provides a clean JSON API surface. It also future-proofs the architecture if SocialRemit later migrates away from RemitONE.
+- **Made by:** Boris Vida (SA), in the December 2025 proposal.
+- **Sources:** [`team-inputs/2025-12-17-fe-build-proposal.md`](team-inputs/2025-12-17-fe-build-proposal.md)
+- **Status:** active

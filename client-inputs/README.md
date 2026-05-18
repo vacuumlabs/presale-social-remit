@@ -16,4 +16,4 @@ Any non-markdown file (PDF, deck, spreadsheet, image) gets a matching `.md` next
 
 <!-- Claude maintains this on every /ingest and /lint pass -->
 
-_(empty)_
+- [`Socialremit_Customer_Flow_Nov2025.md`](./Socialremit_Customer_Flow_Nov2025.md) — companion summary for `../../../Socialremit_Customer Flow Nov 2025.pdf`; full UX screen spec from client (Nov 2025)

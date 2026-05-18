@@ -50,4 +50,6 @@ The fastest way is to ask Claude: *"scaffold a new PO persona for a senior radio
 
 <!-- Claude maintains this on every /ingest and /lint pass -->
 
-_(empty — first file to be added)_
+- [`2025-12-08-call-transcript.md`](./2025-12-08-call-transcript.md) — discovery call transcript (Marcus Davey, Paul, Joseph); companion to GDrive `19kIRzgUSK5yZlzFmDl-W3XLxJ4aMnPrEQLyWTL4z83E`
+- [`2025-12-15-discovery-questions.md`](./2025-12-15-discovery-questions.md) — 12 VL discovery questions prepared for SocialRemit; answers not yet captured
+- [`2025-12-17-fe-build-proposal.md`](./2025-12-17-fe-build-proposal.md) — Dec 2025 MVP proposal (React Native + NestJS BFF + RemitONE); companion to GDrive `1vbWLnsZ_GTBkVH0Xbcasam92xm3ugFXJ_WFeCMbXvsc`

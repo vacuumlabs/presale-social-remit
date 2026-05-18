@@ -30,4 +30,4 @@ Roadmaps, timelines, milestones, capacity planning, status reports, project asse
 
 <!-- Claude maintains this list -->
 
-_(empty)_
+- [`estimation.md`](./estimation.md) — Dec 2025 T&M estimates: 175 MD / £118k (FE+BFF) or 250 MD / £169k (with Discovery)
