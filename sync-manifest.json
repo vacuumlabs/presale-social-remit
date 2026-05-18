@@ -1,0 +1,51 @@
+{
+  "version": "1.9.0",
+  "updated": "2026-05-15",
+  "template_repo": "vacuumlabs/presale-template",
+  "template_branch": "master",
+  "files": [
+    "AGENTS.md",
+    "CLAUDE.md",
+    "HOW-IT-WORKS.md",
+    "README.md",
+    "SETUP.md",
+    ".gitattributes",
+    ".gitignore",
+    "sync-manifest.json",
+    ".claude/settings.json",
+    ".claude/commands/ingest.md",
+    ".claude/commands/query.md",
+    ".claude/commands/lint.md",
+    ".claude/commands/sync-template.md",
+    ".claude/commands/p1-deal-intake.md",
+    ".claude/commands/p2-domain-research.md",
+    ".claude/commands/p3-problem-framing.md",
+    ".claude/commands/p3e-business-architecture.md",
+    ".claude/commands/p3f-sales-strategy-alignment.md",
+    ".claude/commands/p4-technical-architecture.md",
+    ".claude/commands/p5-estimation.md",
+    ".claude/commands/p6-arb-review.md",
+    ".claude/commands/p7-proposal-assembly.md",
+    ".claude/commands/p8-quality-check.md",
+    ".claude/commands/p9-win-loss-debrief.md",
+    ".claude/agents/synthesiser.md",
+    ".claude/skills/vacuumlabs-presale-guide.skill",
+    "templates/T1-sales-deal-brief.md",
+    "templates/T2-discovery-qa.md",
+    "templates/T4-deal-outcome.md",
+    "templates/T5-proposal-document.md",
+    "templates/T6-postmortem-call.md",
+    "templates/T7-sales-strategy-alignment.md",
+    "templates/README.md"
+  ],
+  "external_tools": [
+    {
+      "name": "superpowers",
+      "source": "https://github.com/anthropics/claude-plugins-official",
+      "version": null,
+      "status": "candidate",
+      "relevant_commands": ["/review", "/security-review", "/init", "/brainstorming", "/writing-plans", "/systematic-debugging"],
+      "install_note": "Install via the Claude Code plugin marketplace: run '/plugin marketplace add anthropics/claude-plugins-official' then '/plugin install superpowers@claude-plugins-official'. Plugin commands coexist with presale commands — different prefixes, no conflicts."
+    }
+  ]
+}

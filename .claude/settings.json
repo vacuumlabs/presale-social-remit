@@ -1,0 +1,40 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write|NotebookEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "git fetch --quiet 2>/dev/null; BEHIND=$(git rev-list --count HEAD..@{u} 2>/dev/null); if [ \"${BEHIND:-0}\" -gt 0 ]; then git pull --ff-only --quiet 2>/dev/null || printf '{\"hookSpecificOutput\":{\"hookEventName\":\"PreToolUse\",\"permissionDecision\":\"deny\",\"permissionDecisionReason\":\"Your copy is out of sync — someone has pushed to origin since you last synced. Ask Claude: pull and rebase my working copy.\"}}'; fi; exit 0",
+            "timeout": 15,
+            "statusMessage": "Syncing with origin…"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "command -v jq >/dev/null 2>&1 || exit 0; INPUT=$(cat); cmd=$(printf '%s' \"$INPUT\" | jq -r '.tool_input.command // \"\"'); branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null); [ \"$branch\" = \"master\" ] || exit 0; case \"$cmd\" in *\"git push\"*) case \"$cmd\" in *\"--force-with-lease\"*) exit 0;; *\" --force\"*|*\" -f \"*|*\" -f\") printf '%s' '{\"hookSpecificOutput\":{\"hookEventName\":\"PreToolUse\",\"permissionDecision\":\"deny\",\"permissionDecisionReason\":\"Force-push to master is blocked by a repo guard hook. Push to a branch or remove the --force flag.\"}}';; esac ;; esac; exit 0",
+            "timeout": 10,
+            "statusMessage": "Checking force-push guard…"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "git add -A 2>/dev/null; if ! git diff --cached --quiet; then MSG=$(git diff --cached --name-only 2>/dev/null | sed 's|/.*||' | sort -u | tr '\\n' ', ' | sed 's/, $//'); git commit -m \"wiki: ${MSG:-updates}\" --quiet 2>/dev/null; fi; git push --quiet 2>/dev/null || (git pull --rebase --quiet 2>/dev/null && git push --quiet 2>/dev/null); exit 0",
+            "timeout": 30,
+            "statusMessage": "Saving changes to GitHub…"
+          }
+        ]
+      }
+    ]
+  }
+}
