@@ -43,3 +43,7 @@ Ingested 4 raw sources (client UX flow PDF, Dec 2025 call transcript, discovery 
 - Updated: `contract/engagement.md`, all folder READMEs, root `index.md`
 - Decisions recorded: React Native selected (Dec 2025, under review); BFF pattern adopted (NestJS + Redis + ECS Fargate)
 - Contradictions: none
+
+## [2026-05-18 00:00] ingest | VL internal approach — SocialRemit re-engagement
+
+Per CTO Michal Cernak: Boris Vida to continue the re-engagement independently; Martin Simonovic and Richard Peres to be informed only after the 19 May 2026 call. Marcus Davey not looped in before the call. Presales ownership shifting from sales to delivery. Updated `deal-context/stakeholder-map.md` with Michal Cernak, Martin Simonovic, Richard Peres. Saved to memory.

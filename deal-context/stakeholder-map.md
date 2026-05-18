@@ -31,8 +31,17 @@ Paul was the other SocialRemit speaker on the December 2025 call. He expressed a
 
 ## Vacuumlabs
 
+### Michal Cernak
+**Role:** CTO. Directed the internal approach for the May 2026 re-engagement: Boris to continue independently with Joseph, and to inform Martin Simonovic and Richard Peres only after the 19 May 2026 call. Presales ownership is shifting from sales to delivery under his direction.
+
 ### Boris Vida
-**Role:** Solution Architect. Primary technical contact. Led architecture on the Dec 2025 proposal. Re-engaged by Joseph directly in May 2026.
+**Role:** Solution Architect. Primary technical contact. Led architecture on the Dec 2025 proposal. Re-engaged by Joseph directly in May 2026. Running the 19 May call.
+
+### Martin Simonovic
+**Role:** Unknown (delivery-side). To be informed of the re-engagement after the 19 May 2026 call, per Michal Cernak's direction.
+
+### Richard Peres
+**Role:** Unknown (delivery-side). To be informed of the re-engagement after the 19 May 2026 call, per Michal Cernak's direction.
 
 ### Marcus Davey
-**Role:** Business Developer / Sales. Made the original introduction to SocialRemit (via a contact named Marcus). Led the December 2025 discovery call commercially. Not involved in the May 2026 re-engagement so far.
+**Role:** Business Developer / Sales. Made the original introduction to SocialRemit. Led the December 2025 discovery call commercially. Not being looped into the May 2026 re-engagement at this stage — presales ownership is moving from sales to delivery.
