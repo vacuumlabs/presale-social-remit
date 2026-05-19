@@ -50,3 +50,6 @@ Problem framing, product strategy, user and market research, personas, PRDs, use
 
 - [`mvp-scope.md`](./mvp-scope.md) — what is in/out of MVP scope; Fincode native vs Phase 2 features
 - [`product-vision.md`](./product-vision.md) — brand, differentiation, "built by migrants for migrants", 6-year innovation pipeline
+- [`domain-research.md`](./domain-research.md) — P2: client profile, UK remittance domain context, likely priorities
+- [`regulatory-brief.md`](./regulatory-brief.md) — P2: FCA/EMI regulatory framework, KYC/AML/sanctions constraints, data residency
+- [`competitive-positioning.md`](./competitive-positioning.md) — P2: likely competitors, VL differentiators, risks to VL's position

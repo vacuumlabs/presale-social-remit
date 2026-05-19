@@ -26,6 +26,9 @@ Maintained by `/ingest` and `/lint`. Do not edit by hand except to resolve confl
 
 - [`product-management/mvp-scope.md`](./product-management/mvp-scope.md) — MVP in/out of scope, what Fincode supports natively vs Phase 2
 - [`product-management/product-vision.md`](./product-management/product-vision.md) — "Built by migrants for migrants"; emotional money brand; 6-year innovation pipeline
+- [`product-management/domain-research.md`](./product-management/domain-research.md) — P2: client profile, UK remittance domain context, likely priorities
+- [`product-management/regulatory-brief.md`](./product-management/regulatory-brief.md) — P2: FCA/EMI regulatory framework; top constraints: progressive KYC, sanctions screening, data residency
+- [`product-management/competitive-positioning.md`](./product-management/competitive-positioning.md) — P2: freelancers vs agencies vs boutiques; VL differentiators; risks to VL's position
 
 ## Technical architecture
 

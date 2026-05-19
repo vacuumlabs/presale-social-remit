@@ -54,6 +54,13 @@ Ingested `Flutter - SocialRemit Transcript.txt` (57-min call, Boris Vida + Josep
 
 Per CTO Michal Cernak: Boris Vida to continue the re-engagement independently; Martin Simonovic and Richard Peres to be informed only after the 19 May 2026 call. Marcus Davey not looped in before the call. Presales ownership shifting from sales to delivery. Updated `deal-context/stakeholder-map.md` with Michal Cernak, Martin Simonovic, Richard Peres. Saved to memory.
 
+## [2026-05-19 00:00] ingest | P2 domain research — SocialRemit
+
+P2 ran for SocialRemit. Three pages created in product-management/:
+- Created: `domain-research.md` — client profile (EMI-registered startup, Joseph Owusu background, Affecta group), UK remittance domain context, likely priorities (speed to market, KYC compliance, Fincode exit narrative)
+- Created: `regulatory-brief.md` — FCA/EMI regulatory framework, PSR 2017/EMR 2011, AML/CTF (MLR 2017), top 3 constraints: progressive KYC thresholds, sanctions screening, data residency/Fincode hosting location
+- Created: `competitive-positioning.md` — freelancers (already quoting), nearshore agencies, UK boutiques; VL differentiators: relationship + pre-built patterns + BFF abstraction; key risk: cost gap vs. freelancers
+
 ## [2026-05-19 00:00] ingest | P1 deal intake — SocialRemit (T2)
 
 P1 ran on T1 brief for SocialRemit (T2). T1 brief was reconstructed from wiki context (discovery call already complete). GDrive Deals folder searched for `_deal-outcome.md` files across 10+ domain-relevant subfolders — no files found. Four pages created in deal-context/:
