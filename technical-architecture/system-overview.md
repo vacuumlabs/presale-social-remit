@@ -14,11 +14,11 @@ Three-layer architecture proposed in December 2025. The mobile technology choice
 
 ## Layer 1 — Mobile App
 
-**Proposed tech (Dec 2025):** React Native (TypeScript), iOS + Android.
+**Open decision — Flutter vs React Native.** See `decisions.md` entry dated 2026-05-19.
 
-**Client preference (May 2026):** Flutter. Joseph Osei Owusu specified Flutter in the May 2026 LinkedIn exchange. This supersedes the React Native recommendation in the December 2025 proposal but has not yet been validated with VL internally.
+Joseph's initial preference was Flutter. On the 19 May call Boris explained that React Native and Flutter are architecturally equivalent for this use case; React Native has a larger hiring pool (JavaScript vs Dart) and VL has more experience with it. Joseph opened up to React Native: "if it costs less and gives the customer the same experience, it makes sense." Boris to consult VL mobile experts and include a recommendation in the proposal. VL internal lean: React Native.
 
-**Resourcing note:** VL has limited Flutter developer capacity. This is a resourcing consideration to resolve before committing to a Flutter engagement — not a technical blocker.
+The current Figma prototype has a React implementation behind it (built separately by SocialRemit's team).
 
 The app holds no RemitONE credentials. All communication goes through the BFF. Session token from the BFF is stored in secure device storage with optional biometric unlock.
 
@@ -43,11 +43,11 @@ Built by VL. Single JSON/REST API surface for the mobile app.
 
 The BFF insulates the app from RemitONE's API design and is the correct place to implement any future-proofing if SocialRemit later migrates away from RemitONE.
 
-## Layer 3 — RemitONE White-label Backend
+## Layer 3 — Fincode White-label Backend
 
-Third-party managed (black box). Provides the core remittance domain: remitter registry, beneficiaries, FX rates, transaction lifecycle, wallet ledger, wallet load flows, compliance/business rules via UISettings.
+Third-party managed. Replaces RemitONE (selected after the December 2025 proposal; see [`integrations/remitone.md`](./integrations/remitone.md) for the superseded provider). SocialRemit plans to use Fincode for **12 months only**, then replace with their own proprietary backend. The BFF is the abstraction layer that makes this swap possible.
 
-API: REST-style POST endpoints, XML responses. Version 3.3 (March 2020). See [`integrations/remitone.md`](./integrations/remitone.md).
+API details: not yet received. Joseph to send Fincode API documentation post-19 May 2026 call. See [`integrations/fincode.md`](./integrations/fincode.md).
 
 ## Layer 4 — Administration Portal
 

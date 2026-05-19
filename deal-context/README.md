@@ -15,7 +15,8 @@ Sales and account management context: who the client is, who decides what, what 
 
 <!-- Claude maintains this list -->
 
-- [`stakeholder-map.md`](./stakeholder-map.md) — all named people: Joseph Osei Owusu FCCA, Paul (co-founder), Marcus Davey (VL BD), Boris Vida (VL SA)
-- [`client-overview.md`](./client-overview.md) — SocialRemit company overview, current stage, key unknowns
+- [`stakeholder-map.md`](./stakeholder-map.md) — all named people: Joseph Owusu, Paul Duncan, Tomas Masek + Marek Tomasik (VL leadership), Boris Vida, Marcus Davey
+- [`client-overview.md`](./client-overview.md) — SocialRemit company overview, updated post 19 May call
 - [`proposal-dec-2025.md`](./proposal-dec-2025.md) — December 2025 proposal summary and deal status
-- [`open-questions.md`](./open-questions.md) — 18 open discovery questions, prioritised for 19 May 2026 call
+- [`open-questions.md`](./open-questions.md) — questions answered on 19 May; critical open: commercial model
+- [`group-structure.md`](./group-structure.md) — Affecta Technology group: all entities and strategic intent

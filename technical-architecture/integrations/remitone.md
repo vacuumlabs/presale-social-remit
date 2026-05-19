@@ -1,12 +1,16 @@
 ---
 type: integration
-title: RemitONE — Integration Reference
+title: RemitONE — Integration Reference (superseded)
 tags: [remitone, integration, api, white-label, remittance]
 sources:
   - ../../client-inputs/Socialremit_Customer_Flow_Nov2025.md
-last_updated: 2026-05-18
-status: active
+  - ../../client-inputs/2026-05-19-call-transcript.md
+last_updated: 2026-05-19
+status: superseded
+supersedes: null
 ---
+
+> **Superseded.** SocialRemit switched from RemitONE to **Fincode** after the December 2025 discussions. See [`fincode.md`](./fincode.md). This page is retained for reference — the integration patterns (BFF, XML→JSON translation, RSA encryption, UISettings caching) are likely similar and informed the Fincode approach.
 
 # RemitONE — Integration Reference
 

@@ -48,4 +48,5 @@ Problem framing, product strategy, user and market research, personas, PRDs, use
 
 <!-- Claude maintains this list -->
 
-- [`mvp-scope.md`](./mvp-scope.md) — what is in/out of MVP scope; RemitONE native vs Phase 2 features
+- [`mvp-scope.md`](./mvp-scope.md) — what is in/out of MVP scope; Fincode native vs Phase 2 features
+- [`product-vision.md`](./product-vision.md) — brand, differentiation, "built by migrants for migrants", 6-year innovation pipeline

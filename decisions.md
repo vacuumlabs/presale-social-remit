@@ -72,6 +72,23 @@ Claude appends entries here whenever a decision surfaces during `/ingest` or whi
 - **Refines:** "Drop AI-assisted vs baseline comparison from estimates" (2026-05-13). Both decisions are active together.
 - **Status:** active
 
+## 2026-05-19 — White-label provider: RemitONE → Fincode (client decision)
+
+- **Decision:** SocialRemit switched from RemitONE to Fincode as their white-label remittance backend.
+- **Context:** After the December 2025 discussions, a SocialRemit colleague ("Penny") reviewed RemitONE and recommended switching. Fincode is more expensive but described as significantly more collaborative. SocialRemit was reviewing the Fincode contract as of 19 May 2026.
+- **Made by:** SocialRemit board.
+- **Sources:** [`client-inputs/2026-05-19-call-transcript.md`](client-inputs/2026-05-19-call-transcript.md)
+- **Status:** active
+
+## 2026-05-19 — Flutter vs React Native: open decision, VL leans React Native
+
+- **Decision:** Not yet made. SocialRemit initially preferred Flutter; on the 19 May call Boris explained the equivalence of both frameworks and raised React Native's larger hiring pool and VL's greater experience. Joseph opened to React Native. Boris to consult VL mobile experts and include a recommendation in the proposal.
+- **Context:** VL has more React Native experience and it is generally easier to hire for. Flutter offers performance advantages for heavy animations, but the difference is not meaningful for this use case. The current SocialRemit Figma prototype has a React implementation behind it.
+- **Internal lean:** React Native.
+- **Made by:** Pending — Boris Vida to recommend; Paul Duncan to approve.
+- **Sources:** [`client-inputs/2026-05-19-call-transcript.md`](client-inputs/2026-05-19-call-transcript.md)
+- **Status:** open
+
 ## 2025-12-17 — React Native selected as mobile tech stack (December 2025 proposal)
 
 - **Decision:** React Native (TypeScript) chosen for the SocialRemit mobile app — single codebase for iOS and Android.

@@ -18,28 +18,37 @@ SocialRemit is a UK-based startup building a consumer remittance mobile applicat
 
 A full-featured remittance app targeting migrants sending money internationally. The product covers: user onboarding with progressive KYC, multi-currency wallet, send money (bank deposit and mobile money delivery rails), wallet top-ups via card and open banking, beneficiary management, transaction history, scheduled payments, and a basic help/support section. The full screen specification was shared in November 2025 (see [`client-inputs/Socialremit_Customer_Flow_Nov2025.md`](../client-inputs/Socialremit_Customer_Flow_Nov2025.md)).
 
-## Stage as of May 2026
+## Stage as of May 2026 (updated post 19 May call)
 
-Joseph Osei Owusu describes the project as having "progressed quite a lot" since December 2025. SocialRemit is now:
+SocialRemit is now ready to move. Key milestones since December 2025:
 
-- **Planning to go live "within the next couple of months"** using RemitONE white-label infrastructure.
-- **Simultaneously building** a proprietary Flutter frontend and longer-term platform architecture.
+- **EMI registered** (last year). FCA regulated. Anti-money laundering board in place.
+- **$900M liquidity** committed for two countries — not yet deployed, reserved for transaction float.
+- **Paul Duncan** (Technical Director) has officially left Unitalink and joined full-time.
+- **Fincode** selected as white-label provider (replacing RemitONE after Penny's review).
+- **Sumsub** contracted for KYC (SDK integration).
+- **Figma prototype** completed for the full customer journey.
+- Grantify has qualified SocialRemit for **£2M Innovate UK loans** (not yet drawn).
+- AWS account exists, potentially with **$300k–$1M in credits**.
+- **Go-live target: 6–8 weeks.** Then 6 months of live transactions → seed raise.
 
-This is a classic "borrow before buy" pattern: use the RemitONE white-label to go live quickly, then replace it with a custom stack over time.
+The delay since December 2025 was caused by team restructuring, funding discussions, and ensuring regulatory/liquidity/operational readiness — all now resolved.
 
-## Target market (inferred)
+## White-label strategy
 
-VL's discovery questions (December 2025) asked whether SocialRemit targets migrants in the UK from eastern/western Africa. No answer was captured in available sources. The RemitONE API spec and the emphasis on mobile money delivery rails is consistent with UK→Sub-Saharan Africa corridors, but this remains unconfirmed.
+SocialRemit plans to use Fincode for **12 months only**, then replace it with their own proprietary backend. The BFF/middleware layer is explicitly designed to make this swap transparent to the frontend.
 
-## Regulatory status (unknown)
+## Target market
 
-VL's discovery questions included the licensing question (MSB / EMI licence status). No answer is recorded. Going live in months implies either a licence is in place or SocialRemit is operating under a third-party's regulatory umbrella (e.g., RemitONE or a sponsor bank). **This must be clarified on the May 2026 call.**
+UK-based migrants and low-income workers. Two corridors confirmed (specific countries not named in available sources). Consumer-only for MVP. Joseph has deep domain expertise — he scaled UnityLink from 50k to 1.5M transactions/day as CEO/CFO/treasury. See [`product-management/product-vision.md`](../product-management/product-vision.md) for brand and differentiation.
 
-## Key unknowns
+## Group structure
 
-- Exact corridors and currencies in scope for MVP.
-- Regulatory / licensing status.
-- Whether Paul (co-founder) is still involved and in what capacity.
-- Why the deal did not proceed to contract after December 2025.
-- Whether other vendors have been engaged in the interim.
-- What "longer-term platform architecture" means and what the exit plan from RemitONE looks like.
+SocialRemit is one product in the Affecta Technology group. See [`deal-context/group-structure.md`](./group-structure.md) for the full picture including Transpara (B2B white-label), E-money Score (credit engine), and E-money Finance.
+
+## Key remaining unknowns
+
+- Specific MVP corridors and currencies.
+- Fincode API capabilities and protocol (docs to be sent by Joseph).
+- NDA status (may already be in place from December 2025).
+- Commercial model — deferred payment / equity structure is a significant open risk. See [`deal-context/open-questions.md`](./open-questions.md).

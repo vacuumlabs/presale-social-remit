@@ -44,6 +44,12 @@ Ingested 4 raw sources (client UX flow PDF, Dec 2025 call transcript, discovery 
 - Decisions recorded: React Native selected (Dec 2025, under review); BFF pattern adopted (NestJS + Redis + ECS Fargate)
 - Contradictions: none
 
+## [2026-05-19 00:00] ingest | SocialRemit — Teams call transcript 19 May 2026
+
+Ingested `Flutter - SocialRemit Transcript.txt` (57-min call, Boris Vida + Joseph Owusu). Major updates across the wiki: provider switched (RemitONE → Fincode), EMI registration confirmed, architecture and 12-month Fincode exit plan confirmed, Flutter/RN open decision noted. Paul's full name confirmed (Paul Duncan). Tomas Masek and Marek Tomasik added to stakeholder map. Commercial risk (deferred payment model) flagged. Created: `client-inputs/2026-05-19-call-transcript.md`, `technical-architecture/integrations/fincode.md`, `deal-context/group-structure.md`, `product-management/product-vision.md`. Updated: `client-overview.md`, `stakeholder-map.md`, `open-questions.md`, `system-overview.md`, `remitone.md` (superseded), `decisions.md`, all indexes.
+- Decisions recorded: RemitONE → Fincode (client); Flutter vs RN (open, VL leans RN)
+- Contradictions: none
+
 ## [2026-05-18 00:00] ingest | VL internal approach — SocialRemit re-engagement
 
 Per CTO Michal Cernak: Boris Vida to continue the re-engagement independently; Martin Simonovic and Richard Peres to be informed only after the 19 May 2026 call. Marcus Davey not looped in before the call. Presales ownership shifting from sales to delivery. Updated `deal-context/stakeholder-map.md` with Michal Cernak, Martin Simonovic, Richard Peres. Saved to memory.

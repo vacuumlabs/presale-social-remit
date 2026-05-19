@@ -12,19 +12,22 @@ Maintained by `/ingest` and `/lint`. Do not edit by hand except to resolve confl
 
 ## Deal context
 
-- [`deal-context/stakeholder-map.md`](./deal-context/stakeholder-map.md) — Joseph Osei Owusu FCCA (client CFO), Paul (co-founder, surname unknown), Marcus Davey (VL BD), Boris Vida (VL SA)
-- [`deal-context/client-overview.md`](./deal-context/client-overview.md) — SocialRemit: UK remittance startup, RemitONE white-label backend, Flutter frontend in progress, going live in months
+- [`deal-context/stakeholder-map.md`](./deal-context/stakeholder-map.md) — Joseph Owusu, Paul Duncan (Technical Director), Tomas Masek + Marek Tomasik (VL CEO/CDO), Boris Vida, Marcus Davey
+- [`deal-context/client-overview.md`](./deal-context/client-overview.md) — SocialRemit: EMI registered, Fincode white-label, go-live 6–8 weeks, $900M liquidity
 - [`deal-context/proposal-dec-2025.md`](./deal-context/proposal-dec-2025.md) — December 2025 VL proposal status: not contracted; re-engagement via Joseph May 2026
-- [`deal-context/open-questions.md`](./deal-context/open-questions.md) — 18 unanswered questions from discovery + May 2026 re-engagement
+- [`deal-context/open-questions.md`](./deal-context/open-questions.md) — questions answered on 19 May call; critical open: commercial/payment model
+- [`deal-context/group-structure.md`](./deal-context/group-structure.md) — Affecta Technology group: Social Remit, Transpara, E-money Score, E-money Finance
 
 ## Product management
 
-- [`product-management/mvp-scope.md`](./product-management/mvp-scope.md) — MVP in/out of scope, what RemitONE supports natively vs Phase 2
+- [`product-management/mvp-scope.md`](./product-management/mvp-scope.md) — MVP in/out of scope, what Fincode supports natively vs Phase 2
+- [`product-management/product-vision.md`](./product-management/product-vision.md) — "Built by migrants for migrants"; emotional money brand; 6-year innovation pipeline
 
 ## Technical architecture
 
-- [`technical-architecture/system-overview.md`](./technical-architecture/system-overview.md) — 3-layer architecture: Flutter/React Native app → VL BFF (NestJS/AWS) → RemitONE
-- [`technical-architecture/integrations/remitone.md`](./technical-architecture/integrations/remitone.md) — RemitONE API reference: protocol, full endpoint list, integration constraints
+- [`technical-architecture/system-overview.md`](./technical-architecture/system-overview.md) — 3-layer architecture: React Native/Flutter app → VL BFF → Fincode; Flutter vs RN open decision
+- [`technical-architecture/integrations/fincode.md`](./technical-architecture/integrations/fincode.md) — Fincode: new white-label provider; API docs pending
+- [`technical-architecture/integrations/remitone.md`](./technical-architecture/integrations/remitone.md) — RemitONE: superseded by Fincode; retained for reference
 
 ## Project management (incl. scope & estimates)
 

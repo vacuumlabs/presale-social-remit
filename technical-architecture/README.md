@@ -15,5 +15,6 @@ System design, architecture diagrams, tech-stack decisions, ADRs, ARB records, i
 
 <!-- Claude maintains this list -->
 
-- [`system-overview.md`](./system-overview.md) — 3-layer MVP architecture (mobile app + BFF + RemitONE); Flutter vs React Native open question
-- [`integrations/remitone.md`](./integrations/remitone.md) — RemitONE API v3.3 reference and integration constraints
+- [`system-overview.md`](./system-overview.md) — 3-layer MVP architecture (mobile app + BFF + Fincode); Flutter vs React Native open decision
+- [`integrations/fincode.md`](./integrations/fincode.md) — Fincode (current white-label provider); API docs pending
+- [`integrations/remitone.md`](./integrations/remitone.md) — RemitONE (superseded); retained for reference
