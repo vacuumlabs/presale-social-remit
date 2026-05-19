@@ -17,6 +17,10 @@ Maintained by `/ingest` and `/lint`. Do not edit by hand except to resolve confl
 - [`deal-context/proposal-dec-2025.md`](./deal-context/proposal-dec-2025.md) — December 2025 VL proposal status: not contracted; re-engagement via Joseph May 2026
 - [`deal-context/open-questions.md`](./deal-context/open-questions.md) — questions answered on 19 May call; critical open: commercial/payment model
 - [`deal-context/group-structure.md`](./deal-context/group-structure.md) — Affecta Technology group: Social Remit, Transpara, E-money Score, E-money Finance
+- [`deal-context/intake-gaps.md`](./deal-context/intake-gaps.md) — P1 gap analysis: know/don't-know, 5 risk signals
+- [`deal-context/similar-deals.md`](./deal-context/similar-deals.md) — P1 similar deals: no past outcomes found; Dec 2025 SocialRemit proposal as baseline
+- [`deal-context/go-no-go-flags.md`](./deal-context/go-no-go-flags.md) — P1 go/no-go flags: 6 green / 6 amber / 1 red
+- [`deal-context/pre-meeting-brief.md`](./deal-context/pre-meeting-brief.md) — P1 pre-meeting brief for proposal delivery ~w/c 25 May
 
 ## Product management
 

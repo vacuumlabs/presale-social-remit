@@ -53,3 +53,11 @@ Ingested `Flutter - SocialRemit Transcript.txt` (57-min call, Boris Vida + Josep
 ## [2026-05-18 00:00] ingest | VL internal approach — SocialRemit re-engagement
 
 Per CTO Michal Cernak: Boris Vida to continue the re-engagement independently; Martin Simonovic and Richard Peres to be informed only after the 19 May 2026 call. Marcus Davey not looped in before the call. Presales ownership shifting from sales to delivery. Updated `deal-context/stakeholder-map.md` with Michal Cernak, Martin Simonovic, Richard Peres. Saved to memory.
+
+## [2026-05-19 00:00] ingest | P1 deal intake — SocialRemit (T2)
+
+P1 ran on T1 brief for SocialRemit (T2). T1 brief was reconstructed from wiki context (discovery call already complete). GDrive Deals folder searched for `_deal-outcome.md` files across 10+ domain-relevant subfolders — no files found. Four pages created in deal-context/:
+- Created: `intake-gaps.md` — what we know / don't know / watch for; 5 risk signals flagged
+- Created: `similar-deals.md` — no past deal outcomes found in GDrive; Dec 2025 SocialRemit proposal used as internal baseline
+- Created: `go-no-go-flags.md` — 6 green / 6 amber / 1 red (deferred payment + equity model awaiting VL CEO/CDO decision)
+- Created: `pre-meeting-brief.md` — one-pager framed for proposal delivery meeting ~w/c 25 May 2026

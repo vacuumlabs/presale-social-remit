@@ -20,3 +20,7 @@ Sales and account management context: who the client is, who decides what, what 
 - [`proposal-dec-2025.md`](./proposal-dec-2025.md) — December 2025 proposal summary and deal status
 - [`open-questions.md`](./open-questions.md) — questions answered on 19 May; critical open: commercial model
 - [`group-structure.md`](./group-structure.md) — Affecta Technology group: all entities and strategic intent
+- [`intake-gaps.md`](./intake-gaps.md) — P1 gap analysis: what we know / don't know / watch for
+- [`similar-deals.md`](./similar-deals.md) — P1 similar deals lookup: no past deal outcomes found; Dec 2025 SocialRemit proposal is baseline
+- [`go-no-go-flags.md`](./go-no-go-flags.md) — P1 go/no-go: 6 green, 6 amber, 1 red (deferred payment model)
+- [`pre-meeting-brief.md`](./pre-meeting-brief.md) — P1 pre-meeting brief for proposal delivery ~w/c 25 May 2026
