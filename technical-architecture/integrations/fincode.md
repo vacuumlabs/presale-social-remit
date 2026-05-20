@@ -29,9 +29,11 @@ Same BFF pattern as planned for RemitONE: Flutter/React Native app → VL-built 
 
 ## API documentation
 
-Shared by Joseph on 19 May 2026: https://docs.fincode.technology/api/transactions/call-quote
+Public docs: https://docs.fincode.technology/remittance/overview (full index at https://docs.fincode.technology/llms.txt)
 
-Full technical review pending. Protocol details (REST/SOAP, auth mechanism, response format), feature coverage mapping against MVP scope, and sandbox/test credential availability all remain open until the review is complete.
+**Sandbox:** `https://remitjunction.fincode.software/api/v6/services/` — SocialRemit's tenant is `remitjunction`. Test credentials match Fincode's own documentation (`hello@remitjunction.co.uk`). Sandbox appears to be provisioned and accessible.
+
+Full field-level review pending sandbox access confirmation with Joseph.
 
 ## Open items
 

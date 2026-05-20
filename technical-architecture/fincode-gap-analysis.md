@@ -38,6 +38,7 @@ Fincode covers the backend capability. VL's work is wiring it up through the BFF
 | Supported payment methods + fees | `POST /paymentmanagement/supported-payment-methods`, `POST /paymentmanagement/payment-methods-charges` | Returns available methods per corridor + transaction type, with fees. BFF caches. |
 | Wallet payment | `POST /paymentmanagement/makepaymentfromwalletaccount` | Pay transaction from Fincode wallet balance. |
 | Manual bank transfer flow | `PUT /paymentmanagement/bank-iwillpaylater-wallet`, `POST /paymentmanagement/notify-bank-transfer-payment` | Customer marks "I will pay later" via bank and confirms when sent. BFF orchestrates awaiting state. |
+| Card top-up via payment token | `POST /paymentmanagement/processpaymentwithpaymenttoken` | Tokenised card flow: third-party gateway SDK tokenises card on-device → token passed to BFF → BFF calls Fincode with `paymentGatewayRef` + `supportedPaymentGatewayProvider`. Raw card data never touches VL servers. VL is out of PCI-DSS scope. Supported gateways: `SECURE_TRADING` (TrustPayments), `STRIPE_ACH` (Stripe), `RAVE_FLUTTERWAVE`, `POLI_PAYMENT_API`, `COINBASE_PAYMENT_API`. UK candidates: TrustPayments or Stripe. **Need to confirm which gateway is active on SocialRemit's Fincode tenant.** |
 | Awaiting payments list + actions | `GET /paymentmanagement/awaiting-payments`, `POST /paymentmanagement/awaiting-payment-actions` | Mark paid or cancel a pending bank transfer. |
 | Transaction history / ledger | `GET /ledger/account-ledger-history/{account_id}/{page}/{size}` | Paginated, with executionDate, ledgerType, amount, newBalance. |
 | Account balance | `GET /ledger/account-balance/{account_id}` | Current balance retrieval. |
@@ -94,8 +95,8 @@ This is the continuity layer for the Fincode → Transpara migration. Without it
 ### Fincode abstraction / provider exit ramp
 The internal service interfaces in the BFF must be designed so Fincode is swappable. This is architectural design work upfront — not just coding — that shapes every integration decision made during the build. Deferring this design decision creates expensive rework later.
 
-### Open banking top-up
-**Confirmed gap — Fincode has no open banking integration.** Fincode's bank transfer flow is manual ("I will pay later" + customer notifies). This is not open banking. For account-to-account instant top-up (required in MVP scope), VL must integrate a separate provider. Leading candidates: GoCardless (direct debit / VRP), TrueLayer (open banking payments), Yapily. Provider selection is open — see Bucket 3.
+### Card top-up — gateway SDK integration (mobile app side)
+Fincode's tokenised payment flow (`processpaymentwithpaymenttoken`) requires a third-party payment gateway SDK to be integrated in the mobile app for card capture and tokenisation. The SDK renders a secure card input UI, handles card data entirely client-to-gateway, and returns a token. VL integrates the SDK and wires the token through the BFF to Fincode. This is a contained piece of work — a single payment screen with the gateway's native card widget. **Gateway to be confirmed with SocialRemit/Fincode** (TrustPayments or Stripe most likely for UK).
 
 ### App authentication layer (device-side)
 Fincode handles credential verification server-side. The mobile app must implement:
@@ -129,29 +130,7 @@ Fincode has a built-in KYC engine (document submission, CRA form, external scree
 
 This decision affects: BFF scope, SDK in-app, onboarding UX flow, and compliance documentation for FCA. **Must be resolved before estimation.**
 
-### 2. Card top-up PCI-DSS scope
-
-Fincode's card payment API (`POST /paymentmanagement/process-card-payment`) accepts raw PAN, expiry, and CVV. If the BFF passes raw card data, VL's infrastructure enters PCI-DSS scope — significant compliance overhead.
-
-Questions to resolve with Fincode:
-- Does Fincode provide a client-side tokenisation widget (JS/native SDK) so the card number never touches VL's servers?
-- Or does card processing happen entirely through a third-party gateway (Checkout.com, Volume) that tokenises independently, and Fincode is bypassed for top-up?
-
-If VL servers are in PCI scope, this adds security audit and certification requirements to the project. If Fincode or a gateway handles it cleanly, VL is out of scope.
-
-### 3. Open banking provider selection
-
-Open banking top-up is confirmed as MVP scope (no Fincode coverage). Provider has not been selected. The choice affects integration complexity and timeline:
-
-| Provider | Model | Notes |
-|---|---|---|
-| **GoCardless** | Direct debit + Variable Recurring Payments (VRP) | Strong UK coverage; VRP is the most seamless UX for recurring top-up |
-| **TrueLayer** | Open banking payments (Pay by Bank) | Broad UK bank coverage; good for one-time instant payments |
-| **Yapily** | Open banking data + payments | More developer-focused; broad coverage |
-
-SocialRemit may have a preference or may defer to VL recommendation. This needs a decision before open banking scope can be estimated.
-
-### 4. Operational admin portal — day-one requirement or deferred?
+### 2. Operational admin portal — day-one requirement or deferred?
 
 Fincode provides raw admin APIs (customer search, transaction lookup, AML rule management, employee management). What it does NOT provide is a ready-to-use operational dashboard. For a live remittance business, the operations team needs to:
 - Look up customers and transactions in real time
@@ -167,7 +146,7 @@ Options:
 
 Joseph's governance doc §26 says "operational blindness is a major business risk" informed by his UnityLink experience. Option D is unlikely to be acceptable.
 
-### 5. Push notifications — MVP or Phase 2?
+### 3. Push notifications — MVP or Phase 2?
 
 The governance doc (§14) describes customer communication as "a core operational and behavioural component" including OTP delivery, transactional notifications (transaction sent/received/failed), and onboarding reminders. These were Phase 2 in the Dec 2025 proposal (RemitONE had no webhook support).
 
@@ -183,6 +162,7 @@ These items are desirable and referenced in the governance doc, but are not requ
 
 | Item | Description | Priority signal from governance doc |
 |---|---|---|
+| **Open banking top-up** | Account-to-account instant top-up (GoCardless VRP, TrueLayer Pay by Bank, or Yapily). No Fincode coverage — separate provider integration required. Not a blocker for MVP launch; card + manual bank transfer cover the deposit requirement at go-live. | Optional post-launch enhancement |
 | **Rewards & referral engine** | Welcome bonuses, referral attribution, reward eligibility/release logic, abuse prevention. Entirely VL-built — no Fincode coverage. | §16: "core behavioural infrastructure" — high priority but not a go-live blocker |
 | **Analytics integration** | Mixpanel / PostHog / Firebase Analytics in-app + BFF event forwarding. Onboarding funnel, transaction funnel, retention. | §17: MVP optional at minimum |
 | **Enhanced observability** | Datadog / Grafana / PagerDuty on top of CloudWatch baseline. Operational dashboards, SLA alerting, webhook monitoring. | §25–26: "major business risk" — baseline included in Bucket 2; this is the enhanced tier |
@@ -199,8 +179,8 @@ These items are desirable and referenced in the governance doc, but are not requ
 ## Must-resolve before estimation can be finalised
 
 1. **Sumsub vs Fincode KYC** — approach determines BFF scope and in-app SDK work (Bucket 3, item 1)
-2. **PCI-DSS scope for card top-up** — approach determines whether VL's infrastructure requires compliance hardening (Bucket 3, item 2)
-3. **Open banking provider selection** — determines integration scope and timeline (Bucket 3, item 3)
-4. **Push notifications — MVP or not** — affects backend notification service scope and timeline (Bucket 3, item 5)
-5. **Sandbox credentials** — VL needs tenant-specific access to verify Fincode field coverage, dynamic field behaviour, and beneficiary API detail
-6. **Corridors confirmed** — specific destination countries determine which payout rails, dynamic field sets, and KYC requirements are in scope
+2. **Card gateway selection** — which `supportedPaymentGatewayProvider` is active on SocialRemit's Fincode tenant (TrustPayments vs Stripe)? Determines which mobile SDK to integrate. Small decision but needs confirming with Joseph/Fincode.
+3. **Admin portal — day-one or deferred?** — if day-one, adds scope (Bucket 3, item 2)
+4. **Push notifications — MVP or not** — affects notification service scope (Bucket 3, item 3)
+5. **Sandbox credentials** — `remitjunction.fincode.software` sandbox appears to be available; VL needs confirmed access to verify field coverage, dynamic fields, and beneficiary endpoint detail
+6. **Corridors confirmed** — specific destination countries determine payout rails, dynamic field sets, and KYC requirements in scope
