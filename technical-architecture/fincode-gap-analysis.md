@@ -118,17 +118,16 @@ Governance operational non-negotiable: "critical failures must be detectable int
 
 These items cannot be cleanly estimated without a decision on approach. They should be agenda items for the next call with Joseph and Paul.
 
-### 1. Sumsub vs Fincode KYC — who handles what?
+### 1. Fincode progressive KYC — confirmation needed
 
-Fincode has a built-in KYC engine (document submission, CRA form, external screening via `continue-enrolment`). SocialRemit has separately contracted Sumsub for identity verification. These overlap. Three architecturally distinct options:
+**VL direction (provisional):** Use Fincode's built-in KYC engine for MVP only — dropping Sumsub from launch scope to limit integration complexity. Fincode already handles AML/sanctions/PEP screening natively.
 
-| Option | Description | Implication for VL |
-|---|---|---|
-| **A — Sumsub only** | Sumsub SDK in-app for document capture + liveness check; BFF passes verified status to Fincode via admin verify endpoint | Cleanest UX; VL integrates Sumsub SDK + manages verification state in BFF. Need to confirm Fincode accepts external verification signal. |
-| **B — Fincode native KYC only** | Use Fincode's `attach-documents` + `continue-enrolment` flow; Sumsub contract may be redundant | Simpler integration; need to confirm what external provider Fincode's `continue-enrolment` calls and whether it meets SocialRemit's UX expectations. |
-| **C — Split** | Sumsub handles document capture + liveness; Fincode handles AML/sanctions/PEP screening | Both integrations needed; BFF orchestrates both. Most compliance-complete but highest complexity. |
+The outstanding question sent to Joseph (23 May): **does Fincode support gradual/progressive KYC** — minimal information at registration, escalating to full CDD based on transaction thresholds? Fincode has a `kyc-requirements-by-isocountry/{countryIso}/{triggerPoint}` endpoint which suggests it can drive different KYC requirements per trigger, but whether this maps cleanly to SocialRemit's progressive UX flow needs confirmation.
 
-This decision affects: BFF scope, SDK in-app, onboarding UX flow, and compliance documentation for FCA. **Must be resolved before estimation.**
+- **If yes** (Fincode supports progressive KYC): Sumsub not needed for MVP. BFF orchestrates Fincode's KYC flow only. Clean scope.
+- **If no** (Fincode is all-or-nothing at registration): Progressive KYC logic must live in the BFF with a phased document collection design. Sumsub may still be deferred. Needs design discussion.
+
+Recorded as provisional decision in [`decisions.md`](../decisions.md).
 
 ### 2. Operational admin portal — day-one requirement or deferred?
 

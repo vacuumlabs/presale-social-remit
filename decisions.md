@@ -72,6 +72,14 @@ Claude appends entries here whenever a decision surfaces during `/ingest` or whi
 - **Refines:** "Drop AI-assisted vs baseline comparison from estimates" (2026-05-13). Both decisions are active together.
 - **Status:** active
 
+## 2026-05-20 — KYC approach: Fincode-native for MVP (pending confirmation of progressive KYC support)
+
+- **Decision:** Use Fincode's built-in KYC and compliance engine for MVP, dropping the Sumsub integration from launch scope.
+- **Context:** Sumsub is contracted but adds integration complexity (in-app SDK, BFF orchestration, dual KYC state management). Using Fincode-native KYC simplifies MVP scope significantly. Fincode already handles AML/sanctions/PEP screening natively. The outstanding question is whether Fincode supports progressive/gradual KYC (minimal info at registration, escalating based on transaction thresholds) — if yes, Sumsub is not needed for MVP. If Fincode's KYC is all-or-nothing at registration, a phased approach still needs to be designed. Question sent to Joseph on 23 May 2026.
+- **Made by:** Boris Vida (SA recommendation).
+- **Sources:** [`technical-architecture/fincode-gap-analysis.md`](technical-architecture/fincode-gap-analysis.md), [`team-inputs/T2-discovery-qa.md`](team-inputs/T2-discovery-qa.md)
+- **Status:** provisional — pending Joseph's answer on Fincode progressive KYC support
+
 ## 2026-05-19 — White-label provider: RemitONE → Fincode (client decision)
 
 - **Decision:** SocialRemit switched from RemitONE to Fincode as their white-label remittance backend.

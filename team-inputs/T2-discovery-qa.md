@@ -217,16 +217,20 @@ _Source: 2026-05-19-call-transcript.md_
 
 ## Section 7 — Open Questions
 
-_Questions to be sent to Joseph on Friday 23 May 2026. Paul Duncan reviewing from 25 May._
+_Four questions to be sent to Joseph on Friday 23 May 2026. Paul Duncan reviewing from 25 May._
 
 | # | Question | Asked by | Date asked | Answer | Status |
 |---|----------|----------|-----------|--------|--------|
-| 1 | **Sumsub + Fincode KYC split** — Our assumption: Sumsub handles identity document capture and liveness; Fincode handles AML/PEP screening and ongoing monitoring. Does that match your intended setup, or did you have a different split in mind? | Boris Vida | 2026-05-23 | | Open |
-| 2 | **Card payment tokenisation** — We'd use Fincode's `processpaymentwithpaymenttoken` endpoint to keep card data off our servers. Does Fincode provide its own card capture widget on your tenant, or should we plan to integrate a specific gateway (e.g. TrustPayments)? | Boris Vida | 2026-05-23 | | Open |
-| 3 | **Sandbox access** — Can you share credentials for your `remitjunction` sandbox? We'd like to run a few test calls before the proposal to give you accurate estimates rather than assumptions. | Boris Vida | 2026-05-23 | | Open |
-| 4 | **Launch corridors** — Which two countries are the MVP corridors? This determines the payout rails and KYC requirements we scope. | Boris Vida | 2026-05-23 | | Open |
-| 5 | **Operational visibility from day one** — For your ops team post-launch: do you need a customer/transaction management interface on day one, or can that be phased in shortly after go-live? | Boris Vida | 2026-05-23 | | Open |
-| 6 | **NDA status** — Is the December 2025 NDA still in force, or do we need a new one before sharing the proposal? | Boris Vida | 2026-05-23 | | Open |
-| 7 | **Flutter vs React Native** — VL recommendation is React Native (larger hiring pool, VL has more experience, architecturally equivalent for this use case). Does Paul have a strong view either way? | Boris Vida | 2026-05-23 | | Open |
-| 8 | **Figma prototype access** — Can you share the Figma link so we can reference the full UX spec when producing the estimate? | Boris Vida | 2026-05-23 | | Open |
-| 9 | **Business / revenue model** — What is the fee structure for transactions (spread on FX, flat fee, percentage)? Useful context for how Joseph frames ROI on the build cost. | Boris Vida | 2026-05-23 | | Open |
+| 1 | **Fincode progressive KYC** — To keep the MVP scope lean, we'd like to use Fincode's built-in KYC and compliance engine rather than a separate Sumsub integration. Before we confirm that, can you tell us: does Fincode support a gradual KYC approach — i.e. minimal information collected at registration, with verification escalating automatically based on transaction thresholds or risk? | Boris Vida | 2026-05-23 | | Open |
+| 2 | **Card payment** — We'd use Fincode's `processpaymentwithpaymenttoken` endpoint for card top-up, which keeps card data off our servers entirely. Does Fincode provide its own native card capture widget on your tenant, or should we plan to integrate a specific third-party gateway (e.g. TrustPayments)? | Boris Vida | 2026-05-23 | | Open |
+| 3 | **Operational visibility from day one** — For your ops team post-launch: do you need a customer/transaction management interface on day one, or can that be phased in shortly after go-live? | Boris Vida | 2026-05-23 | | Open |
+| 4 | **Revenue model** — What is the fee structure for transactions (FX spread, flat fee, percentage, or blended)? This helps us understand how Joseph frames the ROI on the build cost, and is relevant to how we structure our commercial proposal. | Boris Vida | 2026-05-23 | | Open |
+
+---
+
+_Dropped from Friday send (rationale):_
+- _Sandbox credentials — not requesting now_
+- _Corridors — UK launch + African payout rails (bank deposit + mobile money) already in scope; specific countries don't change estimate materially_
+- _NDA — assumed in force from December 2025_
+- _Flutter vs React Native — VL recommendation will go in the proposal; BFF stack suggestion to be included alongside_
+- _Figma prototype — Joseph has not shared; skip_
