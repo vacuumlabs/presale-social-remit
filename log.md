@@ -80,3 +80,10 @@ Ingested two client-authored documents shared by Joseph on 19 May 2026 email. Ke
 - Updated: `deal-context/client-overview.md` — added investor nuance ("investors exist but want traction"), self-funded for two years, card/open banking provider open items
 - Updated: `product-management/regulatory-brief.md` — expanded sanctions screening entry to include PEP screening and ongoing monitoring as client non-negotiables (governance doc §12)
 - Contradictions: none
+
+## [2026-05-20 00:00] author | Fincode gap analysis
+
+Crawled Fincode public API documentation (overview, llms-full.txt, quote API, create-transaction API, webhooks API). Produced gap analysis mapping Fincode native coverage against SocialRemit MVP scope.
+- Created: `technical-architecture/fincode-gap-analysis.md` — full coverage/gap matrix; confirmed gaps; design risks
+
+Key findings: open banking top-up is a confirmed gap (no Fincode coverage); Sumsub/Fincode KYC overlap is an unresolved design risk; card payment PCI-DSS scope needs clarification; push notifications, analytics, rewards engine, internal DB, observability, and CI/CD are all VL-built with no Fincode coverage.

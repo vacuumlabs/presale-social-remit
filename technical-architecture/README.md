@@ -17,5 +17,6 @@ System design, architecture diagrams, tech-stack decisions, ADRs, ARB records, i
 
 - [`system-overview.md`](./system-overview.md) — 3-layer MVP architecture (Product/Control/Infrastructure); observability and CI/CD requirements; Flutter vs React Native open decision
 - [`governance-principles.md`](./governance-principles.md) — client's non-negotiable architectural, operational, delivery and strategic principles; 3-layer model; vendor shortlist; scope signals for estimation
+- [`fincode-gap-analysis.md`](./fincode-gap-analysis.md) — what Fincode covers natively vs what VL must build; confirmed gaps (open banking, push notifications, analytics, rewards, observability, internal DB, CI/CD); design risks (Sumsub vs Fincode KYC, PCI scope)
 - [`integrations/fincode.md`](./integrations/fincode.md) — Fincode (current white-label provider); API docs URL now available
 - [`integrations/remitone.md`](./integrations/remitone.md) — RemitONE (superseded); retained for reference

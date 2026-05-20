@@ -34,6 +34,7 @@ Maintained by `/ingest` and `/lint`. Do not edit by hand except to resolve confl
 
 - [`technical-architecture/system-overview.md`](./technical-architecture/system-overview.md) — 3-layer architecture (Product/Control/Infrastructure); Fincode integration; observability + CI/CD requirements; Flutter vs RN open decision
 - [`technical-architecture/governance-principles.md`](./technical-architecture/governance-principles.md) — client non-negotiables, 3-layer model, vendor shortlist, scope signals for estimation
+- [`technical-architecture/fincode-gap-analysis.md`](./technical-architecture/fincode-gap-analysis.md) — Fincode coverage vs VL build scope; confirmed gaps (open banking, notifications, analytics, rewards, observability, DB, CI/CD); design risks (Sumsub/Fincode KYC overlap, PCI scope)
 - [`technical-architecture/integrations/fincode.md`](./technical-architecture/integrations/fincode.md) — Fincode: white-label provider; API docs URL now available
 - [`technical-architecture/integrations/remitone.md`](./technical-architecture/integrations/remitone.md) — RemitONE: superseded by Fincode; retained for reference
 
