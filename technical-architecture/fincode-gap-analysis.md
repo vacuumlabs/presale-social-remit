@@ -1,6 +1,6 @@
 ---
 type: concept
-title: Fincode Gap Analysis — What Fincode covers vs what VL must build
+title: Fincode Gap Analysis — Build scope buckets
 tags: [fincode, gap-analysis, scope, estimation, architecture]
 sources:
   - ../client-inputs/2026-05-19-governance-notes-v1.md
@@ -13,285 +13,194 @@ last_updated: 2026-05-20
 status: draft
 ---
 
-# Fincode Gap Analysis
+# Fincode Gap Analysis — Build scope buckets
 
-What Fincode covers natively, what VL must build, and what requires custom orchestration on top of Fincode APIs. Based on the public Fincode API documentation (May 2026). Sandbox access and full API review with SocialRemit's tenant credentials will be needed to confirm coverage at the field level.
+Based on the Fincode public API documentation (May 2026). Four buckets for proposal and estimation purposes.
+
+> **Sandbox access still needed** — field-level API verification, beneficiary endpoint detail, and dynamic field coverage require SocialRemit's tenant credentials. Items marked with ⚠️ are confirmed from docs but field-level detail pending sandbox review.
 
 ---
 
-## Integration model
+## Bucket 1 — Fincode native: BFF facade only
 
-Fincode offers two integration modes. SocialRemit's architecture sits in between:
+Fincode covers the backend capability. VL's work is wiring it up through the BFF: authentication, response mapping, error normalisation, caching where appropriate. No custom business logic needed beyond translation.
 
-| Mode | Description | SocialRemit approach |
+| Capability | Fincode endpoint(s) | Notes |
 |---|---|---|
-| **Full Journey** | Fincode manages everything — customer onboarding through payout | Not used — SocialRemit owns the customer experience layer |
-| **Transaction-Only** | Integrator manages customers, passes transactions directly | Partial — SocialRemit owns the UX and orchestration, but uses Fincode's customer and KYC APIs |
-
-SocialRemit's architecture is essentially "Full Journey with a VL-built Control Layer in front." The BFF maps SocialRemit's internal model to Fincode's API.
-
----
-
-## What Fincode covers natively
-
-### Authentication & session management ✅
-- JWT login / logout / token refresh
-- OTP generation and email delivery
-- Password management (reset, change)
-- Transaction PIN and login PIN creation
-- Account locking on failed login attempts
-- RSA payload encryption support
-
-**VL implication:** Fincode's auth tokens are a backend concern only. The mobile app authenticates against the BFF, which holds Fincode credentials server-side. The app never talks to Fincode directly.
-
----
-
-### Customer registration & profile ✅
-- `POST /usermanagement/register-customer` — creates a customer record in Fincode
-- Required at registration: firstName, lastName, email, phone (international), dob (min 18), address, customerType (INDIVIDUAL / BUSINESS), password
-- Profile retrieval, editing, activation/deactivation, profile picture upload
-- Customer search by name or phone (admin operation)
-
-**VL implication:** The BFF calls Fincode's register endpoint as part of the onboarding flow. Fincode stores the customer record. However, SocialRemit's governance principles require owning the internal data model — so the BFF/database must mirror key customer state (see Gaps section below).
+| FX quote / pricing | `POST /quote/callQuote` | Real-time rate + fees + recipient amount. Supports inverse calculation (receive-first), promo codes, mobile operator routing. |
+| Transaction creation | `POST` (create-transaction) | ACCOUNTPAYMENT, MOBILE_MONEY, CASHPICKUP transaction types. Requires pre-existing sender + recipient customer codes. Idempotency key required. |
+| Customer registration | `POST /usermanagement/register-customer` | firstName, lastName, email, phone, dob, address, customerType (INDIVIDUAL/BUSINESS). RSA payload encryption supported. |
+| Customer profile (get/edit) | `GET /usermanagement/profile`, `PUT /usermanagement/profile-edit` | BFF calls on behalf of authenticated user. |
+| Session management (Fincode side) | Login / logout / refresh-token | BFF holds Fincode JWTs server-side; app never touches Fincode directly. |
+| Transaction PIN + login PIN | `POST /usermanagement/create-transaction-pin`, `POST /securitymanagement/create-user-pin` | Created in Fincode; BFF orchestrates when to prompt. |
+| OTP generation + verification | `GET /securitymanagement/generate-and-send-otp-toemail/{email}`, `POST /securitymanagement/verify-login-otp` | Fincode sends OTP by email; BFF triggers. |
+| Beneficiary management ⚠️ | Create / update / list beneficiaries | Bank account + mobile money. Validation handled by Fincode. Full endpoint detail needs sandbox. |
+| Supported payment methods + fees | `POST /paymentmanagement/supported-payment-methods`, `POST /paymentmanagement/payment-methods-charges` | Returns available methods per corridor + transaction type, with fees. BFF caches. |
+| Wallet payment | `POST /paymentmanagement/makepaymentfromwalletaccount` | Pay transaction from Fincode wallet balance. |
+| Manual bank transfer flow | `PUT /paymentmanagement/bank-iwillpaylater-wallet`, `POST /paymentmanagement/notify-bank-transfer-payment` | Customer marks "I will pay later" via bank and confirms when sent. BFF orchestrates awaiting state. |
+| Awaiting payments list + actions | `GET /paymentmanagement/awaiting-payments`, `POST /paymentmanagement/awaiting-payment-actions` | Mark paid or cancel a pending bank transfer. |
+| Transaction history / ledger | `GET /ledger/account-ledger-history/{account_id}/{page}/{size}` | Paginated, with executionDate, ledgerType, amount, newBalance. |
+| Account balance | `GET /ledger/account-balance/{account_id}` | Current balance retrieval. |
+| KYC document submission ⚠️ | `POST /documentmanagement/attach-documents` | Attach identity documents to customer profile. Relationship to Sumsub TBD — see Bucket 3. |
+| Compliance / awaiting requirements check | `GET /compliance/awaiting-compliance-requirements` | Check what KYC is still outstanding for the current user. |
+| KYC requirements by country + trigger point | `GET /complaince/kyc-requirements-by-isocountry/{countryIso}/{triggerPoint}` | Returns what's required per country and trigger (first transaction, threshold, etc.). BFF uses to route KYC flow. |
+| Sanctions + PEP screening | Built into Fincode transaction flow | OFAC, EU, UN lists + PEP database. Results included in webhook payload (`compliance_status`, `sanction_screening_results`). |
+| Webhooks (transaction lifecycle) | `PAID`, `FAILED`, `CANCELLED`, `kyc.verification.completed`, `payment.received` | Terminal-state only. BFF receives, deduplicates, and dispatches downstream (notifications, state updates). |
+| Dynamic fields | `GET /dynamicfields/dynamic-fields-group/{processGroupCode}` | Corridor-specific form requirements. BFF fetches and caches; app renders dynamically. Equivalent to RemitONE's UISettings. |
+| Payout points / cash pickup locations | `POST /branches/listpayoutpoints`, `POST /branches/listpayoutCenter`, etc. | List available cash pickup locations. |
+| Countries + currency pairs ⚠️ | (per overview: 100+ countries, 50+ currencies) | Full corridor/currency list needs sandbox confirmation. |
+| Account activation / deactivation | `GET /usermanagement/activate-user-account/{id}` | Admin operation via BFF. |
+| Password reset / change | `GET /securitymanagement/reset-password/{email}`, `PUT /securitymanagement/change-password` | Standard account management. |
 
 ---
 
-### KYC & compliance ✅ (partial — see design risk below)
-- `POST /documentmanagement/attach-documents` — submit KYC documents
-- `POST /admin/compliance/submit-cra` — Customer Risk Assessment form submission
-- `GET /admin/compliance/continue-enrolment` — triggers external screening, returns URLs for external verification flow
-- `GET /compliance/awaiting-compliance-requirements` — checks what KYC is still outstanding for the authenticated user
-- `GET /complaince/kyc-requirements-by-isocountry/{countryIso}/{triggerPoint}` — returns KYC requirements by country and trigger point (e.g., first transaction, threshold crossed)
-- AML rule management: list, activate, deactivate, configure
-- KYC rule management: add, edit rules
+## Bucket 2 — VL must-build: platform does not work without this
 
-**Compliance screening included:** Fincode's overview states it screens against OFAC, EU, and UN sanctions lists, PEP databases, unusual activity patterns, and applies dynamic risk assessment. The webhook payload includes `compliance_status` and `sanction_screening_results` fields.
+These have no Fincode coverage. Every item is a hard dependency for the MVP to be functional.
 
-**VL implication:** Fincode has a KYC and AML engine. However, SocialRemit has separately contracted Sumsub for KYC. **This creates a design question that must be resolved before estimation** — see Design Risks section.
+### Mobile application (React Native or Flutter)
+Fincode has no mobile SDK, no white-label app, no UI components. VL builds the entire mobile app: all screens, navigation, state management, animations, app store deployment.
 
----
+### BFF / Control Layer
+The orchestration middleware itself. The entire layer is VL-built:
+- All Fincode API calls routed through here; app never hits Fincode directly
+- JSON/REST surface for the app (Fincode's API is not app-friendly raw)
+- Session lifecycle: Fincode JWT acquisition, storage, refresh, revocation
+- Dynamic field caching (avoid repeated Fincode calls for form config)
+- Error normalisation across all Fincode error codes → consistent app-facing errors
+- Retry and timeout handling with idempotency key management
+- Webhook receiver endpoint + deduplication on reference field (Fincode can re-deliver)
+- Provider abstraction interfaces — all Fincode calls behind internal service interfaces so that swapping Fincode → Transpara requires only BFF changes, zero app changes
 
-### FX quote / pricing ✅
-- `POST /quote/callQuote` — real-time FX rate + fees + total cost + recipient amount
-- Supports inverse calculation (calculate send amount from receive amount)
-- Takes: principalAmount, currency pair, paymentType, transactionType, destinationCountry, promoCode, mobileOperator
-- Returns: guaranteed rate, recipient amount, fee breakdown
+### Progressive KYC routing logic
+Fincode tells you what KYC is required per country and trigger point. The BFF decides *when* to trigger which level based on transaction amount, cumulative user volume, and risk signals. This is FCA-mandated business logic that lives entirely in the BFF:
+- Threshold tracking per user
+- Routing: when to show Sumsub SDK, when to gate a transaction behind further verification
+- State machine: onboarding → basic → enhanced CDD levels
+See Bucket 3 for the Sumsub/Fincode KYC design question.
 
-**VL implication:** The BFF calls this for the FX calculator and the send money quote screen. Response shaping to the app format is BFF responsibility.
+### Transaction state machine
+Fincode webhooks only fire on terminal states (PAID/FAILED/CANCELLED). The BFF needs to maintain a local transaction state model covering intermediate states (submitted, processing, payout-pending) so the app can show meaningful status screens without polling endlessly.
 
----
+### SocialRemit's internal database
+Governance non-negotiable: "own the internal data model." The BFF must maintain its own database (PostgreSQL or equivalent) storing:
+- Customer profile mirror (enriched beyond what Fincode stores)
+- KYC progression state (which level reached, when, by which trigger)
+- Transaction records with SocialRemit's internal reference model (decoupled from Fincode references)
+- Webhook event log (for deduplication, replay, and audit trail)
+- Reward and referral state (see Bucket 4)
+This is the continuity layer for the Fincode → Transpara migration. Without it, migrating means losing all historical data visibility.
 
-### Transaction creation ✅
-- `POST /remittance/create-transaction` (or equivalent) — initiates remittance
-- Supported transaction types: ACCOUNTPAYMENT (bank deposit), MOBILE_MONEY, CASHPICKUP, WALLET, BILL_PAYMENT
-- Requires pre-existing sender and recipient customer codes
+### Fincode abstraction / provider exit ramp
+The internal service interfaces in the BFF must be designed so Fincode is swappable. This is architectural design work upfront — not just coding — that shapes every integration decision made during the build. Deferring this design decision creates expensive rework later.
 
-**VL implication:** The BFF creates the transaction in Fincode. Must hold idempotency keys to prevent duplicates. Error normalisation is BFF responsibility.
+### Open banking top-up
+**Confirmed gap — Fincode has no open banking integration.** Fincode's bank transfer flow is manual ("I will pay later" + customer notifies). This is not open banking. For account-to-account instant top-up (required in MVP scope), VL must integrate a separate provider. Leading candidates: GoCardless (direct debit / VRP), TrueLayer (open banking payments), Yapily. Provider selection is open — see Bucket 3.
 
----
+### App authentication layer (device-side)
+Fincode handles credential verification server-side. The mobile app must implement:
+- Secure session token storage (Fincode JWT from BFF, stored in device keychain / encrypted storage)
+- Device binding
+- Biometric unlock (FaceID / TouchID)
+- PIN login with lockout
+- App-level session expiry and re-auth flow
 
-### Payment collection ✅ (partial — see open banking gap below)
+### CI/CD pipeline and environments
+Governance delivery non-negotiable: dev / staging / production environments with structured deployment pipeline and rollback capability. Includes: infrastructure-as-code, environment secrets management, deployment automation, app store build pipeline. This is DevOps scope that must be in the estimate.
 
-**Card payment (native):**
-- `POST /paymentmanagement/process-card-payment` — direct card processing in Fincode
-- Takes raw PAN, expiry, CVV — Fincode handles card processing natively through their own processor relationships
-
-**Wallet payment:**
-- `POST /paymentmanagement/makepaymentfromwalletaccount` — pay from Fincode wallet balance
-
-**Payment token (third-party gateways):**
-- `POST /paymentmanagement/processpaymentwithpaymenttoken` — fund via external payment token
-- Supports: Stripe ACH, Coinbase, Poli, Secure Trading (TrustPayments), Flutterwave, Custom POS
-
-**Manual bank transfer flow:**
-- `PUT /paymentmanagement/bank-iwillpaylater-wallet/{pcn}/{payableType}` — marks as pending bank transfer
-- `POST /paymentmanagement/notify-bank-transfer-payment` — customer confirms they've sent the bank transfer manually
-
-**Supported payment methods query:**
-- `POST /paymentmanagement/supported-payment-methods` — returns available methods with fees and metadata for a given transaction type and corridor
-
----
-
-### Beneficiary management ✅
-- Confirmed in Fincode overview: create, manage, and retrieve beneficiary profiles
-- Bank account validation and mobile money phone number validation
-- Both ACCOUNTPAYMENT and MOBILE_MONEY beneficiary types supported
-- _(Specific endpoint details 404 in public docs — requires sandbox to confirm full field set)_
+### Observability baseline
+Governance operational non-negotiable: "critical failures must be detectable internally before customers report them." Minimum viable: structured logging, CloudWatch dashboards, alerts on error rate, API latency, webhook delivery failures. Without this, SocialRemit cannot operate the platform.
 
 ---
 
-### Transaction history & ledger ✅
-- `GET /ledger/account-ledger-history/{account_id}/{page}/{size}` — paginated ledger with executionDate, ledgerType, transactionAmount, newBalance
-- `GET /ledger/account-balance/{account_id}` — current balance
-- Ledger history by idempotency key (audit trail)
+## Bucket 3 — Needs discussion before we can scope or price
 
----
+These items cannot be cleanly estimated without a decision on approach. They should be agenda items for the next call with Joseph and Paul.
 
-### Webhooks ✅
-- Events: `transaction.created`, `transaction.completed`, `transaction.failed`, `kyc.verification.completed`, `payment.received`
-- Terminal status webhooks: PAID, FAILED, CANCELLED
-- Payload includes: eventType, reference, status, 23+ fields of transaction metadata including compliance status and sanction screening results
-- **Important:** Same event may be delivered multiple times — BFF must deduplicate on reference
+### 1. Sumsub vs Fincode KYC — who handles what?
 
----
+Fincode has a built-in KYC engine (document submission, CRA form, external screening via `continue-enrolment`). SocialRemit has separately contracted Sumsub for identity verification. These overlap. Three architecturally distinct options:
 
-### Dynamic fields ✅
-- `GET /dynamicfields/dynamic-fields-group/{processGroupCode}` — returns structured fields required for a specific process
-- Analogous to RemitONE's UISettings — Fincode drives form requirements dynamically per corridor/transaction type
-
-**VL implication:** BFF must fetch and cache dynamic fields. App renders forms based on BFF-provided field definitions. Same pattern as RemitONE, different API.
-
----
-
-### Payout point / cash pickup support ✅
-- List payout points, pay centres, payment collectors by address
-- Payout point branches
-
----
-
-### Sandbox environment ✅
-- Sandbox base URL available: `https://{domain}.fincode.software/api/v6/services/`
-- Test credentials, test bank account, test card data provided in documentation
-- Separate from production (`*.fincode.tech`)
-
----
-
-### Admin / back-office APIs ✅ (raw APIs only — no portal confirmed)
-- Customer list, search, profile lookup
-- Employee management
-- Organisation preferences
-- AML/KYC rule configuration
-- Fee management
-- Connector management
-
----
-
-## What VL must build entirely
-
-### Mobile application (React Native or Flutter) 🔴 VL builds
-All screens, navigation, state management, biometric unlock, secure session storage, device binding. Fincode has no mobile SDK or white-label app.
-
----
-
-### BFF / Control Layer 🔴 VL builds
-The entire orchestration middleware. Includes:
-- API translation (Fincode's API → clean JSON/REST for the app)
-- Session and token lifecycle management (Fincode JWTs held server-side)
-- Dynamic field caching (equivalent to RemitONE's UISettings caching)
-- Error normalisation across all Fincode error codes
-- Retry and timeout handling for all Fincode calls
-- Idempotency key management
-- Progressive KYC threshold logic (which trigger point to apply per user + transaction amount)
-- Fincode abstraction layer (provider-portable interfaces so Transpara replacement requires only BFF changes)
-
----
-
-### Open banking top-up 🔴 VL builds + integrates
-**This is a confirmed gap.** Fincode's bank transfer flow is a manual "I will pay later" notification model, not open banking. There is no open banking (account-to-account, consent-based, instant) integration in Fincode's API.
-
-For open banking top-up (which is in MVP scope and a key low-friction deposit method), VL must integrate a separate open banking provider — GoCardless, TrueLayer, or Yapily. This is additional integration scope not present in the Dec 2025 estimate in the same form.
-
----
-
-### Push notifications 🔴 VL builds + integrates
-Fincode has webhook events but no push notification delivery to mobile devices. VL must integrate Firebase Cloud Messaging (FCM) / Apple Push Notifications (APNs) via a notification service (Firebase, OneSignal, or similar). The BFF receives Fincode webhooks, processes them, and triggers push notifications to the app.
-
----
-
-### Analytics 🔴 VL builds + integrates
-Fincode has no analytics. Mixpanel, PostHog, Firebase Analytics, or Amplitude integration must be built into the mobile app (client-side events) and optionally the BFF (server-side events). Per governance doc §36, this is an MVP priority.
-
----
-
-### Rewards and referral engine 🔴 VL builds
-Fincode has no rewards or referral capability. Per governance doc §16, rewards and referrals are "core behavioural infrastructure." This includes: welcome bonuses, referral attribution, reward eligibility logic, reward release logic, abuse prevention. All of this lives in the BFF / a dedicated service, with its own data store.
-
----
-
-### Observability infrastructure 🔴 VL builds + configures
-Fincode does not provide operational dashboards. Per governance non-negotiables: VL must implement monitoring, logging, alerting, API performance dashboards, webhook monitoring, and payout visibility. Baseline: CloudWatch + structured logging. Enhanced: consider Datadog, Grafana, or similar.
-
----
-
-### Internal data model / SocialRemit's own database 🔴 VL designs + builds
-Governance principle: "own the internal data model." The BFF must maintain SocialRemit's own database records for:
-- User profiles (mirrored from Fincode, enriched)
-- KYC state and progression history
-- Transaction records (with SocialRemit's internal reference model)
-- Reward and referral state
-- Audit logs
-- Webhook event log (for deduplication + replay)
-
-This is essential for the Fincode → Transpara migration: when Fincode is replaced, SocialRemit's internal data model is the continuity layer.
-
----
-
-### CI/CD pipeline and environments 🔴 VL builds + configures
-Three environments (dev / staging / prod) with structured deployment pipelines and rollback. Per governance delivery non-negotiables. This is DevOps scope that must be in the estimate.
-
----
-
-## What requires BFF orchestration on top of Fincode (not purely Fincode-native)
-
-### Progressive KYC routing ⚠️ BFF logic
-Fincode provides the KYC requirements API (`kyc-requirements-by-isocountry/{countryIso}/{triggerPoint}`), but the decision of *when* to trigger which level of KYC (based on transaction amount, cumulative volume, risk signals) is business logic that lives in the BFF. The BFF must track where each user is in the KYC lifecycle and decide when to gate transactions behind further verification.
-
-### Sumsub / Fincode KYC orchestration ⚠️ Design question — MUST RESOLVE BEFORE ESTIMATION
-SocialRemit has contracted Sumsub for identity verification. Fincode has its own KYC flow (`attach-documents`, `continue-enrolment`, `submit-cra`). These are potentially redundant or complementary. Three possible architectures:
-
-| Option | Description | Implication |
+| Option | Description | Implication for VL |
 |---|---|---|
-| A — Sumsub only | Use Sumsub SDK for all identity verification; pass verification status to Fincode via its `verify-customer` admin endpoint | Sumsub is the truth for KYC; Fincode is informed of the result. Simplest if Fincode accepts external verification signal. |
-| B — Fincode only | Use Fincode's native KYC flow (which may invoke external providers via `continue-enrolment`) | Sumsub contract may be redundant or used differently. Need to confirm what provider Fincode's external screening uses. |
-| C — Split responsibility | Sumsub handles identity document verification + liveness; Fincode handles AML/sanctions/PEP screening | Two separate flows in the BFF; Sumsub SDK in the app for document capture; Fincode compliance APIs for AML. |
+| **A — Sumsub only** | Sumsub SDK in-app for document capture + liveness check; BFF passes verified status to Fincode via admin verify endpoint | Cleanest UX; VL integrates Sumsub SDK + manages verification state in BFF. Need to confirm Fincode accepts external verification signal. |
+| **B — Fincode native KYC only** | Use Fincode's `attach-documents` + `continue-enrolment` flow; Sumsub contract may be redundant | Simpler integration; need to confirm what external provider Fincode's `continue-enrolment` calls and whether it meets SocialRemit's UX expectations. |
+| **C — Split** | Sumsub handles document capture + liveness; Fincode handles AML/sanctions/PEP screening | Both integrations needed; BFF orchestrates both. Most compliance-complete but highest complexity. |
 
-**This needs to be confirmed with Joseph/Fincode before the architecture can be finalised.** The wrong choice here creates double-KYC friction for users or a compliance gap.
+This decision affects: BFF scope, SDK in-app, onboarding UX flow, and compliance documentation for FCA. **Must be resolved before estimation.**
 
-### Card payment PCI-DSS scope ⚠️ Risk
-Fincode's card payment API accepts raw PAN, expiry, and CVV. This means if the BFF routes card payment requests through Fincode, the BFF is handling raw card data — which creates PCI-DSS scope for VL's infrastructure. This must be reviewed: either Fincode's card processing is handled entirely client-side (Fincode-provided JS widget or equivalent), or VL's servers are in PCI scope. Checkout.com, Stripe, and similar providers solve this via tokenisation (client-side tokenises the card, only a token touches the server). **PCI scope should be discussed with SocialRemit's compliance team and Fincode before the architecture is locked.**
+### 2. Card top-up PCI-DSS scope
 
-### Transaction state management ⚠️ BFF logic
-Fincode webhooks only fire on terminal states (PAID, FAILED, CANCELLED). Intermediate states (processing, pending payout, etc.) must be polled or managed by the BFF. The BFF must maintain a local transaction state machine that reconciles app state with Fincode webhook events.
+Fincode's card payment API (`POST /paymentmanagement/process-card-payment`) accepts raw PAN, expiry, and CVV. If the BFF passes raw card data, VL's infrastructure enters PCI-DSS scope — significant compliance overhead.
+
+Questions to resolve with Fincode:
+- Does Fincode provide a client-side tokenisation widget (JS/native SDK) so the card number never touches VL's servers?
+- Or does card processing happen entirely through a third-party gateway (Checkout.com, Volume) that tokenises independently, and Fincode is bypassed for top-up?
+
+If VL servers are in PCI scope, this adds security audit and certification requirements to the project. If Fincode or a gateway handles it cleanly, VL is out of scope.
+
+### 3. Open banking provider selection
+
+Open banking top-up is confirmed as MVP scope (no Fincode coverage). Provider has not been selected. The choice affects integration complexity and timeline:
+
+| Provider | Model | Notes |
+|---|---|---|
+| **GoCardless** | Direct debit + Variable Recurring Payments (VRP) | Strong UK coverage; VRP is the most seamless UX for recurring top-up |
+| **TrueLayer** | Open banking payments (Pay by Bank) | Broad UK bank coverage; good for one-time instant payments |
+| **Yapily** | Open banking data + payments | More developer-focused; broad coverage |
+
+SocialRemit may have a preference or may defer to VL recommendation. This needs a decision before open banking scope can be estimated.
+
+### 4. Operational admin portal — day-one requirement or deferred?
+
+Fincode provides raw admin APIs (customer search, transaction lookup, AML rule management, employee management). What it does NOT provide is a ready-to-use operational dashboard. For a live remittance business, the operations team needs to:
+- Look up customers and transactions in real time
+- Manually review flagged transactions
+- Manage failed payouts
+- Override or cancel transactions
+
+Options:
+- **A — Fincode admin portal exists** (needs confirmation from Fincode directly — their documentation does not clearly describe a web admin portal)
+- **B — Retool / internal tool** built on top of Fincode admin APIs (fast to build, cheaper than bespoke)
+- **C — Custom admin portal** built by VL (full control, higher cost)
+- **D — Defer** (accept operational risk for first weeks post-launch; Joseph's team manages manually)
+
+Joseph's governance doc §26 says "operational blindness is a major business risk" informed by his UnityLink experience. Option D is unlikely to be acceptable.
+
+### 5. Push notifications — MVP or Phase 2?
+
+The governance doc (§14) describes customer communication as "a core operational and behavioural component" including OTP delivery, transactional notifications (transaction sent/received/failed), and onboarding reminders. These were Phase 2 in the Dec 2025 proposal (RemitONE had no webhook support).
+
+Fincode does fire webhooks (`transaction.completed`, `transaction.failed`). The BFF can receive these and forward to FCM/APNs. The question is whether SocialRemit needs push notifications at go-live or can operate with email + in-app status only for the first weeks.
+
+**Recommendation:** Transactional push (send confirmed, send failed) should be MVP — users expect it from a money transfer app and it directly affects trust. Behavioural nudges (inactivity, referral prompts) can be Phase 2.
 
 ---
 
-## Confirmed gaps (items in MVP scope with no Fincode coverage)
+## Bucket 4 — Separate pricing: modular/shopping list
 
-| Feature | In MVP scope? | Fincode covers? | VL must provide |
-|---|---|---|---|
-| Open banking top-up | Yes | ❌ No | Third-party integration (GoCardless/TrueLayer) |
-| Push notifications | Yes (governance §14) | ❌ No | FCM/APNs + notification service |
-| Analytics tracking | Yes (governance §17) | ❌ No | Mixpanel/PostHog/Firebase |
-| Rewards & referrals | Yes (governance §16) | ❌ No | Custom service in BFF |
-| Observability dashboards | Yes (governance §25) | ❌ No | CloudWatch + tooling |
-| Internal data model / own DB | Yes (governance §20) | ❌ No | PostgreSQL or equivalent in BFF |
-| CI/CD pipeline (3 envs) | Yes (governance §29) | ❌ No | DevOps work |
-| Biometric unlock | Yes (MVP scope) | ❌ No | Mobile app native (FaceID/TouchID) |
-| Admin/operational portal | TBD | ⚠️ APIs only | Custom dashboard or Retool/similar on top of Fincode admin APIs |
-| PDF statements | Phase 2 | ❌ No | BFF-generated (deferred) |
-| Cancel/reverse transfer | Phase 2 | ❌ Not confirmed | Deferred |
-| Scheduled transfers | Phase 2 | ❌ No | Deferred |
+These items are desirable and referenced in the governance doc, but are not required for the platform to be functional and transact. They should be broken out as priced line items so SocialRemit can choose what to include, defer, or descope depending on budget and timeline.
 
----
-
-## Items that appeared in Phase 2 (Dec 2025) but may now be in MVP scope
-
-The governance doc expands scope relative to the December 2025 proposal. The following were previously deferred but are now flagged as MVP or near-MVP:
-
-| Item | Dec 2025 status | Governance doc signal | Action needed |
-|---|---|---|---|
-| Push notifications | Deferred | §14: "core operational + behavioural component" | Confirm with Joseph — likely MVP |
-| Analytics | Deferred | §17: MVP optional at minimum | Confirm phasing |
-| Rewards/referrals | Deferred | §16: "core behavioural infrastructure, not marketing" | Confirm if MVP or Phase 1.5 |
-| Webhooks (real-time status) | Deferred (RemitONE-specific) | Fincode webhooks available natively | Include in MVP — changes the delivery confirmation flow |
+| Item | Description | Priority signal from governance doc |
+|---|---|---|
+| **Rewards & referral engine** | Welcome bonuses, referral attribution, reward eligibility/release logic, abuse prevention. Entirely VL-built — no Fincode coverage. | §16: "core behavioural infrastructure" — high priority but not a go-live blocker |
+| **Analytics integration** | Mixpanel / PostHog / Firebase Analytics in-app + BFF event forwarding. Onboarding funnel, transaction funnel, retention. | §17: MVP optional at minimum |
+| **Enhanced observability** | Datadog / Grafana / PagerDuty on top of CloudWatch baseline. Operational dashboards, SLA alerting, webhook monitoring. | §25–26: "major business risk" — baseline included in Bucket 2; this is the enhanced tier |
+| **Admin / operational portal** | Retool or custom dashboard on Fincode admin APIs for customer ops, transaction management, manual compliance review. | §26: Joseph's "operational blindness" concern — see Bucket 3 for approach discussion |
+| **Event-driven behavioural engine** | Configurable triggers (KYC completed → send bonus, first transfer → reward, inactivity → nudge). Requires event bus and workflow config layer. | §19: MVP foundations, but configurable automation is Phase 2 |
+| **PDF statement generation** | BFF-generated transaction history PDFs. Was Phase 2 in Dec 2025 proposal. | Low priority; deferred |
+| **Multi-language support** | App copy in multiple languages. Joseph's UX prototype includes language selection on onboarding. | Not confirmed as MVP requirement |
+| **SR Tribe / community features** | Future gamification, loyalty tiers, community engagement concepts. | §16: explicitly future |
+| **CRM integration** | Zendesk / Intercom connection to customer profile + transaction history. For support team operations. | §18: future |
+| **Future Transpara integration planning** | Architecture planning doc + BFF interface specification for the Fincode → Transpara migration. A deliverable VL could produce alongside MVP delivery. | Strategic — not operational MVP |
 
 ---
 
-## What must be confirmed with Fincode / Joseph before estimation
+## Must-resolve before estimation can be finalised
 
-1. **Sumsub vs Fincode KYC** — which handles what? Is Fincode's `continue-enrolment` pointing to Sumsub, or a different external provider?
-2. **Card processing via Fincode** — is PCI-DSS scope manageable (client-side tokenisation available)? Or do we need Checkout.com/Volume alongside Fincode?
-3. **Open banking provider selection** — GoCardless vs TrueLayer vs Yapily; has SocialRemit decided?
-4. **Does Fincode provide an operational admin portal** beyond raw APIs? If not, what does SocialRemit need for day-one operations?
-5. **Corridor and currency confirmation** — which specific corridors are in MVP? Determines which payout rails and dynamic field sets are in scope.
-6. **Sandbox credentials** — VL needs tenant-specific sandbox access to confirm all of the above at the API level.
+1. **Sumsub vs Fincode KYC** — approach determines BFF scope and in-app SDK work (Bucket 3, item 1)
+2. **PCI-DSS scope for card top-up** — approach determines whether VL's infrastructure requires compliance hardening (Bucket 3, item 2)
+3. **Open banking provider selection** — determines integration scope and timeline (Bucket 3, item 3)
+4. **Push notifications — MVP or not** — affects backend notification service scope and timeline (Bucket 3, item 5)
+5. **Sandbox credentials** — VL needs tenant-specific access to verify Fincode field coverage, dynamic field behaviour, and beneficiary API detail
+6. **Corridors confirmed** — specific destination countries determine which payout rails, dynamic field sets, and KYC requirements are in scope
