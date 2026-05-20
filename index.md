@@ -32,8 +32,9 @@ Maintained by `/ingest` and `/lint`. Do not edit by hand except to resolve confl
 
 ## Technical architecture
 
-- [`technical-architecture/system-overview.md`](./technical-architecture/system-overview.md) — 3-layer architecture: React Native/Flutter app → VL BFF → Fincode; Flutter vs RN open decision
-- [`technical-architecture/integrations/fincode.md`](./technical-architecture/integrations/fincode.md) — Fincode: new white-label provider; API docs pending
+- [`technical-architecture/system-overview.md`](./technical-architecture/system-overview.md) — 3-layer architecture (Product/Control/Infrastructure); Fincode integration; observability + CI/CD requirements; Flutter vs RN open decision
+- [`technical-architecture/governance-principles.md`](./technical-architecture/governance-principles.md) — client non-negotiables, 3-layer model, vendor shortlist, scope signals for estimation
+- [`technical-architecture/integrations/fincode.md`](./technical-architecture/integrations/fincode.md) — Fincode: white-label provider; API docs URL now available
 - [`technical-architecture/integrations/remitone.md`](./technical-architecture/integrations/remitone.md) — RemitONE: superseded by Fincode; retained for reference
 
 ## Project management (incl. scope & estimates)

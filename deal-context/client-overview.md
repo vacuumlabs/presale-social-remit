@@ -6,13 +6,14 @@ sources:
   - ../team-inputs/2025-12-08-call-transcript.md
   - ../team-inputs/2025-12-17-fe-build-proposal.md
   - ../client-inputs/Socialremit_Customer_Flow_Nov2025.md
-last_updated: 2026-05-18
+  - ../client-inputs/2026-05-19-meeting-minutes.md
+last_updated: 2026-05-20
 status: active
 ---
 
 # Client Overview — SocialRemit
 
-SocialRemit is a UK-based startup building a consumer remittance mobile application. The company is building on top of the RemitONE white-label platform as its initial infrastructure layer, while simultaneously planning a proprietary Flutter-based frontend for the longer term.
+SocialRemit is a UK-based startup building a consumer remittance mobile application. The company is building on Fincode's white-label platform as its initial infrastructure layer (RemitONE was the original choice, replaced in early 2026), while planning to migrate to a proprietary backend (Transpara) within 12 months.
 
 ## What they are building
 
@@ -46,9 +47,14 @@ UK-based migrants and low-income workers. Two corridors confirmed (specific coun
 
 SocialRemit is one product in the Affecta Technology group. See [`deal-context/group-structure.md`](./group-structure.md) for the full picture including Transpara (B2B white-label), E-money Score (credit engine), and E-money Finance.
 
+## Funding & investor situation
+
+The business has been self-funded for two years. Joseph confirmed on 19 May 2026 that investors already exist but want to see traction before committing — Joseph wants stronger bargaining power before activating larger funding rounds. This nuances the "pre-seed, self-funded" framing: it is not that there are no investors, but that they are contingent on live transaction volume. The seed raise is planned approximately 6 months post go-live.
+
 ## Key remaining unknowns
 
 - Specific MVP corridors and currencies.
-- Fincode API capabilities and protocol (docs to be sent by Joseph).
+- Fincode API capabilities and feature coverage (docs URL shared: https://docs.fincode.technology/api/transactions/call-quote — full review pending).
 - NDA status (may already be in place from December 2025).
 - Commercial model — deferred payment / equity structure is a significant open risk. See [`deal-context/open-questions.md`](./open-questions.md).
+- Card payment processor and open banking provider selection (multiple vendors named in governance doc; none yet contracted).

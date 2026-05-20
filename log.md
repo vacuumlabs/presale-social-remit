@@ -68,3 +68,15 @@ P1 ran on T1 brief for SocialRemit (T2). T1 brief was reconstructed from wiki co
 - Created: `similar-deals.md` — no past deal outcomes found in GDrive; Dec 2025 SocialRemit proposal used as internal baseline
 - Created: `go-no-go-flags.md` — 6 green / 6 amber / 1 red (deferred payment + equity model awaiting VL CEO/CDO decision)
 - Created: `pre-meeting-brief.md` — one-pager framed for proposal delivery meeting ~w/c 25 May 2026
+
+## [2026-05-20 00:00] ingest | Joseph's post-call documents — governance notes, meeting minutes, Fincode API
+
+Ingested two client-authored documents shared by Joseph on 19 May 2026 email. Key output: formal client governance framework now captured in wiki; system-overview updated to adopt client's layer naming and add observability/CI/CD requirements.
+- Created: `client-inputs/2026-05-19-governance-notes-v1.md` — full 38-section governance framework (raw source)
+- Created: `client-inputs/2026-05-19-meeting-minutes.md` — Joseph's formatted meeting minutes from 19 May call (raw source)
+- Created: `technical-architecture/governance-principles.md` — distilled wiki page: 3-layer model, non-negotiables, vendor shortlist, scope signals for estimation
+- Updated: `technical-architecture/system-overview.md` — adopted Product/Control/Infrastructure layer naming; added observability requirements, CI/CD environments requirement, Control Layer scope; replaced RemitONE references with Fincode; referenced governance-principles.md
+- Updated: `technical-architecture/integrations/fincode.md` — added API docs URL (https://docs.fincode.technology/api/transactions/call-quote); expanded open items to include sanctions/PEP screening coverage and admin portal question
+- Updated: `deal-context/client-overview.md` — added investor nuance ("investors exist but want traction"), self-funded for two years, card/open banking provider open items
+- Updated: `product-management/regulatory-brief.md` — expanded sanctions screening entry to include PEP screening and ongoing monitoring as client non-negotiables (governance doc §12)
+- Contradictions: none

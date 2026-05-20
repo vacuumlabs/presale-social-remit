@@ -1,71 +1,107 @@
 ---
 type: system
 title: System Architecture Overview
-tags: [architecture, system, bff, remitone, flutter, react-native, aws]
+tags: [architecture, system, bff, fincode, flutter, react-native, aws]
 sources:
   - ../team-inputs/2025-12-17-fe-build-proposal.md
-last_updated: 2026-05-18
+  - ../client-inputs/2026-05-19-governance-notes-v1.md
+  - ../client-inputs/2026-05-19-meeting-minutes.md
+last_updated: 2026-05-20
 status: active
 ---
 
 # System Architecture Overview
 
-Three-layer architecture proposed in December 2025. The mobile technology choice is under re-evaluation for the May 2026 re-engagement (see note below).
+Three-layer architecture — aligned with SocialRemit's formal governance model (see [`governance-principles.md`](./governance-principles.md)). The December 2025 proposal introduced this pattern; the May 2026 governance document formalises it using SocialRemit's own layer naming.
 
-## Layer 1 — Mobile App
+## Layer naming (client's formal model)
+
+| Client term | VL equivalent | Owner |
+|---|---|---|
+| Product Layer | Mobile app | Social Remit / VL-built |
+| Control Layer | BFF / middleware | VL-built, Social Remit-owned |
+| Infrastructure Layer | Fincode + Sumsub + payment providers | Third-party |
+
+---
+
+## Layer 1 — Product Layer (Mobile App)
 
 **Open decision — Flutter vs React Native.** See `decisions.md` entry dated 2026-05-19.
 
-Joseph's initial preference was Flutter. On the 19 May call Boris explained that React Native and Flutter are architecturally equivalent for this use case; React Native has a larger hiring pool (JavaScript vs Dart) and VL has more experience with it. Joseph opened up to React Native: "if it costs less and gives the customer the same experience, it makes sense." Boris to consult VL mobile experts and include a recommendation in the proposal. VL internal lean: React Native.
+Joseph's preference is Flutter. On the 19 May call Boris explained that React Native and Flutter are architecturally equivalent; React Native has a larger hiring pool (JavaScript vs Dart) and VL has more experience with it. Joseph is open to React Native: "if it costs less and gives the customer the same experience, it makes sense." Boris to consult VL mobile experts and include a recommendation in the proposal. VL internal lean: React Native.
 
 The current Figma prototype has a React implementation behind it (built separately by SocialRemit's team).
 
-The app holds no RemitONE credentials. All communication goes through the BFF. Session token from the BFF is stored in secure device storage with optional biometric unlock.
+The app must remain fully decoupled from provider-specific logic — per governance non-negotiables. All communication goes through the BFF. Session token stored in secure device storage; optional biometric unlock.
 
-## Layer 2 — BFF (Backend-for-Frontend)
+---
 
-Built by VL. Single JSON/REST API surface for the mobile app.
+## Layer 2 — Control Layer (BFF / Middleware)
 
-**Tech stack (Dec 2025 proposal):**
+Built by VL. Single JSON/REST API surface for the mobile app. This layer is described by SocialRemit as strategically important and expected to become "increasingly valuable over time" — it is the primary intellectual asset VL is creating.
+
+**Tech stack (baseline from Dec 2025 proposal — to be confirmed in new estimate):**
 - Runtime: Node.js + NestJS
 - Caching: Redis (ElastiCache)
 - Deployment: Docker on AWS ECS Fargate, behind ALB or API Gateway
-- Security: AWS WAF, Secrets Manager for RemitONE keys
-- Observability: CloudWatch Logs + Metrics
+- Security: AWS WAF, Secrets Manager for provider credentials
+- Observability: CloudWatch Logs + Metrics (minimum; governance doc requires full operational visibility — see below)
 
-**BFF responsibilities:**
-- XML↔JSON translation (RemitONE API returns XML over POST)
-- RSA encryption of `encrypted_data` fields required by RemitONE
-- Session/token lifecycle management
-- UISettings caching (RemitONE uses dynamic form configuration)
+**Control Layer responsibilities:**
+- Fincode API integration (auth, session management, response mapping)
+- Progressive KYC routing (Sumsub SDK orchestration, threshold logic for CDD escalation)
+- Sanctions screening + PEP screening + ongoing monitoring (via Sumsub or ComplyAdvantage)
 - Error normalisation and retry/timeout handling
-- Optional: PDF statement generation, analytics event forwarding, notification orchestration
+- Provider abstraction — frontend must not depend on Fincode response formats or workflows
+- Event-driven orchestration (KYC completion events, first transfer events, referral triggers, inactivity signals)
+- Rewards and referral eligibility logic
+- Analytics event forwarding (Mixpanel/PostHog/Firebase — phasing TBD)
+- Notification orchestration (OTP, transactional, behavioural nudges)
 
-The BFF insulates the app from RemitONE's API design and is the correct place to implement any future-proofing if SocialRemit later migrates away from RemitONE.
+**The BFF is also the Fincode exit ramp.** When SocialRemit's proprietary backend (Transpara) is ready (~12 months), only the BFF's downstream integration changes. The mobile app is unaffected. This is a governance non-negotiable and a key investment narrative for SocialRemit's seed raise.
 
-## Layer 3 — Fincode White-label Backend
+---
 
-Third-party managed. Replaces RemitONE (selected after the December 2025 proposal; see [`integrations/remitone.md`](./integrations/remitone.md) for the superseded provider). SocialRemit plans to use Fincode for **12 months only**, then replace with their own proprietary backend. The BFF is the abstraction layer that makes this swap possible.
+## Layer 3 — Infrastructure Layer (Fincode + Third-party Providers)
 
-API details: not yet received. Joseph to send Fincode API documentation post-19 May 2026 call. See [`integrations/fincode.md`](./integrations/fincode.md).
+Third-party managed. Fincode is the white-label remittance backend (replaces RemitONE — see [`integrations/remitone.md`](./integrations/remitone.md)). SocialRemit plans to use Fincode for **12 months only**.
 
-## Layer 4 — Administration Portal
+API documentation shared by Joseph on 19 May 2026: https://docs.fincode.technology/api/transactions/call-quote. See [`integrations/fincode.md`](./integrations/fincode.md) for full integration notes.
 
-Provided by RemitONE (TBC). Covers: customer lookup, transaction search and status timeline, beneficiary lookup, wallet balances, support triage, manual compliance notes, CSV/PDF export.
+Other Infrastructure Layer providers (from governance doc):
+- **Sumsub** — KYC/identity verification (contracted)
+- **Card processor** — Volume, Checkout.com, or SagePay (not yet selected)
+- **Open banking** — GoCardless or bundled via Fincode (not yet confirmed)
+- **Sanctions/AML** — ComplyAdvantage or equivalent (not yet selected; may be bundled with Sumsub)
 
-## Architecture diagram
+---
 
-A high-level architecture diagram exists at `../../hla.png` (GDrive: `1Aqd0_Z91hjxnCWg2qjN4u9I_8H8MFSsO`). It shows a longer-term target state with additional services (auth & user management, beneficiary service, wallets & ledger, KYC/AML, FX & fees engine, fraud & risk, payments orchestrator, mobile money aggregator, open banking, card processor, notifications, CRM, DMS, analytics, reporting) — this appears to represent the Phase 2+ proprietary architecture, not the MVP.
+## Observability requirements (governance non-negotiable)
 
-## Send money — API call chain
+"Operational blindness is considered a major business risk." The platform must support:
+- Transaction lifecycle visibility (end-to-end, not just app-side)
+- API monitoring (Fincode response times, error rates)
+- Webhook monitoring
+- OTP delivery visibility
+- Provider payout visibility
+- Alerting before customers report failures
 
-The BFF orchestrates the following RemitONE calls for the send money flow:
+CloudWatch alone is insufficient. A structured observability approach (tooling TBD) is required and must be scoped in the new estimate.
 
-1. `getTransactionUISettings` + `getBeneficiaryUISettings` + `getDestinationCountries` — initialise screen
-2. `listBeneficiaries` — recipient selection
-3. `createBeneficiary` / `updateBeneficiary` — add or edit recipient
-4. `getCharges` — quote (fees + FX)
-5. `createTransaction` — pre-commit
-6. `getTransactionPaymentInstructions` — payment details for card/wallet/open banking
-7. `confirmTransaction` (with OTP) — finalise
-8. Optional: `requestTransactionConfirmationCode` — resend OTP
+---
+
+## CI/CD and environments (governance non-negotiable)
+
+Must include: development environment, staging environment, production environment, structured deployment pipeline, rollback capability, version control discipline. This is not optional — it is a delivery non-negotiable per the governance framework.
+
+---
+
+## Administration Portal
+
+Status: TBD for new estimate. In Dec 2025 proposal this was provided by RemitONE. With Fincode, whether an equivalent operational portal is provided natively or needs to be built is an open item pending Fincode API review.
+
+---
+
+## Architecture diagram (Phase 2+ reference)
+
+A high-level architecture diagram exists at `../../hla.png` (GDrive: `1Aqd0_Z91hjxnCWg2qjN4u9I_8H8MFSsO`). It shows a longer-term target state with additional services (auth & user management, beneficiary service, wallets & ledger, KYC/AML, FX & fees engine, fraud & risk, payments orchestrator, mobile money aggregator, open banking, card processor, notifications, CRM, DMS, analytics, reporting) — this represents the Phase 2+ proprietary architecture. The governance doc's §37 long-term direction aligns with this diagram.

@@ -5,7 +5,8 @@ tags: [regulatory, compliance, P2]
 sources:
   - ../team-inputs/T1-sales-deal-brief.md
   - product-management/domain-research.md
-last_updated: 2026-05-19
+  - ../client-inputs/2026-05-19-governance-notes-v1.md
+last_updated: 2026-05-20
 status: draft
 ---
 
@@ -46,8 +47,10 @@ As a UK company processing personal data of UK residents, the UK GDPR (retained 
 ### 1. Progressive KYC and regulatory thresholds _(High impact — architecture constraint)_
 The FCA requires identity verification tied to transaction volume thresholds. SocialRemit's product uses progressive KYC: minimal data collected at onboarding (phone number + OTP), escalating to full CDD as the user approaches regulatory thresholds. The Sumsub SDK integration must implement this correctly — the business logic for threshold tracking and KYC escalation lives in the BFF, not the app. Getting this wrong (too early, too late, or inconsistently applied) is a direct compliance risk for the EMI licence. This affects both architecture design and QA scope.
 
-### 2. Sanctions screening at transaction time _(High impact — integration constraint)_
-Every send-money transaction must be screened against UK and potentially UN/EU sanctions lists in real time. If Fincode handles this natively, VL needs to confirm it. If it does not, a sanctions screening integration (e.g., ComplyAdvantage, Dow Jones) must be added to the BFF — this is additional scope not currently in the estimate. _(Status: unconfirmed — Fincode API docs outstanding.)_
+### 2. Sanctions screening, PEP screening, and ongoing monitoring _(High impact — integration constraint)_
+Every send-money transaction must be screened against UK and potentially UN/EU sanctions lists in real time. Beyond one-time KYC, the FCA requires ongoing customer monitoring: customers must be re-screened if risk profile changes. The governance document (§12) explicitly requires the architecture to support sanctions screening, PEP (politically exposed persons) screening, and ongoing monitoring as non-negotiables.
+
+If Fincode handles these natively, VL needs to confirm it. If not, an AML/screening integration must be added to the BFF (e.g., ComplyAdvantage, LexisNexis, or Sumsub's AML monitoring module) — this is additional scope. _(Status: unconfirmed — Fincode API review pending.)_
 
 ### 3. Safeguarding of customer e-money _(Operational — not architecture, but affects go-live sign-off)_
 EMI operators must safeguard customer funds in a segregated account or via an insurance/guarantee. This is an operational obligation but relevant to go-live: the FCA could request evidence of safeguarding arrangements before or after launch. SocialRemit's team should own this, but VL should confirm it is in place before go-live, as a failure here would halt operations immediately.
@@ -73,5 +76,5 @@ VL does not have specific Fincode integration experience (new provider). The reg
 | # | Factor | Risk |
 |---|--------|------|
 | 1 | **Progressive KYC thresholds and Sumsub routing logic** | Must be implemented correctly in the BFF; wrong thresholds = compliance breach. Cannot be tested without Sumsub sandbox access. |
-| 2 | **Sanctions screening at transaction time** | If not natively handled by Fincode, requires a separate integration — additional scope and timeline impact. Needs Fincode API review to resolve. |
+| 2 | **Sanctions screening, PEP screening, and ongoing monitoring** | All three are non-negotiable per client governance doc (§12). If not natively handled by Fincode or Sumsub, requires a separate integration — additional scope and timeline impact. Needs Fincode API review to resolve. |
 | 3 | **Data residency / Fincode hosting location** | If Fincode stores UK user PII outside the UK, BFF design must minimise data passed to Fincode. Needs Fincode API review to resolve. |

@@ -27,9 +27,17 @@ Per the 19 May 2026 call, "Penny" (SocialRemit colleague) reviewed RemitONE post
 
 Same BFF pattern as planned for RemitONE: Flutter/React Native app → VL-built BFF → Fincode. The BFF abstracts Fincode's API, handles authentication/session management, and translates responses to JSON for the app. When SocialRemit's own backend is ready, only the BFF's downstream integration changes — the app is unaffected.
 
+## API documentation
+
+Shared by Joseph on 19 May 2026: https://docs.fincode.technology/api/transactions/call-quote
+
+Full technical review pending. Protocol details (REST/SOAP, auth mechanism, response format), feature coverage mapping against MVP scope, and sandbox/test credential availability all remain open until the review is complete.
+
 ## Open items
 
-- API documentation not yet received (Joseph to send post-call).
-- Protocol details (REST/SOAP, response format, auth mechanism) unknown until docs arrive.
-- Exact feature coverage vs RemitONE unknown — needs mapping against SocialRemit's MVP scope once docs are received.
+- Full API review: protocol, auth mechanism, response formats — docs URL now available (see above).
+- Feature coverage vs SocialRemit MVP scope: needs mapping once docs are reviewed.
+- Whether Fincode handles sanctions screening, PEP screening, and ongoing monitoring natively (required per governance non-negotiables).
+- Whether Fincode provides an operational admin portal equivalent to RemitONE's.
+- Sandbox/test credentials for integration testing.
 - Contract not yet signed by SocialRemit as of 19 May 2026.
