@@ -52,3 +52,4 @@ Maintained by `/ingest` and `/lint`. Do not edit by hand except to resolve confl
 
 - [`client-inputs/`](./client-inputs/) — material from the customer (immutable)
 - [`team-inputs/`](./team-inputs/) — material we authored ourselves
+  - [`team-inputs/T2-discovery-qa.md`](./team-inputs/T2-discovery-qa.md) — discovery Q&A; Sections 1–6 pre-filled; 9 open questions for Joseph (send 23 May)

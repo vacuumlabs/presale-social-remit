@@ -87,3 +87,7 @@ Crawled Fincode public API documentation (overview, llms-full.txt, quote API, cr
 - Created: `technical-architecture/fincode-gap-analysis.md` — full coverage/gap matrix; confirmed gaps; design risks
 
 Key findings: open banking top-up is a confirmed gap (no Fincode coverage); Sumsub/Fincode KYC overlap is an unresolved design risk; card payment PCI-DSS scope needs clarification; push notifications, analytics, rewards engine, internal DB, observability, and CI/CD are all VL-built with no Fincode coverage.
+
+## [2026-05-20 00:00] author | T2 discovery Q&A created
+
+Created `team-inputs/T2-discovery-qa.md`. Sections 1–6 pre-filled from existing wiki sources (call transcripts, governance notes, client overview). Section 7 contains 9 open questions for async send to Joseph on 23 May 2026. Answers to be ingested after Joseph responds to unblock `/p3`.
