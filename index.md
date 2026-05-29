@@ -29,6 +29,7 @@ Maintained by `/ingest` and `/lint`. Do not edit by hand except to resolve confl
 - [`product-management/domain-research.md`](./product-management/domain-research.md) — P2: client profile, UK remittance domain context, likely priorities
 - [`product-management/regulatory-brief.md`](./product-management/regulatory-brief.md) — P2: FCA/EMI regulatory framework; top constraints: progressive KYC, sanctions screening, data residency
 - [`product-management/competitive-positioning.md`](./product-management/competitive-positioning.md) — P2: freelancers vs agencies vs boutiques; VL differentiators; risks to VL's position
+- [`product-management/research/migrant-user-research-brief.md`](./product-management/research/migrant-user-research-brief.md) — planned research: Ghana & Nigeria corridor senders, personas, pain points, GTM channels, "built by migrants" validation
 
 ## Technical architecture
 
