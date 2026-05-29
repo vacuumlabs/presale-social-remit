@@ -121,3 +121,6 @@ Read #tmp-social-remit channel history and DMs with Marcus Davey and Andy Birch.
 - Updated: `deal-context/pre-meeting-brief.md` — stripped 3 resolved "what we need to find out" items; updated commercial gate owner to Andy Birch
 - Updated: `index.md` — stakeholder map entry corrected
 - Contradictions: none
+
+## [2026-05-29 00:00] author | Relationship read — partner or vendor?
+Created `deal-context/relationship-read.md` from a query on how SocialRemit views VL. Captures mixed partner/vendor signals and notes resolution hinges on the commercial (deferred-payment + equity) decision. Indexed in root index.md and deal-context/README.md.
