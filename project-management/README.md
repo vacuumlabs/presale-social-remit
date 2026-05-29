@@ -30,4 +30,5 @@ Roadmaps, timelines, milestones, capacity planning, status reports, project asse
 
 <!-- Claude maintains this list -->
 
-- [`estimation.md`](./estimation.md) — Dec 2025 T&M estimates: 175 MD / £118k (FE+BFF) or 250 MD / £169k (with Discovery)
+- [`estimation.md`](./estimation.md) — Dec 2025 estimate (superseded — RemitONE scope; new estimate via `/p5` after P4)
+- [`lint-reports/2026-05-29-lint-report.md`](./lint-reports/2026-05-29-lint-report.md) — first lint pass: 0 contradictions, 0 orphans, 4 content-stale pages, 5 README drift items, 1 missing page candidate (Transpara)

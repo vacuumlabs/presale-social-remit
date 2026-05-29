@@ -106,6 +106,12 @@ Ingested Joseph's email reply to 7 questions Boris sent on 22 May 2026. Resolved
 - Updated: `decisions.md` — 5 new decisions recorded (Sumsub MVP, Trust Payments, Volume, push notification architecture, Ghana + Nigeria corridors); provisional Fincode-native KYC decision superseded
 - Contradictions: none (Joseph's answers override prior VL assumptions; no client-vs-client conflict)
 
+## [2026-05-29 00:00] lint | First wiki lint pass
+
+Report: [`project-management/lint-reports/2026-05-29-lint-report.md`](project-management/lint-reports/2026-05-29-lint-report.md)
+
+0 contradictions · 0 orphans · 3 expected-stale raw sources · 4 content-stale pages (client-overview, intake-gaps, integrations/fincode, contract/engagement) · 5 README drift items · 1 missing page candidate (Transpara) · 1 metadata-incomplete page (contract/engagement).
+
 ## [2026-05-29 00:00] ingest | Slack — #tmp-social-remit + stakeholder corrections
 
 Read #tmp-social-remit channel history and DMs with Marcus Davey and Andy Birch. Key findings: Rudolf Vido (Product Strategist) is the PO (not Carolina Soares, who facilitated assignment); Andy Birch (CRO) is the commercial qualification lead; Marcus Davey is still engaged on qualification; internal alignment planned 2026-06-01; commercial model answer still pending as of 2026-05-29.
