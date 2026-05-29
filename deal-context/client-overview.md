@@ -7,7 +7,8 @@ sources:
   - ../team-inputs/2025-12-17-fe-build-proposal.md
   - ../client-inputs/Socialremit_Customer_Flow_Nov2025.md
   - ../client-inputs/2026-05-19-meeting-minutes.md
-last_updated: 2026-05-20
+  - ../client-inputs/2026-05-28-joseph-qa-response.md
+last_updated: 2026-05-29
 status: active
 ---
 
@@ -41,7 +42,7 @@ SocialRemit plans to use Fincode for **12 months only**, then replace it with th
 
 ## Target market
 
-UK-based migrants and low-income workers. Two corridors confirmed (specific countries not named in available sources). Consumer-only for MVP. Joseph has deep domain expertise — he scaled UnityLink from 50k to 1.5M transactions/day as CEO/CFO/treasury. See [`product-management/product-vision.md`](../product-management/product-vision.md) for brand and differentiation.
+UK-based migrants and low-income workers. **Corridors confirmed: Ghana and Nigeria** — signed liquidity arrangements already in place. Consumer-only for MVP. Joseph has deep domain expertise — he scaled UnityLink from 50k to 1.5M transactions/day as CEO/CFO/treasury. See [`product-management/product-vision.md`](../product-management/product-vision.md) for brand and differentiation.
 
 ## Group structure
 
@@ -53,8 +54,7 @@ The business has been self-funded for two years. Joseph confirmed on 19 May 2026
 
 ## Key remaining unknowns
 
-- Specific MVP corridors and currencies.
-- Fincode API capabilities and feature coverage (docs URL shared: https://docs.fincode.technology/api/transactions/call-quote — full review pending).
-- NDA status (may already be in place from December 2025).
-- Commercial model — deferred payment / equity structure is a significant open risk. See [`deal-context/open-questions.md`](./open-questions.md).
-- Card payment processor and open banking provider selection (multiple vendors named in governance doc; none yet contracted).
+- **Commercial model** — deferred payment / equity structure is the single open risk. Andy Birch (CRO) responsible for VL's position. See [`deal-context/go-no-go-flags.md`](./go-no-go-flags.md).
+- **Flutter vs React Native** — VL leans React Native; recommendation pending mobile expert input.
+- **NDA status** — may already be in force from December 2025; to be confirmed.
+- **Fincode sandbox credentials** — field-level API verification still pending. See [`technical-architecture/fincode-gap-analysis.md`](../technical-architecture/fincode-gap-analysis.md).

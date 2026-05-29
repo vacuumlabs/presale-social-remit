@@ -15,12 +15,12 @@ Sales and account management context: who the client is, who decides what, what 
 
 <!-- Claude maintains this list -->
 
-- [`stakeholder-map.md`](./stakeholder-map.md) — all named people: Joseph Owusu, Paul Duncan, Tomas Masek + Marek Tomasik (VL leadership), Boris Vida, Marcus Davey
-- [`client-overview.md`](./client-overview.md) — SocialRemit company overview, updated post 19 May call
-- [`proposal-dec-2025.md`](./proposal-dec-2025.md) — December 2025 proposal summary and deal status
-- [`open-questions.md`](./open-questions.md) — questions answered on 19 May; critical open: commercial model
+- [`stakeholder-map.md`](./stakeholder-map.md) — Joseph Owusu, Paul Duncan (TD), Tomas Masek + Marek Tomasik (VL CEO/CDO), Boris Vida (SA), Jaro Novák (PM), Rudolf Vido (PO), Andy Birch (CRO / commercial lead), Marcus Davey
+- [`client-overview.md`](./client-overview.md) — SocialRemit: EMI registered, Fincode + Sumsub + Trust Payments + Volume; Ghana + Nigeria corridors; go-live 6–8 weeks
+- [`proposal-dec-2025.md`](./proposal-dec-2025.md) — December 2025 proposal (RemitONE scope, not contracted; estimate superseded)
+- [`open-questions.md`](./open-questions.md) — most items answered via email 28 May; still open: commercial model, Flutter vs RN
 - [`group-structure.md`](./group-structure.md) — Affecta Technology group: all entities and strategic intent
-- [`intake-gaps.md`](./intake-gaps.md) — P1 gap analysis: what we know / don't know / watch for
+- [`intake-gaps.md`](./intake-gaps.md) — P1 gap analysis: what we know / don't know / watch for (partially resolved by Joseph Q&A)
 - [`similar-deals.md`](./similar-deals.md) — P1 similar deals lookup: no past deal outcomes found; Dec 2025 SocialRemit proposal is baseline
-- [`go-no-go-flags.md`](./go-no-go-flags.md) — P1 go/no-go: 6 green, 6 amber, 1 red (deferred payment model)
-- [`pre-meeting-brief.md`](./pre-meeting-brief.md) — P1 pre-meeting brief for proposal delivery ~w/c 25 May 2026
+- [`go-no-go-flags.md`](./go-no-go-flags.md) — P1 go/no-go: 6 green, 4 amber, 1 red (deferred payment model; Andy Birch CRO responsible)
+- [`pre-meeting-brief.md`](./pre-meeting-brief.md) — pre-meeting brief (updated 29 May): 2 open items remain (commercial model, Flutter vs RN)

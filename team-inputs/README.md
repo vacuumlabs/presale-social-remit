@@ -51,7 +51,7 @@ The fastest way is to ask Claude: *"scaffold a new PO persona for a senior radio
 <!-- Claude maintains this on every /ingest and /lint pass -->
 
 - [`T1-sales-deal-brief.md`](./T1-sales-deal-brief.md) — completed T1 brief for SocialRemit re-engagement (May 2026)
-- [`T2-discovery-qa.md`](./T2-discovery-qa.md) — discovery Q&A; Sections 1–6 pre-filled from wiki; Section 7 open questions to send Joseph on 23 May 2026
+- [`T2-discovery-qa.md`](./T2-discovery-qa.md) — discovery Q&A; Sections 1–6 pre-filled from wiki; Section 7: all 7 questions answered by Joseph on 28 May 2026
 - [`2025-12-08-call-transcript.md`](./2025-12-08-call-transcript.md) — discovery call transcript (Marcus Davey, Paul, Joseph); companion to GDrive `19kIRzgUSK5yZlzFmDl-W3XLxJ4aMnPrEQLyWTL4z83E`
 - [`2025-12-15-discovery-questions.md`](./2025-12-15-discovery-questions.md) — 12 VL discovery questions prepared for SocialRemit; answers not yet captured
 - [`2025-12-17-fe-build-proposal.md`](./2025-12-17-fe-build-proposal.md) — Dec 2025 MVP proposal (React Native + NestJS BFF + RemitONE); companion to GDrive `1vbWLnsZ_GTBkVH0Xbcasam92xm3ugFXJ_WFeCMbXvsc`

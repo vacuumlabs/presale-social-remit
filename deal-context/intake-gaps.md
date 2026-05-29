@@ -4,7 +4,7 @@ title: Intake gap analysis — SocialRemit
 tags: [intake, gaps, T1]
 sources:
   - ../team-inputs/T1-sales-deal-brief.md
-last_updated: 2026-05-19
+last_updated: 2026-05-29
 status: draft
 ---
 
@@ -16,7 +16,7 @@ status: draft
 
 **Business context.** SocialRemit is a UK startup, EMI registered and FCA regulated. They had a 5-month delay since the December 2025 VL proposal caused by team restructuring, funding work, and regulatory setup — all now resolved. Paul Duncan (Technical Director, formerly Unitalink) has joined full-time. Sumsub KYC is contracted. Fincode white-label is under contract review. $900M liquidity is committed for two corridors. A Figma prototype covers the full customer journey. The go-live target is 6–8 weeks (early to mid July 2026), after which a seed fundraise is planned approximately 6 months post-launch.
 
-**Budget signal.** Soft, with significant commercial risk. No hard figure provided. Joseph referenced freelancer quotes of £5k–£10k as context (not comparable). The December 2025 VL proposal was £118–169k T&M. Joseph has explicitly asked for a deferred payment model (minimum upfront, remainder on go-live) plus equity/options as additional compensation. This is being escalated to VL CEO Tomas Masek and CDO Marek Tomasik — their answer shapes the proposal entirely.
+**Budget signal.** Soft, with significant commercial risk. No hard figure provided. Joseph referenced freelancer quotes of £5k–£10k as context (not comparable). The December 2025 VL proposal (£118–169k T&M) is superseded — it was scoped for RemitONE and must not be used as a baseline. Joseph has explicitly asked for a deferred payment model (minimum upfront, remainder on go-live) plus equity/options. Andy Birch (CRO) is responsible for VL's position; decision pending as of 2026-05-29.
 
 **Timeline.** Urgent. Joseph wants a proposal by early w/c 25 May 2026. Paul Duncan is back from Singapore on 25 May and must approve commercial terms before board sign-off. Delivery start is expected immediately after agreement.
 
@@ -28,25 +28,25 @@ status: draft
 
 ### Business & Commercial
 
-| Question | Why it matters |
-|----------|---------------|
-| Will VL accept a deferred payment model? | This is the commercial gate — if VL declines, the deal likely cannot proceed or must be fundamentally restructured. Tomas Masek / Marek Tomasik resolution pending. |
-| What is the minimum upfront VL requires if a hybrid model is accepted? | Drives the specific commercial structure of the proposal. |
-| What are the specific MVP corridors and currencies? | Determines which Fincode API flows are in scope and which payout rails need integration (bank deposit vs mobile money varies significantly by corridor). |
-| What is the business revenue model? | Affects how Joseph frames the ROI on VL's cost. Margin-per-transfer, subscription, or blended? |
-| Is the December 2025 NDA still in force? | Governs what information can be shared pre-contract. |
-| Has Joseph had substantive conversations with other agencies (beyond freelancers)? | If a full-service agency is also in the running, the competitive dynamic changes. |
+| Question | Why it matters | Status |
+|----------|---------------|--------|
+| Will VL accept a deferred payment model? | This is the commercial gate — if VL declines, the deal cannot proceed on Joseph's stated terms. | **Open** — Andy Birch (CRO) responsible |
+| What is the minimum upfront VL requires if a hybrid model is accepted? | Drives the specific commercial structure of the proposal. | **Open** — follows CRO decision |
+| Is the December 2025 NDA still in force? | Governs what information can be shared pre-contract. | **Open** |
+| Has Joseph had substantive conversations with other agencies (beyond freelancers)? | If a full-service agency is also in the running, the competitive dynamic changes. | **Open** |
+| ~~Specific MVP corridors and currencies?~~ | ~~Determines Fincode flows and payout rails in scope.~~ | ✅ **Ghana and Nigeria** confirmed |
+| ~~Business revenue model?~~ | ~~Affects how Joseph frames ROI on VL's cost.~~ | ✅ Blend of FX spread + transaction fees + corridor-specific pricing; configurable |
 
 ### Technical
 
-| Question | Why it matters |
-|----------|---------------|
-| What are the Fincode API capabilities and protocol? | Required to confirm BFF scope, estimate integration effort, and validate what's available natively vs custom-built. Docs to be sent by Joseph post-call. |
-| Flutter or React Native? | Affects staffing, timeline, and potentially cost. VL leans React Native (more experience, larger hiring pool). Needs mobile expert consultation. |
-| What open banking provider will be used for top-up? | Additional integration scope if not bundled with Fincode. |
-| What card payment processor is planned (top-up)? | Same — if this is a separate integration, it is additional estimate scope. |
-| Is an admin/back-office tool in scope? | Not discussed on 19 May call. Could add significant scope. |
-| Are Fincode sandbox/test credentials available? | Required to de-risk the BFF integration before go-live; affects timeline confidence. |
+| Question | Why it matters | Status |
+|----------|---------------|--------|
+| Flutter or React Native? | Affects staffing, timeline, and potentially cost. VL leans React Native (more experience, larger hiring pool). Needs mobile expert consultation. | **Open** |
+| Are Fincode sandbox/test credentials available? | Required to de-risk the BFF integration before go-live; affects timeline confidence. | **Open** |
+| ~~Fincode API capabilities and protocol?~~ | ~~Docs to be sent by Joseph post-call.~~ | ✅ Full gap analysis produced — [`technical-architecture/fincode-gap-analysis.md`](../technical-architecture/fincode-gap-analysis.md) |
+| ~~Open banking provider?~~ | ~~Additional integration scope if not bundled with Fincode.~~ | ✅ **Volume** confirmed (already in Fincode) |
+| ~~Card payment processor?~~ | ~~Additional estimate scope if separate integration.~~ | ✅ **Trust Payments** confirmed (already in Fincode) |
+| ~~Admin/back-office tool in scope?~~ | ~~Not discussed on 19 May call.~~ | ✅ Fincode + Sumsub dashboards cover go-live needs; lightweight tooling TBC after Fincode walkthrough |
 
 ### Stakeholder & Process
 
@@ -69,4 +69,4 @@ status: draft
 
 4. **Pre-revenue client accepting equity as VL compensation.** Equity/options in a pre-seed, pre-revenue company with no external investors is speculative. If VL accepts equity as partial compensation, this should be treated as a high-risk receivable, not a commercial offset.
 
-5. **No BD involvement creates account management risk.** Marcus Davey is not looped in. If CTO Michal Cernak's presales ownership transition is not fully formalised before the proposal is sent, there is a risk of internal VL confusion over who owns commercial terms.
+5. **BD and CRO involvement formalised.** Marcus Davey is in the #tmp-social-remit Slack channel and is being consulted on the commercial qualification. Andy Birch (CRO) is the commercial lead. The presales ownership transition is now substantially resolved — risk downgraded from red to amber.
