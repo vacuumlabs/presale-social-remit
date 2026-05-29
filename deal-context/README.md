@@ -24,3 +24,4 @@ Sales and account management context: who the client is, who decides what, what 
 - [`similar-deals.md`](./similar-deals.md) — P1 similar deals lookup: no past deal outcomes found; Dec 2025 SocialRemit proposal is baseline
 - [`go-no-go-flags.md`](./go-no-go-flags.md) — P1 go/no-go: 6 green, 4 amber, 1 red (deferred payment model; Andy Birch CRO responsible)
 - [`pre-meeting-brief.md`](./pre-meeting-brief.md) — pre-meeting brief (updated 29 May): 2 open items remain (commercial model, Flutter vs RN)
+- [`relationship-read.md`](./relationship-read.md) — partner vs vendor? mixed signals; resolution hinges on the commercial decision

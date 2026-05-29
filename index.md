@@ -21,6 +21,7 @@ Maintained by `/ingest` and `/lint`. Do not edit by hand except to resolve confl
 - [`deal-context/similar-deals.md`](./deal-context/similar-deals.md) — P1 similar deals: no past outcomes found; Dec 2025 SocialRemit proposal as baseline
 - [`deal-context/go-no-go-flags.md`](./deal-context/go-no-go-flags.md) — P1 go/no-go flags: 6 green / 6 amber / 1 red
 - [`deal-context/pre-meeting-brief.md`](./deal-context/pre-meeting-brief.md) — P1 pre-meeting brief for proposal delivery ~w/c 25 May
+- [`deal-context/relationship-read.md`](./deal-context/relationship-read.md) — partner vs vendor? mixed signals; resolves with the commercial decision
 
 ## Product management
 
