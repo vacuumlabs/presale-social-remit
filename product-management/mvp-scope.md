@@ -5,7 +5,8 @@ tags: [mvp, scope, features, remittance]
 sources:
   - ../client-inputs/Socialremit_Customer_Flow_Nov2025.md
   - ../team-inputs/2025-12-17-fe-build-proposal.md
-last_updated: 2026-05-18
+  - ../client-inputs/2026-05-28-joseph-qa-response.md
+last_updated: 2026-05-29
 status: active
 ---
 
@@ -30,19 +31,21 @@ Defined in the December 2025 proposal ([`team-inputs/2025-12-17-fe-build-proposa
 
 ## Explicitly out of scope for MVP (deferred to Phase 2)
 
-These features are not natively supported by RemitONE and would require custom BFF implementation if required earlier:
+These features are not natively supported by Fincode and would require custom BFF implementation if required earlier:
 
 - Request money flow
 - Direct Debit mandates
 - Recurring transfers
 - Scheduled transfers
 - PDF statements / statement downloads
-- In-app push notifications
 - Cancel / reverse transfer
 - Card issuance / card management
-- Real-time webhooks from RemitONE
-- Full Admin Portal (RemitONE provides basic admin views)
+- Full Admin Portal (Fincode + Sumsub dashboards cover ops needs at go-live; lightweight tooling TBC)
 - Analytics
+
+## Push notifications — desired at go-live, not a hard blocker
+
+Joseph confirmed (28 May 2026): push notifications for key transaction events (send confirmed, send failed, status updates) are desired at go-live but are **not a hard blocker**. If timelines are tight, email confirmation + in-app status tracking is acceptable for the first weeks. **The architecture must support push notifications from day one**, even if some notification types are phased in shortly after launch. Source: [`client-inputs/2026-05-28-joseph-qa-response.md`](../client-inputs/2026-05-28-joseph-qa-response.md)
 
 ## Feature map (from client UX spec)
 

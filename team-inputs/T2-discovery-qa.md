@@ -4,7 +4,7 @@ title: T2 — Discovery Q&A — SocialRemit
 source_type: internal-authored
 author: Boris Vida
 status: active
-last_updated: 2026-05-20
+last_updated: 2026-05-29
 ---
 
 # T2 — Discovery Q&A Document
@@ -217,20 +217,14 @@ _Source: 2026-05-19-call-transcript.md_
 
 ## Section 7 — Open Questions
 
-_Four questions to be sent to Joseph on Friday 23 May 2026. Paul Duncan reviewing from 25 May._
+_7 questions sent to Joseph on 22 May 2026. All answered by Joseph on 28 May 2026._
 
 | # | Question | Asked by | Date asked | Answer | Status |
 |---|----------|----------|-----------|--------|--------|
-| 1 | **Fincode progressive KYC** — To keep the MVP scope lean, we'd like to use Fincode's built-in KYC and compliance engine rather than a separate Sumsub integration. Before we confirm that, can you tell us: does Fincode support a gradual KYC approach — i.e. minimal information collected at registration, with verification escalating automatically based on transaction thresholds or risk? | Boris Vida | 2026-05-23 | | Open |
-| 2 | **Card payment** — We'd use Fincode's `processpaymentwithpaymenttoken` endpoint for card top-up, which keeps card data off our servers entirely. Does Fincode provide its own native card capture widget on your tenant, or should we plan to integrate a specific third-party gateway (e.g. TrustPayments)? | Boris Vida | 2026-05-23 | | Open |
-| 3 | **Operational visibility from day one** — For your ops team post-launch: do you need a customer/transaction management interface on day one, or can that be phased in shortly after go-live? | Boris Vida | 2026-05-23 | | Open |
-| 4 | **Revenue model** — What is the fee structure for transactions (FX spread, flat fee, percentage, or blended)? This helps us understand how Joseph frames the ROI on the build cost, and is relevant to how we structure our commercial proposal. | Boris Vida | 2026-05-23 | | Open |
-
----
-
-_Dropped from Friday send (rationale):_
-- _Sandbox credentials — not requesting now_
-- _Corridors — UK launch + African payout rails (bank deposit + mobile money) already in scope; specific countries don't change estimate materially_
-- _NDA — assumed in force from December 2025_
-- _Flutter vs React Native — VL recommendation will go in the proposal; BFF stack suggestion to be included alongside_
-- _Figma prototype — Joseph has not shared; skip_
+| 1 | **Fincode progressive KYC** — To keep the MVP scope lean, we'd like to use Fincode's built-in KYC and compliance engine rather than a separate Sumsub integration. Before we confirm that, can you tell us: does Fincode support a gradual KYC approach — i.e. minimal information collected at registration, with verification escalating automatically based on transaction thresholds or risk? | Boris Vida | 2026-05-22 | VL builds the Flutter KYC capture flow and passes customer data to the KYC provider (likely Sumsub) via SDK/API. Sumsub handles all verification logic (document validation, liveness, PEP/sanctions screening, risk scoring, progressive escalation) either directly or through Fincode's integration layer. Middleware must be provider-agnostic — architecture must support switching KYC provider without rebuilding the Flutter front-end. | Answered 2026-05-28 |
+| 2 | **Card payment** — We'd use Fincode's `processpaymentwithpaymenttoken` endpoint for card top-up, which keeps card data off our servers entirely. Does Fincode provide its own native card capture widget on your tenant, or should we plan to integrate a specific third-party gateway (e.g. TrustPayments)? | Boris Vida | 2026-05-22 | **Trust Payments** (SECURE_TRADING) is confirmed as the card gateway — already integrated in Fincode and to be enabled on the SR tenant. VL integrates Trust Payments SDK in the mobile app for card tokenisation and wires the token through BFF to Fincode. Open Banking uses **Volume**, also already in Fincode. Elavon may be considered post-MVP. | Answered 2026-05-28 |
+| 3 | **Push notifications** — For transaction updates (send confirmed, send failed) — do you need push notifications at go-live, or would email confirmation plus in-app status be sufficient for the first weeks of operation? | Boris Vida | 2026-05-22 | Desired at go-live for key events (send confirmed, send failed, status updates) — important for customer trust and engagement. **Not a hard blocker**: email + in-app status tracking is acceptable if timelines are tight. Architecture must support push from day one even if some types are phased in post-launch. | Answered 2026-05-28 |
+| 4 | **Operational visibility** — For your ops team post-launch: do you need a customer/transaction management interface on day one, or can that be phased in shortly after go-live? | Boris Vida | 2026-05-22 | Fincode + Sumsub dashboards cover most ops needs at go-live. No full custom dashboard expected from VL before go-live unless critical gaps emerge. Lightweight internal tooling may be needed (customer lookup, transaction/KYC status). Joseph wants a Fincode technical walkthrough session with VL to assess what tooling already exists and what gaps remain. | Answered 2026-05-28 |
+| 5 | **Revenue model** — What is the fee structure for transactions (FX spread, flat fee, percentage, or blended)? | Boris Vida | 2026-05-22 | Blend of FX spread + transaction fees + corridor/method-specific pricing rules. Exact structure varies by corridor, payout method, payment method, promotional campaigns, and customer tier. **Must be configurable** — not hardcoded. Pricing logic originates from Fincode backend but middleware and front-end must be flexible for future pricing and loyalty strategies. | Answered 2026-05-28 |
+| 6 | **Wallet funding at launch** — Would manual bank transfer alone be sufficient for initial launch, deferring card and open banking to a later phase? | Boris Vida | 2026-05-22 | **No** — all three methods at MVP: card (Trust Payments), open banking (Volume), and manual bank transfer. Manual-only is insufficient for the remittance market. Both Trust Payments and Volume are already in Fincode and only need to be enabled/configured for the SR tenant — not built from scratch. | Answered 2026-05-28 |
+| 7 | **Timeline** — What is driving the 6–8 week window? Is there a specific investor conversation, regulatory deadline, or other event we should be aware of? | Boris Vida | 2026-05-22 | Driven by: (1) signed liquidity arrangements for **Ghana and Nigeria** already in place; (2) regulatory permissions already received and consultants advising timely launch; (3) substantial prior work complete — Figma UX/UI done, provider infrastructure in place (Fincode, Trust Payments, Volume). VL's role is Flutter UX implementation, middleware/orchestration, and provider integration — not building financial infrastructure from scratch. Open to phasing discussion if timelines are at risk. | Answered 2026-05-28 |

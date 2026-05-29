@@ -12,10 +12,10 @@ Maintained by `/ingest` and `/lint`. Do not edit by hand except to resolve confl
 
 ## Deal context
 
-- [`deal-context/stakeholder-map.md`](./deal-context/stakeholder-map.md) — Joseph Owusu, Paul Duncan (Technical Director), Tomas Masek + Marek Tomasik (VL CEO/CDO), Boris Vida, Marcus Davey
+- [`deal-context/stakeholder-map.md`](./deal-context/stakeholder-map.md) — Joseph Owusu, Paul Duncan (Technical Director), Tomas Masek + Marek Tomasik (VL CEO/CDO), Boris Vida, Jaroslav Novák (PM), Carolina Soares (PO), Marcus Davey
 - [`deal-context/client-overview.md`](./deal-context/client-overview.md) — SocialRemit: EMI registered, Fincode white-label, go-live 6–8 weeks, $900M liquidity
 - [`deal-context/proposal-dec-2025.md`](./deal-context/proposal-dec-2025.md) — December 2025 VL proposal status: not contracted; re-engagement via Joseph May 2026
-- [`deal-context/open-questions.md`](./deal-context/open-questions.md) — questions answered on 19 May call; critical open: commercial/payment model
+- [`deal-context/open-questions.md`](./deal-context/open-questions.md) — most items answered (email 28 May); critical still-open: commercial/payment model, Flutter vs RN
 - [`deal-context/group-structure.md`](./deal-context/group-structure.md) — Affecta Technology group: Social Remit, Transpara, E-money Score, E-money Finance
 - [`deal-context/intake-gaps.md`](./deal-context/intake-gaps.md) — P1 gap analysis: know/don't-know, 5 risk signals
 - [`deal-context/similar-deals.md`](./deal-context/similar-deals.md) — P1 similar deals: no past outcomes found; Dec 2025 SocialRemit proposal as baseline
@@ -34,7 +34,7 @@ Maintained by `/ingest` and `/lint`. Do not edit by hand except to resolve confl
 
 - [`technical-architecture/system-overview.md`](./technical-architecture/system-overview.md) — 3-layer architecture (Product/Control/Infrastructure); Fincode integration; observability + CI/CD requirements; Flutter vs RN open decision
 - [`technical-architecture/governance-principles.md`](./technical-architecture/governance-principles.md) — client non-negotiables, 3-layer model, vendor shortlist, scope signals for estimation
-- [`technical-architecture/fincode-gap-analysis.md`](./technical-architecture/fincode-gap-analysis.md) — Fincode coverage vs VL build scope; confirmed gaps (open banking, notifications, analytics, rewards, observability, DB, CI/CD); design risks (Sumsub/Fincode KYC overlap, PCI scope)
+- [`technical-architecture/fincode-gap-analysis.md`](./technical-architecture/fincode-gap-analysis.md) — Fincode coverage vs VL build scope; Bucket 3 resolved (Sumsub confirmed MVP, Trust Payments confirmed, push notifications in architecture from day one); Volume/open banking confirmed MVP; Ghana + Nigeria corridors confirmed
 - [`technical-architecture/integrations/fincode.md`](./technical-architecture/integrations/fincode.md) — Fincode: white-label provider; API docs URL now available
 - [`technical-architecture/integrations/remitone.md`](./technical-architecture/integrations/remitone.md) — RemitONE: superseded by Fincode; retained for reference
 

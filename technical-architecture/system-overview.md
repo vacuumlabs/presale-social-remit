@@ -6,7 +6,8 @@ sources:
   - ../team-inputs/2025-12-17-fe-build-proposal.md
   - ../client-inputs/2026-05-19-governance-notes-v1.md
   - ../client-inputs/2026-05-19-meeting-minutes.md
-last_updated: 2026-05-20
+  - ../client-inputs/2026-05-28-joseph-qa-response.md
+last_updated: 2026-05-29
 status: active
 ---
 
@@ -68,11 +69,11 @@ Third-party managed. Fincode is the white-label remittance backend (replaces Rem
 
 API documentation shared by Joseph on 19 May 2026: https://docs.fincode.technology/api/transactions/call-quote. See [`integrations/fincode.md`](./integrations/fincode.md) for full integration notes.
 
-Other Infrastructure Layer providers (from governance doc):
-- **Sumsub** — KYC/identity verification (contracted)
-- **Card processor** — Volume, Checkout.com, or SagePay (not yet selected)
-- **Open banking** — GoCardless or bundled via Fincode (not yet confirmed)
-- **Sanctions/AML** — ComplyAdvantage or equivalent (not yet selected; may be bundled with Sumsub)
+Other Infrastructure Layer providers:
+- **Sumsub** — KYC/identity verification (contracted). Confirmed in MVP scope — handles document validation, liveness checks, sanctions/PEP screening, risk scoring, and progressive KYC escalation. VL builds the Flutter capture flow and BFF handoff; Sumsub handles all verification logic.
+- **Trust Payments** (SECURE_TRADING) — card top-up gateway, already integrated in Fincode; to be enabled on SR tenant. VL integrates Trust Payments SDK in the mobile app for card tokenisation; token is passed through BFF to Fincode. No raw card data touches VL servers.
+- **Volume** — open banking payments, already integrated in Fincode; to be enabled on SR tenant. Covers account-to-account instant funding.
+- **Sanctions/AML** — handled by Sumsub (PEP screening, ongoing monitoring). Fincode also performs sanctions screening natively in the transaction flow.
 
 ---
 

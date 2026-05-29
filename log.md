@@ -91,3 +91,17 @@ Key findings: open banking top-up is a confirmed gap (no Fincode coverage); Sums
 ## [2026-05-20 00:00] author | T2 discovery Q&A created
 
 Created `team-inputs/T2-discovery-qa.md`. Sections 1–6 pre-filled from existing wiki sources (call transcripts, governance notes, client overview). Section 7 contains 9 open questions for async send to Joseph on 23 May 2026. Answers to be ingested after Joseph responds to unblock `/p3`.
+
+## [2026-05-29 00:00] ingest | Joseph Owusu — email responses to 7 architecture & scope questions (28 May 2026)
+
+Ingested Joseph's email reply to 7 questions Boris sent on 22 May 2026. Resolved all outstanding Bucket 3 items in the gap analysis and most open questions from the discovery phase. Jaroslav Novák (PM) and Carolina Soares (PO) added to the VL team as newly assigned members.
+
+- Created: `client-inputs/2026-05-28-joseph-qa-response.md` — raw email source; all 7 Q&A pairs verbatim
+- Updated: `deal-context/stakeholder-map.md` — added Jaroslav Novák (PM) and Carolina Soares (PO)
+- Updated: `deal-context/open-questions.md` — new "Answered via email 28 May 2026" section; revenue model, corridors (Ghana + Nigeria), admin/ops tool, card processor (Trust Payments), open banking provider (Volume) all answered; 3 items remain open
+- Updated: `team-inputs/T2-discovery-qa.md` — Section 7 expanded to all 7 questions with full answers filled in
+- Updated: `technical-architecture/fincode-gap-analysis.md` — Bucket 3 fully resolved; Trust Payments and Volume added to Bucket 1; open banking removed from Bucket 4 (now MVP); must-resolve list updated (5 of 6 items resolved; sandbox credentials and Fincode walkthrough remain)
+- Updated: `technical-architecture/system-overview.md` — Sumsub confirmed in MVP; Trust Payments confirmed as card processor; Volume confirmed as open banking provider
+- Updated: `product-management/mvp-scope.md` — push notifications moved from "out of scope" to "desired at go-live, architecture from day one"
+- Updated: `decisions.md` — 5 new decisions recorded (Sumsub MVP, Trust Payments, Volume, push notification architecture, Ghana + Nigeria corridors); provisional Fincode-native KYC decision superseded
+- Contradictions: none (Joseph's answers override prior VL assumptions; no client-vs-client conflict)

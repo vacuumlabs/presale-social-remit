@@ -4,12 +4,13 @@ title: Fincode Gap Analysis — Build scope buckets
 tags: [fincode, gap-analysis, scope, estimation, architecture]
 sources:
   - ../client-inputs/2026-05-19-governance-notes-v1.md
+  - ../client-inputs/2026-05-28-joseph-qa-response.md
   - https://docs.fincode.technology/llms-full.txt
   - https://docs.fincode.technology/remittance/overview
   - https://docs.fincode.technology/api/transactions/call-quote
   - https://docs.fincode.technology/api/transactions/create-transaction
   - https://docs.fincode.technology/api/webhooks
-last_updated: 2026-05-20
+last_updated: 2026-05-29
 status: draft
 ---
 
@@ -38,7 +39,8 @@ Fincode covers the backend capability. VL's work is wiring it up through the BFF
 | Supported payment methods + fees | `POST /paymentmanagement/supported-payment-methods`, `POST /paymentmanagement/payment-methods-charges` | Returns available methods per corridor + transaction type, with fees. BFF caches. |
 | Wallet payment | `POST /paymentmanagement/makepaymentfromwalletaccount` | Pay transaction from Fincode wallet balance. |
 | Manual bank transfer flow | `PUT /paymentmanagement/bank-iwillpaylater-wallet`, `POST /paymentmanagement/notify-bank-transfer-payment` | Customer marks "I will pay later" via bank and confirms when sent. BFF orchestrates awaiting state. |
-| Card top-up via payment token | `POST /paymentmanagement/processpaymentwithpaymenttoken` | Tokenised card flow: third-party gateway SDK tokenises card on-device → token passed to BFF → BFF calls Fincode with `paymentGatewayRef` + `supportedPaymentGatewayProvider`. Raw card data never touches VL servers. VL is out of PCI-DSS scope. Supported gateways: `SECURE_TRADING` (TrustPayments), `STRIPE_ACH` (Stripe), `RAVE_FLUTTERWAVE`, `POLI_PAYMENT_API`, `COINBASE_PAYMENT_API`. UK candidates: TrustPayments or Stripe. **Need to confirm which gateway is active on SocialRemit's Fincode tenant.** |
+| Card top-up via payment token | `POST /paymentmanagement/processpaymentwithpaymenttoken` | Tokenised card flow: third-party gateway SDK tokenises card on-device → token passed to BFF → BFF calls Fincode with `paymentGatewayRef` + `supportedPaymentGatewayProvider`. Raw card data never touches VL servers. VL is out of PCI-DSS scope. **Confirmed: Trust Payments (`SECURE_TRADING`) is the gateway active on the SR tenant** (Joseph email, 2026-05-28). VL integrates the Trust Payments SDK in the mobile app. |
+| Open banking top-up (Volume) | Fincode-native, gateway TBC from docs | **Volume** is already integrated in Fincode and will be enabled for the SR tenant (Joseph email, 2026-05-28). Covers account-to-account instant funding. VL's work: orchestrate funding method selection in Flutter and wire through BFF. |
 | Awaiting payments list + actions | `GET /paymentmanagement/awaiting-payments`, `POST /paymentmanagement/awaiting-payment-actions` | Mark paid or cancel a pending bank transfer. |
 | Transaction history / ledger | `GET /ledger/account-ledger-history/{account_id}/{page}/{size}` | Paginated, with executionDate, ledgerType, amount, newBalance. |
 | Account balance | `GET /ledger/account-balance/{account_id}` | Current balance retrieval. |
@@ -114,44 +116,29 @@ Governance operational non-negotiable: "critical failures must be detectable int
 
 ---
 
-## Bucket 3 — Needs discussion before we can scope or price
+## Bucket 3 — Resolved (was: needs discussion before we can scope or price)
 
-These items cannot be cleanly estimated without a decision on approach. They should be agenda items for the next call with Joseph and Paul.
+All three items below were resolved by Joseph's email response (28 May 2026). See [`client-inputs/2026-05-28-joseph-qa-response.md`](../client-inputs/2026-05-28-joseph-qa-response.md).
 
-### 1. Fincode progressive KYC — confirmation needed
+### 1. KYC approach — RESOLVED
 
-**VL direction (provisional):** Use Fincode's built-in KYC engine for MVP only — dropping Sumsub from launch scope to limit integration complexity. Fincode already handles AML/sanctions/PEP screening natively.
+**Joseph's answer:** Sumsub is the KYC provider for MVP. VL builds the Flutter capture flow and BFF handoff; Sumsub handles all verification logic (document validation, liveness, PEP/sanctions screening, progressive escalation) either directly or through Fincode's Sumsub integration. The BFF must remain KYC-provider-agnostic — architecture must support switching provider without rebuilding the Flutter front-end.
 
-The outstanding question sent to Joseph (23 May): **does Fincode support gradual/progressive KYC** — minimal information at registration, escalating to full CDD based on transaction thresholds? Fincode has a `kyc-requirements-by-isocountry/{countryIso}/{triggerPoint}` endpoint which suggests it can drive different KYC requirements per trigger, but whether this maps cleanly to SocialRemit's progressive UX flow needs confirmation.
+**Scope impact:** The BFF must implement a provider-agnostic KYC interface. Sumsub SDK integration is required in the mobile app. The `kyc-requirements-by-isocountry/{countryIso}/{triggerPoint}` Fincode endpoint remains in scope for driving escalation triggers, but Sumsub handles the actual verification.
 
-- **If yes** (Fincode supports progressive KYC): Sumsub not needed for MVP. BFF orchestrates Fincode's KYC flow only. Clean scope.
-- **If no** (Fincode is all-or-nothing at registration): Progressive KYC logic must live in the BFF with a phased document collection design. Sumsub may still be deferred. Needs design discussion.
+Supersedes provisional decision in [`decisions.md`](../decisions.md) — see 2026-05-29 entry.
 
-Recorded as provisional decision in [`decisions.md`](../decisions.md).
+### 2. Operational admin portal — RESOLVED
 
-### 2. Operational admin portal — day-one requirement or deferred?
+**Joseph's answer:** Fincode + Sumsub dashboards cover most ops needs at go-live. No full custom dashboard expected from VL before go-live. Lightweight internal tooling (customer lookup, transaction/KYC status) may be needed — to be confirmed after a Fincode technical walkthrough session that Joseph wants VL to have with Fincode.
 
-Fincode provides raw admin APIs (customer search, transaction lookup, AML rule management, employee management). What it does NOT provide is a ready-to-use operational dashboard. For a live remittance business, the operations team needs to:
-- Look up customers and transactions in real time
-- Manually review flagged transactions
-- Manage failed payouts
-- Override or cancel transactions
+**Scope impact:** Full admin portal moves to Bucket 4 (optional/post-launch). A lightweight internal ops tool (likely Retool or similar) may be needed but scope is TBC pending Fincode walkthrough. **Action: schedule Fincode technical walkthrough.**
 
-Options:
-- **A — Fincode admin portal exists** (needs confirmation from Fincode directly — their documentation does not clearly describe a web admin portal)
-- **B — Retool / internal tool** built on top of Fincode admin APIs (fast to build, cheaper than bespoke)
-- **C — Custom admin portal** built by VL (full control, higher cost)
-- **D — Defer** (accept operational risk for first weeks post-launch; Joseph's team manages manually)
+### 3. Push notifications — RESOLVED
 
-Joseph's governance doc §26 says "operational blindness is a major business risk" informed by his UnityLink experience. Option D is unlikely to be acceptable.
+**Joseph's answer:** Desired at go-live for key events (send confirmed, send failed, status updates). Not a hard blocker — email + in-app status acceptable if timelines are tight. Architecture must support push from day one.
 
-### 3. Push notifications — MVP or Phase 2?
-
-The governance doc (§14) describes customer communication as "a core operational and behavioural component" including OTP delivery, transactional notifications (transaction sent/received/failed), and onboarding reminders. These were Phase 2 in the Dec 2025 proposal (RemitONE had no webhook support).
-
-Fincode does fire webhooks (`transaction.completed`, `transaction.failed`). The BFF can receive these and forward to FCM/APNs. The question is whether SocialRemit needs push notifications at go-live or can operate with email + in-app status only for the first weeks.
-
-**Recommendation:** Transactional push (send confirmed, send failed) should be MVP — users expect it from a money transfer app and it directly affects trust. Behavioural nudges (inactivity, referral prompts) can be Phase 2.
+**Scope impact:** Push notification infrastructure (FCM/APNs + BFF forwarding from Fincode webhooks) is in MVP architecture scope. Delivery of some notification types may be phased to shortly after launch if timeline is constrained. Behavioural nudges remain Phase 2.
 
 ---
 
@@ -161,7 +148,7 @@ These items are desirable and referenced in the governance doc, but are not requ
 
 | Item | Description | Priority signal from governance doc |
 |---|---|---|
-| **Open banking top-up** | Account-to-account instant top-up (GoCardless VRP, TrueLayer Pay by Bank, or Yapily). No Fincode coverage — separate provider integration required. Not a blocker for MVP launch; card + manual bank transfer cover the deposit requirement at go-live. | Optional post-launch enhancement |
+| **Open banking top-up** | ~~No Fincode coverage~~ — **moved to Bucket 1**: Volume is already integrated in Fincode and confirmed as the open banking provider for MVP (Joseph email 2026-05-28). Needs enabling on SR tenant, not a new integration build. | Confirmed MVP |
 | **Rewards & referral engine** | Welcome bonuses, referral attribution, reward eligibility/release logic, abuse prevention. Entirely VL-built — no Fincode coverage. | §16: "core behavioural infrastructure" — high priority but not a go-live blocker |
 | **Analytics integration** | Mixpanel / PostHog / Firebase Analytics in-app + BFF event forwarding. Onboarding funnel, transaction funnel, retention. | §17: MVP optional at minimum |
 | **Enhanced observability** | Datadog / Grafana / PagerDuty on top of CloudWatch baseline. Operational dashboards, SLA alerting, webhook monitoring. | §25–26: "major business risk" — baseline included in Bucket 2; this is the enhanced tier |
@@ -177,9 +164,10 @@ These items are desirable and referenced in the governance doc, but are not requ
 
 ## Must-resolve before estimation can be finalised
 
-1. **Sumsub vs Fincode KYC** — approach determines BFF scope and in-app SDK work (Bucket 3, item 1)
-2. **Card gateway selection** — two scenarios to confirm with Fincode: (a) Fincode provides its own hosted card widget / native SDK that tokenises on their own PCI-compliant infrastructure (the `CUSTOM_POINT_OF_SALE` enum value may indicate this) — if so, no third-party gateway integration needed at all; (b) a specific third-party gateway (TrustPayments `SECURE_TRADING` or Stripe) is required, in which case VL integrates that gateway's mobile SDK. Either way VL stays out of PCI scope — the question is whether a separate gateway dependency exists. One sandbox test call will resolve this.
-3. **Admin portal — day-one or deferred?** — if day-one, adds scope (Bucket 3, item 2)
-4. **Push notifications — MVP or not** — affects notification service scope (Bucket 3, item 3)
-5. **Sandbox credentials** — `remitjunction.fincode.software` sandbox appears to be available; VL needs confirmed access to verify field coverage, dynamic fields, and beneficiary endpoint detail
-6. **Corridors confirmed** — specific destination countries determine payout rails, dynamic field sets, and KYC requirements in scope
+1. ~~**Sumsub vs Fincode KYC**~~ — ✅ **Resolved 2026-05-28**: Sumsub confirmed as KYC provider for MVP. BFF must be provider-agnostic.
+2. ~~**Card gateway selection**~~ — ✅ **Resolved 2026-05-28**: Trust Payments (SECURE_TRADING) confirmed. VL integrates Trust Payments SDK on mobile.
+3. ~~**Admin portal — day-one or deferred?**~~ — ✅ **Resolved 2026-05-28**: Fincode + Sumsub dashboards cover most needs. Lightweight internal tooling TBC after Fincode walkthrough. Full custom portal deferred.
+4. ~~**Push notifications — MVP or not**~~ — ✅ **Resolved 2026-05-28**: Architecture in scope from day one; delivery of some types may be phased post-launch.
+5. **Sandbox credentials** — still needed. `remitjunction.fincode.software` sandbox appears available; VL needs confirmed access to verify field coverage, dynamic fields, and beneficiary endpoint detail.
+6. ~~**Corridors confirmed**~~ — ✅ **Resolved 2026-05-28**: Ghana and Nigeria confirmed (signed liquidity arrangements in place).
+7. **Fincode technical walkthrough** — Joseph has requested VL schedule a session with Fincode to review operational tooling, APIs/webhooks, and confirm what lightweight admin tooling (if any) is needed for MVP.

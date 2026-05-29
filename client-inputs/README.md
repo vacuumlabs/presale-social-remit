@@ -20,3 +20,4 @@ Any non-markdown file (PDF, deck, spreadsheet, image) gets a matching `.md` next
 - [`2026-05-19-call-transcript.md`](./2026-05-19-call-transcript.md) — transcript of 19 May 2026 Boris Vida + Joseph Owusu call (57 min)
 - [`2026-05-19-governance-notes-v1.md`](./2026-05-19-governance-notes-v1.md) — SocialRemit MVP Technology Governance Notes v1; 38-section technical governance framework authored by Joseph; non-negotiable principles, 3-layer model, vendor shortlist
 - [`2026-05-19-meeting-minutes.md`](./2026-05-19-meeting-minutes.md) — Joseph's written meeting minutes from the 19 May 2026 call; corroborates transcript with additional nuances (investor situation, self-funded 2 years, AI tooling)
+- [`2026-05-28-joseph-qa-response.md`](./2026-05-28-joseph-qa-response.md) — Joseph's email responses to 7 architecture & scope questions (KYC, card gateway, push notifications, ops visibility, revenue model, wallet funding, timeline); answered all outstanding open items

@@ -5,7 +5,7 @@ tags: [open-questions, discovery, unknowns]
 sources:
   - ../team-inputs/2025-12-15-discovery-questions.md
   - ../team-inputs/2025-12-08-call-transcript.md
-last_updated: 2026-05-18
+last_updated: 2026-05-29
 status: active
 ---
 
@@ -30,17 +30,22 @@ Questions that remain unanswered from the December 2025 discovery phase, plus ne
 | 16 | Go-live scope | Flutter frontend + BFF + Fincode — the full stack, not just a white-label web portal |
 | 17 | Longer-term architecture | Confirmed: Fincode for 12 months, then replace with proprietary backend. BFF designed for this swap. |
 
+## Answered via email 28 May 2026
+
+| # | Question | Answer |
+|---|----------|--------|
+| 4 | Business model / revenue | Blend of FX spread + transaction fees + corridor/method-specific pricing. Must be configurable — not hardcoded. Pricing logic originates from Fincode but middleware and front-end must be flexible for future pricing and loyalty strategies. |
+| 5 | MVP corridors | **Ghana and Nigeria** — signed liquidity arrangements already in place. |
+| 7 | Admin/back-office tool | Fincode and Sumsub dashboards cover most ops needs. Lightweight internal tooling (customer lookup, transaction/KYC status) may also be needed. Joseph wants a Fincode technical walkthrough session with VL before finalising scope. No full custom dashboard expected before go-live. |
+| — | Card payment processor | **Trust Payments** (SECURE_TRADING), already integrated in Fincode; to be enabled on the Social Remit tenant. No new gateway build required. |
+| — | Open banking provider | **Volume**, already integrated in Fincode; to be enabled on the Social Remit tenant. No new gateway build required. |
+
 ## Still open
 
 | # | Question | Notes |
 |---|----------|-------|
-| 4 | Business model / revenue | Not discussed on 19 May call |
-| 5 | Exact MVP corridors and currencies | "Two countries" confirmed; specific countries not named |
-| 7 | Admin/back-office tool | Not discussed |
 | 11 | User validation / testing | Figma prototype shown; no mention of user testing |
 | 12 | Flutter vs React Native | Open decision — Boris to recommend after consulting VL mobile experts |
 | 18 | Budget / commercial model | **Critical open risk.** Joseph requesting deferred payment (minimum upfront, rest on go-live) + equity/options. Freelancer reference quotes (£5k–£10k) suggest budget pressure. Being escalated to VL CEO (Tomas Masek) and CDO (Marek Tomasik) for qualification. |
-| — | Fincode API capabilities | Docs to be sent by Joseph post-call |
+| — | Fincode API capabilities | Sandbox credentials still needed for field-level verification |
 | — | NDA status | To be confirmed — may already exist from December 2025 |
-| — | Open banking provider | Not named |
-| — | Card payment processor | Not named |

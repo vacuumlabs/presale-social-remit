@@ -78,7 +78,7 @@ Claude appends entries here whenever a decision surfaces during `/ingest` or whi
 - **Context:** Sumsub is contracted but adds integration complexity (in-app SDK, BFF orchestration, dual KYC state management). Using Fincode-native KYC simplifies MVP scope significantly. Fincode already handles AML/sanctions/PEP screening natively. The outstanding question is whether Fincode supports progressive/gradual KYC (minimal info at registration, escalating based on transaction thresholds) — if yes, Sumsub is not needed for MVP. If Fincode's KYC is all-or-nothing at registration, a phased approach still needs to be designed. Question sent to Joseph on 23 May 2026.
 - **Made by:** Boris Vida (SA recommendation).
 - **Sources:** [`technical-architecture/fincode-gap-analysis.md`](technical-architecture/fincode-gap-analysis.md), [`team-inputs/T2-discovery-qa.md`](team-inputs/T2-discovery-qa.md)
-- **Status:** provisional — pending Joseph's answer on Fincode progressive KYC support
+- **Status:** superseded — see 2026-05-29 "Sumsub confirmed in MVP" below
 
 ## 2026-05-19 — White-label provider: RemitONE → Fincode (client decision)
 
@@ -104,6 +104,47 @@ Claude appends entries here whenever a decision surfaces during `/ingest` or whi
 - **Made by:** Boris Vida (SA), in the December 2025 proposal.
 - **Sources:** [`team-inputs/2025-12-17-fe-build-proposal.md`](team-inputs/2025-12-17-fe-build-proposal.md)
 - **Status:** Under review — SocialRemit expressed a preference for Flutter in May 2026. Re-evaluation required before a new engagement is signed.
+
+## 2026-05-29 — Sumsub confirmed in MVP scope (supersedes Fincode-native KYC provisional decision)
+
+- **Decision:** Sumsub is the KYC provider for MVP. VL builds the Flutter onboarding/KYC capture flow and BFF handoff to Sumsub via SDK/API. Sumsub handles all verification logic — document validation, liveness checks, PEP/sanctions screening, risk scoring, and progressive escalation — either directly or through Fincode's Sumsub integration.
+- **Context:** Boris's provisional decision was to drop Sumsub from MVP and use Fincode's built-in KYC only. Joseph's email (28 May 2026) clarified that Sumsub is the contracted KYC provider and must be used. The BFF must be KYC-provider-agnostic so that switching provider in future does not require rebuilding the Flutter front-end.
+- **Made by:** Joseph Owusu (SocialRemit) in response to Boris's Q1.
+- **Sources:** [`client-inputs/2026-05-28-joseph-qa-response.md`](client-inputs/2026-05-28-joseph-qa-response.md)
+- **Supersedes:** 2026-05-20 — KYC approach: Fincode-native for MVP
+- **Status:** active
+
+## 2026-05-29 — Card gateway confirmed: Trust Payments (SECURE_TRADING via Fincode)
+
+- **Decision:** Trust Payments (`SECURE_TRADING`) is the card top-up gateway for MVP. It is already integrated in Fincode and will be enabled on the Social Remit tenant. VL integrates the Trust Payments SDK in the mobile app for on-device card tokenisation; the token passes through the BFF to Fincode. No raw card data touches VL servers; VL remains out of PCI-DSS scope.
+- **Context:** Card gateway was an open item — Fincode supports multiple gateways. Joseph confirmed Trust Payments explicitly.
+- **Made by:** Joseph Owusu (SocialRemit) in response to Boris's Q2.
+- **Sources:** [`client-inputs/2026-05-28-joseph-qa-response.md`](client-inputs/2026-05-28-joseph-qa-response.md)
+- **Status:** active
+
+## 2026-05-29 — Open banking provider confirmed: Volume (via Fincode)
+
+- **Decision:** Volume is the open banking payment provider for MVP. It is already integrated in Fincode and will be enabled on the Social Remit tenant. This is not a new integration build — enabling/configuration work only on the Fincode side; VL wires the payment method selection in Flutter and orchestrates through the BFF.
+- **Context:** Open banking provider was an open item. Joseph confirmed Volume and noted it is already in Fincode's ecosystem.
+- **Made by:** Joseph Owusu (SocialRemit) in response to Boris's Q2 and Q6.
+- **Sources:** [`client-inputs/2026-05-28-joseph-qa-response.md`](client-inputs/2026-05-28-joseph-qa-response.md)
+- **Status:** active
+
+## 2026-05-29 — Push notification architecture in MVP scope from day one
+
+- **Decision:** Push notification infrastructure (FCM/APNs integration, BFF webhook forwarding from Fincode) is in MVP architecture scope from day one. Delivery of some notification types may be phased to shortly after go-live if timelines are tight. Behavioural/marketing nudges remain Phase 2.
+- **Context:** Dec 2025 proposal deferred push notifications entirely (RemitONE had no webhook support). Fincode does fire webhooks. Joseph confirmed push is desired at go-live but is not a hard blocker.
+- **Made by:** Joseph Owusu (SocialRemit) in response to Boris's Q3.
+- **Sources:** [`client-inputs/2026-05-28-joseph-qa-response.md`](client-inputs/2026-05-28-joseph-qa-response.md)
+- **Status:** active
+
+## 2026-05-29 — MVP corridors confirmed: Ghana and Nigeria
+
+- **Decision:** Ghana and Nigeria are the two launch corridors for MVP. Signed liquidity arrangements are already in place for both.
+- **Context:** Corridors were previously listed as "two countries, specific countries not named." Joseph's timeline explanation confirmed Ghana and Nigeria explicitly.
+- **Made by:** Joseph Owusu (SocialRemit) in response to Boris's Q7.
+- **Sources:** [`client-inputs/2026-05-28-joseph-qa-response.md`](client-inputs/2026-05-28-joseph-qa-response.md)
+- **Status:** active
 
 ## 2025-12-17 — BFF pattern adopted: NestJS + Redis on AWS ECS Fargate
 

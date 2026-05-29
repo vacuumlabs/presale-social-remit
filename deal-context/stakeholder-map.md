@@ -5,7 +5,7 @@ tags: [stakeholders, client, vl-team]
 sources:
   - ../team-inputs/2025-12-08-call-transcript.md
   - ../team-inputs/2025-12-17-fe-build-proposal.md
-last_updated: 2026-05-18
+last_updated: 2026-05-29
 status: active
 ---
 
@@ -46,6 +46,12 @@ Joseph holds the FCCA qualification (Fellow of the Association of Chartered Cert
 
 ### Richard Peres
 **Role:** Unknown (delivery-side). To be informed of the re-engagement after the 19 May 2026 call, per Michal Cernak's direction.
+
+### Jaroslav Novák
+**Role:** Project Manager. Assigned to the SocialRemit engagement as of May 2026. CC'd on Boris's 22 May 2026 Q&A email to Joseph. Contact: jaroslav.novak@vacuumlabs.com.
+
+### Carolina Soares
+**Role:** Product Owner. Assigned to the SocialRemit engagement as of May 2026.
 
 ### Marcus Davey
 **Role:** Business Developer / Sales. Made the original introduction to SocialRemit. Led the December 2025 discovery call commercially. Not being looped into the May 2026 re-engagement at this stage — presales ownership is moving from sales to delivery.
