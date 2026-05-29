@@ -8,7 +8,7 @@ _Complete this before the intake call. This is the minimum information needed to
 
 | Field | Value |
 | --- | --- |
-| Client name | SocialRemit (trading as E-money Financial Services) |
+| Client name | SocialRemit (trading as Emoni Financial Services) |
 | Country / Market | UK (outbound international remittance) |
 | Vertical | Payments — cross-border remittance / migrant fintech |
 | Company size | Startup — pre-revenue, self-funded, pre-seed. EMI registered. ~4–5 named team members including board. |
@@ -28,7 +28,7 @@ SocialRemit wants VL to build a Flutter or React Native mobile app (iOS + Androi
 SocialRemit is now ready to move after a 5-month delay caused by internal team restructuring, funding discussions, and regulatory setup. They are now EMI registered (FCA), have $900M liquidity committed for two corridors, have Paul Duncan joining as Technical Director from Unitalink, have a completed Figma prototype, and have Sumsub (KYC) and Fincode (white-label) contracts in progress. They want to go live in 6–8 weeks to reach 1,000–3,000 transactions/day before raising a seed round.
 
 **What does success look like for the client?**
-The app goes live within 6–8 weeks, reaches meaningful transaction volume (1,000–3,000/day), and enables a seed fundraise approximately 6 months post-launch. The architecture leaves SocialRemit free to migrate away from Fincode to their own proprietary backend (Transpara) within 12 months. The longer-term vision is a multi-product fintech group (Affecta Technology) including B2B remittance infrastructure (Transpara), credit scoring (E-money Score), and embedded finance — with VL as a long-term technology partner.
+The app goes live within 6–8 weeks, reaches meaningful transaction volume (1,000–3,000/day), and enables a seed fundraise approximately 6 months post-launch. The architecture leaves SocialRemit free to migrate away from Fincode to their own proprietary backend (Transpara) within 12 months. The longer-term vision is a multi-product fintech group (Affecta Technology) including B2B remittance infrastructure (Transpara), credit scoring (Emoni Score), and embedded finance — with VL as a long-term technology partner.
 
 ---
 

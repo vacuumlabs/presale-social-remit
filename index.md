@@ -16,10 +16,10 @@ Maintained by `/ingest` and `/lint`. Do not edit by hand except to resolve confl
 - [`deal-context/client-overview.md`](./deal-context/client-overview.md) — SocialRemit: EMI registered, Fincode white-label, go-live 6–8 weeks, $900M liquidity
 - [`deal-context/proposal-dec-2025.md`](./deal-context/proposal-dec-2025.md) — December 2025 VL proposal status: not contracted; re-engagement via Joseph May 2026
 - [`deal-context/open-questions.md`](./deal-context/open-questions.md) — most items answered (email 28 May); critical still-open: commercial/payment model, Flutter vs RN
-- [`deal-context/group-structure.md`](./deal-context/group-structure.md) — Affecta Technology group: Social Remit, Transpara, E-money Score, E-money Finance
+- [`deal-context/group-structure.md`](./deal-context/group-structure.md) — Affecta Technology group: Social Remit, Transpara, Emoni Score, Emoni Finance
 - [`deal-context/intake-gaps.md`](./deal-context/intake-gaps.md) — P1 gap analysis: know/don't-know, 5 risk signals
 - [`deal-context/similar-deals.md`](./deal-context/similar-deals.md) — P1 similar deals: no past outcomes found; Dec 2025 SocialRemit proposal as baseline
-- [`deal-context/go-no-go-flags.md`](./deal-context/go-no-go-flags.md) — P1 go/no-go flags: 6 green / 6 amber / 1 red
+- [`deal-context/go-no-go-flags.md`](./deal-context/go-no-go-flags.md) — P1 go/no-go flags: 6 green / 4 amber / 1 red
 - [`deal-context/pre-meeting-brief.md`](./deal-context/pre-meeting-brief.md) — P1 pre-meeting brief for proposal delivery ~w/c 25 May
 - [`deal-context/relationship-read.md`](./deal-context/relationship-read.md) — partner vs vendor? mixed signals; resolves with the commercial decision
 
@@ -56,5 +56,5 @@ Maintained by `/ingest` and `/lint`. Do not edit by hand except to resolve confl
 
 - [`client-inputs/`](./client-inputs/) — material from the customer (immutable)
 - [`team-inputs/`](./team-inputs/) — material we authored ourselves
-  - [`team-inputs/T2-discovery-qa.md`](./team-inputs/T2-discovery-qa.md) — discovery Q&A; Sections 1–6 pre-filled; 9 open questions for Joseph (send 23 May)
+  - [`team-inputs/T2-discovery-qa.md`](./team-inputs/T2-discovery-qa.md) — discovery Q&A; Sections 1–6 pre-filled; all 7 Section 7 questions answered by Joseph (28 May 2026)
   - [`team-inputs/2026-05-29-product-discovery-questions.md`](./team-inputs/2026-05-29-product-discovery-questions.md) — strategic discovery set: targets, personas, differentiation, brand/naming, GTM, channel

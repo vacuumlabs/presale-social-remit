@@ -44,13 +44,13 @@ _Resolved since 19 May:_ MVP corridors (Ghana + Nigeria confirmed), Fincode API 
 
 ## 4. What we bring
 
-VL has directly relevant experience: Boris led the December 2025 SocialRemit architecture (React Native + NestJS BFF + white-label integration), which provides a proven baseline for this re-engagement. VL's differentiators for this client are payments domain expertise, pre-built auth and progressive KYC patterns (Sumsub), and the BFF abstraction approach that protects SocialRemit's 12-month Fincode exit plan. The longer-term vision (Affecta Technology group — Transpara B2B, E-money Score, E-money Finance) makes this a strategically valuable partnership if SocialRemit reaches traction.
+VL has directly relevant experience: Boris led the December 2025 SocialRemit architecture (React Native + NestJS BFF + white-label integration), which provides a proven baseline for this re-engagement. VL's differentiators for this client are payments domain expertise, pre-built auth and progressive KYC patterns (Sumsub), and the BFF abstraction approach that protects SocialRemit's 12-month Fincode exit plan. The longer-term vision (Affecta Technology group — Transpara B2B, Emoni Score, Emoni Finance) makes this a strategically valuable partnership if SocialRemit reaches traction.
 
 ---
 
 ## 5. Go/no-go status
 
-**One red flag, six amber signals.** The red flag is the deferred payment + equity commercial model — non-standard for VL, currently under CEO/CDO review. Until that is resolved, do not commit to a fixed proposal format. The six amber signals include an extremely aggressive 6–8 week go-live timeline, no hard budget figure, and the Fincode API remaining unreviewed. None of the ambers are blockers individually, but they compound.
+**One red flag, four amber signals.** The red flag is the deferred payment + equity commercial model — Andy Birch (CRO) is responsible; answer pending. Until resolved, do not commit to a fixed proposal format. The four remaining ambers: no hard budget figure, aggressive 6–8 week timeline (partially mitigated by prior Figma/provider work), Flutter vs RN pending, and commercial structure. Fincode API and presales ownership are no longer amber.
 
 ---
 

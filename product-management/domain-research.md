@@ -13,7 +13,7 @@ status: draft
 ## 1. Client profile
 
 **Company overview**
-SocialRemit (trading as E-money Financial Services) is a UK-based consumer remittance startup. It operates under the umbrella of Affecta Technology, an IP holding group also encompassing Transpara (B2B white-label remittance infrastructure), E-money Score (credit engine), and E-money Finance (embedded finance/EWA). The immediate product is a mobile remittance app targeting UK-based migrants sending money internationally.
+SocialRemit (trading as Emoni Financial Services) is a UK-based consumer remittance startup. It operates under the umbrella of Affecta Technology, an IP holding group also encompassing Transpara (B2B white-label remittance infrastructure), Emoni Score (credit engine), and Emoni Finance (embedded finance/EWA). The immediate product is a mobile remittance app targeting UK-based migrants sending money internationally.
 
 **Regulatory standing** _(confirmed from wiki — T1 brief and client call)_
 SocialRemit holds an Electronic Money Institution (EMI) licence from the FCA. An AML board is in place. This is a meaningful milestone for a pre-revenue company — EMI registration takes 12–18 months and requires demonstrable safeguarding and compliance infrastructure. This is confirmed, not inferred.

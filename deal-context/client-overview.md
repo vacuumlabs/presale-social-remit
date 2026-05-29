@@ -46,7 +46,7 @@ UK-based migrants and low-income workers. **Corridors confirmed: Ghana and Niger
 
 ## Group structure
 
-SocialRemit is one product in the Affecta Technology group. See [`deal-context/group-structure.md`](./group-structure.md) for the full picture including Transpara (B2B white-label), E-money Score (credit engine), and E-money Finance.
+SocialRemit is one product in the Affecta Technology group. See [`deal-context/group-structure.md`](./group-structure.md) for the full picture including Transpara (B2B white-label), Emoni Score (credit engine), and Emoni Finance.
 
 ## Funding & investor situation
 

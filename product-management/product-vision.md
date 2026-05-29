@@ -15,8 +15,8 @@ Articulated by Joseph Owusu on the 19 May 2026 call.
 ## Brand
 
 - **Name:** Social Remit (went through a rebranding period, now back to Social Remit)
-- **Trading as:** E-money Financial Services
-- **E-money = Emotional Money**
+- **Trading as:** Emoni Financial Services
+- **Emoni = Emotional Money**
 - **Tagline:** "Money is emotional — make your money work the way life actually works"
 - **Sub-tagline:** "Built by migrants, for migrants"
 - **Brand colour:** Coral

@@ -9,7 +9,7 @@ last_updated: 2026-05-29
 
 # T2 — Discovery Q&A Document
 
-**Client:** SocialRemit (E-money Financial Services / Affecta Technology)
+**Client:** SocialRemit (Emoni Financial Services / Affecta Technology)
 **Date started:** 2025-12-08 (first discovery call)
 **Last updated:** 2026-05-20
 
@@ -21,7 +21,7 @@ _Pre-filled from: Dec 2025 call transcript, 19 May 2026 call transcript, meeting
 
 **1. What is the primary business objective behind this initiative? What changes in your business when this project succeeds?**
 
-Go live with a consumer remittance mobile app (iOS + Android) within 6–8 weeks of agreement. Reach 1,000–3,000 transactions/day. Use that traction to raise a seed round approximately 6 months post-launch. The app is the first product of the Affecta Technology group — the seed raise funds the broader platform vision (Transpara B2B infrastructure, E-money Score credit engine, E-money Finance embedded finance).
+Go live with a consumer remittance mobile app (iOS + Android) within 6–8 weeks of agreement. Reach 1,000–3,000 transactions/day. Use that traction to raise a seed round approximately 6 months post-launch. The app is the first product of the Affecta Technology group — the seed raise funds the broader platform vision (Transpara B2B infrastructure, Emoni Score credit engine, Emoni Finance embedded finance).
 
 _Source: T1-sales-deal-brief.md, 2026-05-19-call-transcript.md_
 
@@ -85,7 +85,7 @@ _Status: not answered — feeds Phase 2 scope._
 
 **10. List the products / services you currently offer. For each: who uses it, how it works, and the main friction point.**
 
-No live products. MVP is the Social Remit consumer remittance app. Future group products: Transpara (B2B remittance infrastructure), E-money Score (credit/behavioural scoring), E-money Finance (embedded finance/EWA), E-money ESG (trust/impact layer). See deal-context/group-structure.md.
+No live products. MVP is the Social Remit consumer remittance app. Future group products: Transpara (B2B remittance infrastructure), Emoni Score (credit/behavioural scoring), Emoni Finance (embedded finance/EWA), Emoni ESG (trust/impact layer). See deal-context/group-structure.md.
 
 _Source: deal-context/group-structure.md_
 
