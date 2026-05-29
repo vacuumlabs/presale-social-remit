@@ -41,6 +41,7 @@ Maintained by `/ingest` and `/lint`. Do not edit by hand except to resolve confl
 ## Project management (incl. scope & estimates)
 
 - [`project-management/estimation.md`](./project-management/estimation.md) — Dec 2025 estimate (superseded — RemitONE scope, do not use as baseline; new estimate via `/p5` after P4)
+- [`presale-tracker.md`](./presale-tracker.md) / [`presale-tracker.html`](./presale-tracker.html) — live HTML dashboard: SDLC pipeline stage, blockers, agreed vs suggested tasks with owners
 
 ## Cross-cutting
 
@@ -53,3 +54,4 @@ Maintained by `/ingest` and `/lint`. Do not edit by hand except to resolve confl
 - [`client-inputs/`](./client-inputs/) — material from the customer (immutable)
 - [`team-inputs/`](./team-inputs/) — material we authored ourselves
   - [`team-inputs/T2-discovery-qa.md`](./team-inputs/T2-discovery-qa.md) — discovery Q&A; Sections 1–6 pre-filled; 9 open questions for Joseph (send 23 May)
+  - [`team-inputs/2026-05-29-product-discovery-questions.md`](./team-inputs/2026-05-29-product-discovery-questions.md) — strategic discovery set: targets, personas, differentiation, brand/naming, GTM, channel

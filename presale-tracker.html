@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SocialRemit Presale — Delivery Tracker</title>
+<style>
+  :root{
+    --pink:#FF1F8E;          /* VL hot pink */
+    --pink-dark:#C70061;
+    --pink-soft:#FFE3F1;
+    --ink:#1A1420;
+    --muted:#6B6472;
+    --line:#ECE7EE;
+    --bg:#FAF8FB;
+    --card:#FFFFFF;
+    --done:#10B981;
+    --prog:#FF1F8E;
+    --block:#EF4444;
+    --todo:#B8B2BF;
+    --amber:#F59E0B;
+    --shadow:0 1px 3px rgba(26,20,32,.06),0 8px 24px rgba(26,20,32,.05);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px 64px}
+
+  /* header */
+  header{background:linear-gradient(110deg,var(--pink) 0%,var(--pink-dark) 100%);color:#fff;padding:30px 0 28px;margin-bottom:28px;box-shadow:var(--shadow)}
+  header .wrap{padding-bottom:0}
+  .eyebrow{text-transform:uppercase;letter-spacing:.14em;font-size:11px;font-weight:700;opacity:.85}
+  h1{margin:6px 0 4px;font-size:28px;font-weight:800;letter-spacing:-.02em}
+  .sub{opacity:.9;font-size:14px}
+  .asof{margin-top:14px;display:inline-block;font-size:12px;background:rgba(255,255,255,.18);padding:5px 12px;border-radius:99px;font-weight:600}
+
+  /* stat chips */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:30px}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;box-shadow:var(--shadow)}
+  .stat .k{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700}
+  .stat .v{font-size:22px;font-weight:800;margin-top:4px}
+  .stat .v small{font-size:13px;font-weight:600;color:var(--muted)}
+  .stat.alert .v{color:var(--block)}
+
+  h2{font-size:15px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:800;margin:34px 0 14px}
+
+  /* pipeline */
+  .pipe{display:flex;flex-wrap:wrap;gap:10px}
+  .step{flex:1 1 150px;min-width:150px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 14px;position:relative;box-shadow:var(--shadow)}
+  .step .code{font-size:11px;font-weight:800;letter-spacing:.04em;color:var(--muted)}
+  .step .name{font-size:13.5px;font-weight:600;margin-top:3px}
+  .step .pill{margin-top:9px;display:inline-block;font-size:10.5px;font-weight:700;padding:3px 9px;border-radius:99px;text-transform:uppercase;letter-spacing:.04em}
+  .step.done{border-color:#C9F0DF}
+  .step.done .pill{background:#E7F8F0;color:#0A8F5E}
+  .step.prog{border-color:var(--pink);box-shadow:0 0 0 2px var(--pink-soft),var(--shadow)}
+  .step.prog .pill{background:var(--pink-soft);color:var(--pink-dark)}
+  .step.block .pill{background:#FEE7E7;color:#C42121}
+  .step.block{border-color:#F7C6C6}
+  .step.todo{opacity:.72}
+  .step.todo .pill{background:#F0EDF2;color:var(--muted)}
+  .step.gate{flex:0 0 56px;min-width:56px;background:transparent;border:none;box-shadow:none;display:flex;align-items:center;justify-content:center}
+  .gate-badge{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;border:2px dashed var(--todo);color:var(--muted)}
+  .gate-badge.passed{border-style:solid;border-color:var(--done);color:var(--done)}
+
+  /* blocker banner */
+  .banner{background:#FFF3F3;border:1px solid #F7C6C6;border-left:4px solid var(--block);border-radius:12px;padding:14px 18px;margin:8px 0 4px;display:flex;gap:14px;align-items:flex-start}
+  .banner .dot{flex:0 0 auto;width:10px;height:10px;border-radius:50%;background:var(--block);margin-top:6px}
+  .banner b{color:#B81818}
+  .banner .meta{font-size:12px;color:var(--muted);margin-top:3px}
+
+  /* legend + filter */
+  .toolbar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin:30px 0 12px}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;font-size:12px;color:var(--muted);align-items:center}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .swatch{width:22px;height:14px;border-radius:4px;display:inline-block}
+  .sw-agreed{background:var(--pink)}
+  .sw-suggest{background:repeating-linear-gradient(45deg,var(--pink-soft),var(--pink-soft) 4px,#fff 4px,#fff 8px);border:1px dashed var(--pink)}
+  .filters{display:flex;gap:8px}
+  .fbtn{font-size:12px;font-weight:600;padding:6px 13px;border-radius:99px;border:1px solid var(--line);background:#fff;cursor:pointer;color:var(--muted)}
+  .fbtn.active{background:var(--pink);color:#fff;border-color:var(--pink)}
+
+  /* task cards */
+  .tasks{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .task{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:15px 16px;box-shadow:var(--shadow);position:relative;border-left:4px solid var(--pink)}
+  .task.suggested{border-left-style:dashed;border-left-color:var(--pink);background:linear-gradient(0deg,#fff,#fff)}
+  .task.suggested::after{content:"SUGGESTED";position:absolute;top:13px;right:14px;font-size:9.5px;font-weight:800;letter-spacing:.08em;color:var(--pink);background:var(--pink-soft);padding:3px 7px;border-radius:6px}
+  .task.agreed::after{content:"AGREED";position:absolute;top:13px;right:14px;font-size:9.5px;font-weight:800;letter-spacing:.08em;color:#fff;background:var(--pink);padding:3px 7px;border-radius:6px}
+  .task .ttitle{font-size:14.5px;font-weight:700;padding-right:74px}
+  .task .tnote{font-size:12.5px;color:var(--muted);margin-top:6px}
+  .task .trow{display:flex;flex-wrap:wrap;gap:8px;margin-top:11px;align-items:center}
+  .chip{font-size:11px;font-weight:600;padding:3px 9px;border-radius:99px;background:#F4F1F6;color:var(--muted)}
+  .chip.stage{background:#EFEAFB;color:#6D4FC0}
+  .chip.owner{background:#FFF;border:1px solid var(--line)}
+  .st{font-size:11px;font-weight:700;padding:3px 9px;border-radius:99px;display:inline-flex;align-items:center;gap:5px}
+  .st::before{content:"";width:7px;height:7px;border-radius:50%}
+  .st.done{background:#E7F8F0;color:#0A8F5E}.st.done::before{background:var(--done)}
+  .st.prog{background:var(--pink-soft);color:var(--pink-dark)}.st.prog::before{background:var(--prog)}
+  .st.block{background:#FEE7E7;color:#C42121}.st.block::before{background:var(--block)}
+  .st.todo{background:#F0EDF2;color:var(--muted)}.st.todo::before{background:var(--todo)}
+
+  footer{margin-top:40px;font-size:12px;color:var(--muted);text-align:center;border-top:1px solid var(--line);padding-top:18px}
+  @media(max-width:780px){.stats{grid-template-columns:repeat(2,1fr)}.tasks{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="eyebrow">Vacuumlabs · Presale Engagement</div>
+    <h1>SocialRemit — Delivery Tracker</h1>
+    <div class="sub">Consumer remittance app · Flutter/RN + BFF on Fincode · Ghana &amp; Nigeria corridors</div>
+    <div class="asof">As of 2026-05-29 · V2 Presale SDLC</div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="stats">
+    <div class="stat"><div class="k">Current stage</div><div class="v">P3 / P4 <small>parallel</small></div></div>
+    <div class="stat"><div class="k">Stages complete</div><div class="v">2 <small>/ 11 (P1, P2)</small></div></div>
+    <div class="stat alert"><div class="k">Open blockers</div><div class="v">1 <small>commercial model</small></div></div>
+    <div class="stat"><div class="k">Next milestone</div><div class="v" style="font-size:16px">Internal align<br><small>2026-06-01</small></div></div>
+  </div>
+
+  <h2>Pipeline</h2>
+  <div class="pipe" id="pipe"></div>
+
+  <h2>Blockers</h2>
+  <div class="banner">
+    <span class="dot"></span>
+    <div>
+      <b>Deferred-payment + equity commercial model unresolved.</b> Joseph wants minimum upfront, balance on go-live, plus equity/options — non-standard for VL. The proposal cannot be finalised until this is answered.
+      <div class="meta">Owner: Andy Birch (CRO) · escalated to Tomas Masek (CEO) / Marek Tomasik (CDO) · gates G2→proposal · to surface at 2026-06-01 alignment</div>
+    </div>
+  </div>
+
+  <div class="toolbar">
+    <div class="legend">
+      <span><i class="swatch sw-agreed"></i> Agreed step</span>
+      <span><i class="swatch sw-suggest"></i> Suggested step (PM proposal — not yet confirmed)</span>
+    </div>
+    <div class="filters">
+      <button class="fbtn active" data-f="all">All</button>
+      <button class="fbtn" data-f="agreed">Agreed</button>
+      <button class="fbtn" data-f="suggested">Suggested</button>
+    </div>
+  </div>
+
+  <div class="tasks" id="tasks"></div>
+
+  <footer>
+    Owners marked are best-guess assignments pending confirmation. Suggested steps reflect the incoming PM's proposal, not yet agreed by the team.<br>
+    Edit the <code>STAGES</code> and <code>TASKS</code> arrays in this file to update. · SocialRemit presale · Vacuumlabs
+  </footer>
+</div>
+
+<script>
+const STAGES = [
+  {code:"P1",  name:"Deal Intake",            status:"done"},
+  {code:"G1",  gate:true, passed:true},
+  {code:"P2",  name:"Domain Research",        status:"done"},
+  {code:"P3",  name:"Problem Framing",        status:"prog"},
+  {code:"P3e", name:"Business Architecture",  status:"todo"},
+  {code:"P3f", name:"Sales Strategy Align",   status:"todo"},
+  {code:"G2",  gate:true, passed:false},
+  {code:"P4",  name:"Technical Architecture", status:"prog"},
+  {code:"P5",  name:"Estimation",             status:"todo"},
+  {code:"P6",  name:"ARB Review",             status:"todo"},
+  {code:"G3",  gate:true, passed:false},
+  {code:"P7",  name:"Proposal Assembly",      status:"todo"},
+  {code:"P8",  name:"Quality Check",          status:"todo"},
+  {code:"G4",  gate:true, passed:false},
+  {code:"P9",  name:"Win/Loss Debrief",       status:"todo"},
+];
+const PILL = {done:"Done",prog:"In progress",block:"Blocked",todo:"Not started"};
+
+const TASKS = [
+  // ---- AGREED ----
+  {t:"Resolve deferred-payment + equity commercial model", type:"agreed", stage:"G2 / Commercial", owner:"Andy Birch (CRO)", status:"block", note:"Single red flag. Escalated to CEO/CDO. Gates the proposal."},
+  {t:"Internal alignment meeting", type:"agreed", stage:"Commercial", owner:"Jaro Novák (PM)", status:"todo", note:"2026-06-01 — surface commercial position + scope."},
+  {t:"Flutter vs React Native recommendation", type:"agreed", stage:"P4", owner:"Boris Vida (SA)", status:"prog", note:"VL leans RN; confirm with mobile experts, include in proposal."},
+  {t:"Obtain Fincode sandbox credentials", type:"agreed", stage:"P4", owner:"Boris Vida (SA)", status:"todo", note:"Needed for field-level API verification of BFF scope."},
+  {t:"Fincode technical walkthrough session", type:"agreed", stage:"P4", owner:"Boris Vida / Joseph", status:"todo", note:"Joseph requested before finalising admin/back-office scope."},
+  {t:"Draft product discovery question set", type:"agreed", stage:"P3", owner:"Rudolf Vido (PO)", status:"prog", note:"Strategy, personas, differentiation, GTM — drafted 2026-05-29."},
+
+  // ---- SUGGESTED ----
+  {t:"Corridor persona research — Ghana & Nigeria migrants", type:"suggested", stage:"P3", owner:"PO / PM", status:"todo", note:"Who they are, where they gather online, pain points. 5–10 user interviews."},
+  {t:"Clarify tx/day vs customer targets & 3-yr goals", type:"suggested", stage:"P3", owner:"PM", status:"todo", note:"1–3k tx/day implies 20k–90k active senders — reconcile with '10k customers'."},
+  {t:"Run P3 problem framing", type:"suggested", stage:"P3", owner:"Rudolf Vido (PO)", status:"todo", note:"After discovery answers land."},
+  {t:"Probe GTM / first-10k acquisition plan", type:"suggested", stage:"P3", owner:"PM (probe Joseph)", status:"todo", note:"Client-owned, but gates the 6-mo-to-seed realism."},
+  {t:"Flag brand/naming risk: 'E-money' = electronic money", type:"suggested", stage:"P3f", owner:"PM", status:"todo", note:"FCA term-of-art clash for an EMI holder; raise with client."},
+  {t:"Business Architecture (P3e)", type:"suggested", stage:"P3e", owner:"PO", status:"todo", note:"Stakeholder RACI, value streams, success measures."},
+  {t:"Sales Strategy Alignment (P3f)", type:"suggested", stage:"P3f", owner:"CRO / PM", status:"todo", note:"After P3e, before G2."},
+  {t:"Pressure-test 6–8 week timeline & phasing", type:"suggested", stage:"P5", owner:"Jaro Novák (PM)", status:"todo", note:"Aggressive for full MVP; agree phasing fallback."},
+  {t:"Fresh estimation (P5) post-P4", type:"suggested", stage:"P5", owner:"Boris Vida + PM", status:"todo", note:"Dec 2025 estimate superseded (RemitONE scope)."},
+  {t:"Confirm NDA status", type:"suggested", stage:"P3", owner:"Jaro Novák (PM)", status:"todo", note:"May already be in force from Dec 2025."},
+  {t:"ARB review (P6)", type:"suggested", stage:"P6", owner:"Boris Vida (SA)", status:"todo", note:"After P4 + P5, before ARB session."},
+  {t:"Proposal assembly (P7)", type:"suggested", stage:"P7", owner:"PM", status:"todo", note:"After commercial green-light (G3)."},
+];
+
+// render pipeline
+document.getElementById("pipe").innerHTML = STAGES.map(s=>{
+  if(s.gate) return `<div class="step gate"><div class="gate-badge ${s.passed?'passed':''}">${s.code}</div></div>`;
+  return `<div class="step ${s.status}">
+    <div class="code">${s.code}</div>
+    <div class="name">${s.name}</div>
+    <span class="pill">${PILL[s.status]}</span>
+  </div>`;
+}).join("");
+
+// render tasks
+function renderTasks(filter){
+  document.getElementById("tasks").innerHTML = TASKS
+    .filter(t=>filter==="all"||t.type===filter)
+    .map(t=>`<div class="task ${t.type}">
+      <div class="ttitle">${t.t}</div>
+      <div class="tnote">${t.note}</div>
+      <div class="trow">
+        <span class="st ${t.status}">${PILL[t.status]}</span>
+        <span class="chip stage">${t.stage}</span>
+        <span class="chip owner">👤 ${t.owner}</span>
+      </div>
+    </div>`).join("");
+}
+renderTasks("all");
+
+document.querySelectorAll(".fbtn").forEach(b=>{
+  b.onclick=()=>{
+    document.querySelectorAll(".fbtn").forEach(x=>x.classList.remove("active"));
+    b.classList.add("active");
+    renderTasks(b.dataset.f);
+  };
+});
+</script>
+</body>
+</html>
