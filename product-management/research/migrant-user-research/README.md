@@ -23,8 +23,9 @@ SocialRemit's MVP, positioning, and launch plan credible in the proposal?
 
 - [`sender-behaviour.md`](./sender-behaviour.md) — sender profiles, corridor differences, transfer behaviour,
   and pain points.
-- [`digital-ethnography.md`](./digital-ethnography.md) — public online discourse, app-review themes, community
-  trust signals, and complaints.
+- [`digital-ethnography.md`](./digital-ethnography.md) — public social listening across
+  Reddit, Trustpilot, App Store, and Google Play traces: provider comparisons, mobile
+  money, account blocks, delayed funds, refunds, and "where is my money?" anxiety.
 - [`channel-map.md`](./channel-map.md) — online and offline acquisition/trust channels for Ghanaian and
   Nigerian migrant communities in the UK.
 - [`differentiation-dialectic.md`](./differentiation-dialectic.md) — persona-led pressure test of the "built by migrants,

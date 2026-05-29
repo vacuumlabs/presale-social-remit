@@ -21,14 +21,16 @@ status: draft
 ## Executive summary
 
 - SocialRemit's core claim, "built by migrants, for migrants", is promising but
-  unvalidated. It becomes credible only if translated into corridor-specific trust,
-  receiver confidence, and support when money gets stuck.
+  unvalidated. Public social listening suggests the sharper trust promise is not "we
+  understand migrants" but "we tell you where the money is, whether your family received
+  it, and what happens if something goes wrong."
 - UK -> Ghana and UK -> Nigeria should not be treated as one segment. Ghana appears more
   shaped by mobile-money receiver expectations; Nigeria has stronger visible signals of
   informal/networked alternatives and rate-seeking workarounds.
-- Price matters, but it is not enough. World Bank data shows UK -> Nigeria is already a
-  low-cost competitive corridor, while UK -> Ghana has more cost variation. SocialRemit
-  needs reliability, transparency, and trust proof, not only a fee claim.
+- Price matters, but it is not enough. Public Ghana/Nigeria threads show users comparing
+  Wise, Remitly, WorldRemit, Sendwave, TapTap Send, Ria, informal routes, and crypto
+  workarounds. SocialRemit needs reliability, transparency, and trust proof, not only a
+  fee claim.
 - The real user is a family system: sender, receiver, and sometimes wider relatives. The
   sender app must account for receiver payout reality and family-pressure dynamics.
 - GTM should not be framed as generic digital acquisition. Early launch needs community
@@ -57,7 +59,19 @@ actually access the money.
 So what: MVP scope should include sender-visible payout confidence, clear receiver method,
 and exception handling. This is not merely integration detail.
 
-### 3. Generic fintech trust is weaker than corridor-local trust
+### 3. Public listening shows the trust wound: "where is my money?"
+
+Reddit, Trustpilot, App Store, and Google Play traces show users praising fast transfers
+when they work, but becoming furious when a transfer is delayed, cancelled, reversed,
+blocked, or marked complete while the receiver has not received money. Account blocking
+and vague fraud/compliance explanations create a special kind of harm because the sender
+feels both accused and financially trapped.
+
+So what: exception handling is not support-table hygiene. It is part of the core product
+promise. SocialRemit needs plain-language transfer states, refund/cancellation clarity,
+and visible escalation from launch.
+
+### 4. Generic fintech trust is weaker than corridor-local trust
 
 Users do not trust "new regulated fintech" in the abstract. They trust a provider because
 someone they know used it, the receiver got money, the rate was fair, and support did not
@@ -66,7 +80,7 @@ disappear during failure.
 So what: proposal positioning should emphasise corridor learning and community proof
 rather than only technology delivery.
 
-### 4. Digital-first does not remove offline/community GTM
+### 5. Digital-first does not remove offline/community GTM
 
 Even for an app-first product, launch trust may come from churches, associations,
 diaspora businesses, WhatsApp groups, referrals, and receiver-side validation. Public
@@ -74,7 +88,7 @@ Nigeria discussions show WhatsApp/networked alternatives as real comparison poin
 
 So what: SocialRemit should define first launch communities, not only app features.
 
-### 5. The "migrant-built" claim needs proof points
+### 6. The "migrant-built" claim needs proof points
 
 The dialectic suggests three proof points:
 
@@ -116,6 +130,7 @@ Suggested proposal language themes:
 - "Community-led launch learning, not only paid acquisition."
 - "Transparent cost and transfer-state clarity."
 - "Exception handling as a trust feature."
+- "Where is my money?" as the core anxiety the app must answer.
 
 ## Product implications
 
@@ -126,6 +141,7 @@ MVP should prioritise:
 - plain-language transfer states;
 - recipient confirmation;
 - clear support escalation for stuck transfers;
+- cancellation/refund clarity when a transfer is blocked, reversed, or partner-delayed;
 - post-transfer feedback loop;
 - referral/community-source tracking.
 

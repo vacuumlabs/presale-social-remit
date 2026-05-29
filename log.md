@@ -128,3 +128,7 @@ Created `deal-context/relationship-read.md` from a query on how SocialRemit view
 ## [2026-05-29 15:35] author | Migrant sender research — Ghana & Nigeria corridors
 
 Ran the first `recon-research` pass for UK-based Ghanaian and Nigerian migrant senders. Created `product-management/research/migrant-user-research/` with sender behaviour, digital ethnography, channel map, persona-led differentiation dialectic, navigator review, and synthesis; updated the research brief and indexes. Core finding: "built by migrants, for migrants" is promising but unvalidated until translated into corridor-specific trust, receiver proof, and exception handling.
+
+## [2026-05-29 16:05] author | Social listening repair — Ghana/Nigeria migrant sender research
+
+Strengthened `product-management/research/migrant-user-research/digital-ethnography.md` into an evidence-led social listening note using public Reddit corridor threads, Trustpilot summaries, and App Store/Google Play review traces. Updated the synthesis to foreground the core user anxiety: "where is my money?", especially around delayed transfers, account blocks, refunds, receiver-not-credited failures, mobile money, rate comparison, and corridor availability.
