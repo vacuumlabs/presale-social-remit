@@ -40,7 +40,7 @@ Maintained by `/ingest` and `/lint`. Do not edit by hand except to resolve confl
 
 ## Project management (incl. scope & estimates)
 
-- [`project-management/estimation.md`](./project-management/estimation.md) — Dec 2025 estimates: Option 1 £118k (FE+BFF), Option 2 £169k (FE+BFF+Discovery)
+- [`project-management/estimation.md`](./project-management/estimation.md) — Dec 2025 estimate (superseded — RemitONE scope, do not use as baseline; new estimate via `/p5` after P4)
 
 ## Cross-cutting
 
