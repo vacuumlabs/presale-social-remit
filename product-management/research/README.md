@@ -9,4 +9,5 @@ once gathered. Synthesised findings may also be promoted to `user-research.md`,
 
 <!-- Claude maintains this list -->
 
-- [`migrant-user-research-brief.md`](./migrant-user-research-brief.md) — research brief: who the Ghana & Nigeria corridor senders are, where they gather, their pain points, and validation of the "built by migrants" claim (status: planned)
+- [`migrant-user-research-brief.md`](./migrant-user-research-brief.md) — research brief: who the Ghana & Nigeria corridor senders are, where they gather, their pain points, and validation of the "built by migrants" claim (status: active)
+- [`migrant-user-research/`](./migrant-user-research/) — completed desk-research and digital-ethnography run: sender behaviour, public social traces, channel map, persona-led differentiation dialectic, navigator review, and synthesis

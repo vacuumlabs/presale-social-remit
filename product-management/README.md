@@ -54,5 +54,6 @@ Problem framing, product strategy, user and market research, personas, PRDs, use
 - [`regulatory-brief.md`](./regulatory-brief.md) — P2: FCA/EMI regulatory framework, KYC/AML/sanctions constraints, data residency
 - [`competitive-positioning.md`](./competitive-positioning.md) — P2: likely competitors, VL differentiators, risks to VL's position
 - [`research/`](./research/) — planned & completed user/market research
-  - [`research/migrant-user-research-brief.md`](./research/migrant-user-research-brief.md) — brief: Ghana & Nigeria corridor senders, personas, pain points, GTM channels, "built by migrants" validation (planned)
+  - [`research/migrant-user-research-brief.md`](./research/migrant-user-research-brief.md) — brief: Ghana & Nigeria corridor senders, personas, pain points, GTM channels, "built by migrants" validation (active)
+  - [`research/migrant-user-research/`](./research/migrant-user-research/) — completed desk-research and digital-ethnography run with synthesis and persona-led dialectic
   - [`research/competitor-research-brief.md`](./research/competitor-research-brief.md) — brief: remittance market competitors — strengths, weaknesses, what holds against them, white space (planned)

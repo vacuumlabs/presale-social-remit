@@ -8,15 +8,25 @@ sources:
   - ../domain-research.md
   - ../../deal-context/client-overview.md
 last_updated: 2026-05-29
-status: planned
+status: active
 ---
 
 # Migrant User Research Brief — Ghana & Nigeria corridors
 
-**Status: planned — not yet started.** This brief defines research the team agreed is
+**Status: active.** The first desk-research and digital-ethnography pass has been written
+up under [`migrant-user-research/`](./migrant-user-research/). This brief defines research
+the team agreed is
 needed during PM onboarding (2026-05-29). It exists so the need is not lost; it is not
-findings. Update `status` to `in-progress` when fieldwork begins and to `active` when
-findings are written up.
+itself the findings.
+
+## Decision this research informs
+
+What must VL know about UK-based Ghanaian and Nigerian migrant senders to make
+SocialRemit's MVP, positioning, and launch plan credible in the proposal?
+
+This research is primarily for the VL presale/product team, with proposal reuse as the
+secondary audience. The output should help scope decisions, sharpen discovery questions,
+and pressure-test positioning. It is not intended to be a polished market report.
 
 ## Why this research exists
 
@@ -45,6 +55,55 @@ differentiation around evidence rather than slogans.
 3. **Surface real pain points** in how they send money today, and the emotional context around it (trust, shame, obligation, urgency).
 4. **Pressure-test the differentiation** — does "built by migrants" resonate, and what concretely would make these users switch from Wise / Western Union / WorldRemit / crypto?
 5. **Validate channel assumptions** — is a fully digital experience enough, or is a physical/cash-in/agent touchpoint expected for trust and funding?
+
+## Recon-research scope
+
+The first research run should be a fast desk-research and digital-ethnography pass, not
+primary fieldwork. It should cover:
+
+- Sender behaviour and pain points for UK -> Ghana and UK -> Nigeria remittance users.
+- Trust and switching logic across formal providers, informal networks, and crypto or
+  stablecoin routes where relevant.
+- Channel reality: where Ghanaian and Nigerian migrant communities discover, discuss,
+  and recommend remittance services.
+- Proposal implications: what this changes for SocialRemit's MVP, positioning, GTM
+  assumptions, and follow-up discovery questions.
+
+The first run should not attempt a full competitor teardown, full regulatory analysis,
+or complete interview protocol. Those can be follow-up workstreams if the evidence shows
+they matter.
+
+## Hypotheses to pressure-test
+
+1. **"Built by migrants" is not enough.** Users will care only if the claim translates
+   into concrete trust signals: better receiver experience, transparent rates, fewer
+   failed transfers, local proof, or community endorsement.
+2. **Price is necessary but not differentiating.** Price and FX must be competitive, but
+   the market already has strong low-cost players. Switching likely requires price plus
+   trust, reliability, and receiver convenience.
+3. **Trust is corridor-local, not generic fintech trust.** A new app needs Ghana/Nigeria
+   credibility: known payout rails, community references, visible compliance, and proof
+   that recipients receive money smoothly.
+4. **The sender is not the only user.** Receiver access and preference may decide the
+   sender's provider choice. Mobile money, bank payout, cash pickup, and local familiarity
+   may matter as much as sender-side UX.
+5. **Ghana and Nigeria should not be treated as one segment.** The corridors may differ
+   materially in payout rails, community networks, provider expectations, and informal
+   transfer behaviour.
+6. **Informal channels persist because they solve trust and social proximity.** They may
+   survive where formal providers feel impersonal, expensive, over-compliant, or detached
+   from local realities.
+7. **An app-first product may still need offline trust anchors.** SocialRemit can be
+   digital-first, but early GTM may need churches, shops, associations, community leaders,
+   or referral loops.
+8. **The emotional job is bigger than "send money fast."** Senders may be managing
+   obligation, guilt, status, urgency, family negotiation, and fear of being exploited.
+9. **Crypto/stablecoin is likely a niche pressure, not a mainstream MVP requirement.**
+   It may matter for rate-seeking or financially sophisticated users, while mainstream
+   users may prioritize simplicity, reversibility, and trust.
+10. **The proposal should sell risk reduction, not only feature delivery.** VL's value
+    is helping SocialRemit avoid building a generic remittance app around an untested
+    founder narrative.
 
 ## Key research questions
 
