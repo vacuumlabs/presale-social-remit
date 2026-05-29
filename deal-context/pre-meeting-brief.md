@@ -7,7 +7,7 @@ sources:
   - deal-context/intake-gaps.md
   - deal-context/similar-deals.md
   - deal-context/go-no-go-flags.md
-last_updated: 2026-05-19
+last_updated: 2026-05-29
 status: draft
 ---
 
@@ -35,11 +35,10 @@ SocialRemit is a UK fintech startup — EMI registered, FCA regulated — buildi
 
 ## 3. What we need to find out
 
-1. **What is VL's position on the deferred payment model?** (Internal — Tomas Masek / Marek Tomasik must respond before this meeting.) This is the commercial gate.
-2. **What are the specific MVP corridors and currencies?** Required to confirm Fincode integration scope and payout rail complexity.
-3. **What do the Fincode API docs show?** BFF integration effort cannot be confirmed without them. Joseph said he would send these post-call.
-4. **Flutter or React Native?** VL leans React Native — Boris must confirm with VL mobile experts before the meeting.
-5. **Is an admin/back-office tool in scope?** Not discussed on 19 May — any yes changes the estimate materially.
+1. **What is VL's position on the deferred payment model?** (Internal — Andy Birch (CRO) is responsible for the commercial qualification. Boris asked Marcus Davey for an update on 2026-05-29; answer pending. This is the single remaining gate before the proposal can be finalised.)
+2. **Flutter or React Native?** VL leans React Native — Boris must confirm with VL mobile experts and include the recommendation in the proposal.
+
+_Resolved since 19 May:_ MVP corridors (Ghana + Nigeria confirmed), Fincode API docs (full gap analysis produced), admin/back-office tool (Fincode + Sumsub dashboards cover go-live needs; lightweight tooling TBC after Fincode walkthrough).
 
 ---
 

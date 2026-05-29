@@ -105,3 +105,13 @@ Ingested Joseph's email reply to 7 questions Boris sent on 22 May 2026. Resolved
 - Updated: `product-management/mvp-scope.md` — push notifications moved from "out of scope" to "desired at go-live, architecture from day one"
 - Updated: `decisions.md` — 5 new decisions recorded (Sumsub MVP, Trust Payments, Volume, push notification architecture, Ghana + Nigeria corridors); provisional Fincode-native KYC decision superseded
 - Contradictions: none (Joseph's answers override prior VL assumptions; no client-vs-client conflict)
+
+## [2026-05-29 00:00] ingest | Slack — #tmp-social-remit + stakeholder corrections
+
+Read #tmp-social-remit channel history and DMs with Marcus Davey and Andy Birch. Key findings: Rudolf Vido (Product Strategist) is the PO (not Carolina Soares, who facilitated assignment); Andy Birch (CRO) is the commercial qualification lead; Marcus Davey is still engaged on qualification; internal alignment planned 2026-06-01; commercial model answer still pending as of 2026-05-29.
+
+- Updated: `deal-context/stakeholder-map.md` — added Rudolf Vido (PO), Andy Birch (CRO); removed Carolina Soares (not on engagement); corrected Jaro's description
+- Updated: `deal-context/go-no-go-flags.md` — removed superseded Dec estimate reference; resolved 2 amber flags (Fincode docs, presales ownership); added VL team assembled as green flag; updated commercial flag to name Andy Birch; summary now 6 green / 4 amber / 1 red
+- Updated: `deal-context/pre-meeting-brief.md` — stripped 3 resolved "what we need to find out" items; updated commercial gate owner to Andy Birch
+- Updated: `index.md` — stakeholder map entry corrected
+- Contradictions: none

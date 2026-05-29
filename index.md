@@ -12,7 +12,7 @@ Maintained by `/ingest` and `/lint`. Do not edit by hand except to resolve confl
 
 ## Deal context
 
-- [`deal-context/stakeholder-map.md`](./deal-context/stakeholder-map.md) — Joseph Owusu, Paul Duncan (Technical Director), Tomas Masek + Marek Tomasik (VL CEO/CDO), Boris Vida, Jaroslav Novák (PM), Carolina Soares (PO), Marcus Davey
+- [`deal-context/stakeholder-map.md`](./deal-context/stakeholder-map.md) — Joseph Owusu, Paul Duncan (Technical Director), Tomas Masek + Marek Tomasik (VL CEO/CDO), Boris Vida, Jaroslav Novák (PM), Rudolf Vido (PO), Andy Birch (CRO / commercial lead), Marcus Davey
 - [`deal-context/client-overview.md`](./deal-context/client-overview.md) — SocialRemit: EMI registered, Fincode white-label, go-live 6–8 weeks, $900M liquidity
 - [`deal-context/proposal-dec-2025.md`](./deal-context/proposal-dec-2025.md) — December 2025 VL proposal status: not contracted; re-engagement via Joseph May 2026
 - [`deal-context/open-questions.md`](./deal-context/open-questions.md) — most items answered (email 28 May); critical still-open: commercial/payment model, Flutter vs RN
