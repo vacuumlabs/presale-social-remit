@@ -55,3 +55,4 @@ Problem framing, product strategy, user and market research, personas, PRDs, use
 - [`competitive-positioning.md`](./competitive-positioning.md) — P2: likely competitors, VL differentiators, risks to VL's position
 - [`research/`](./research/) — planned & completed user/market research
   - [`research/migrant-user-research-brief.md`](./research/migrant-user-research-brief.md) — brief: Ghana & Nigeria corridor senders, personas, pain points, GTM channels, "built by migrants" validation (planned)
+  - [`research/competitor-research-brief.md`](./research/competitor-research-brief.md) — brief: remittance market competitors — strengths, weaknesses, what holds against them, white space (planned)
