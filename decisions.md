@@ -88,6 +88,14 @@ Claude appends entries here whenever a decision surfaces during `/ingest` or whi
 - **Sources:** [`client-inputs/2026-05-19-call-transcript.md`](client-inputs/2026-05-19-call-transcript.md)
 - **Status:** active
 
+## 2026-05-31 — Proposal must include a dedicated Flutter vs React Native section
+
+- **Decision:** The final proposal document must include a dedicated section presenting the Flutter vs React Native comparison, with VL's recommendation and rationale. This is not just an internal note — it is client-facing content Joseph and Paul need to see before signing.
+- **Context:** Joseph originally requested Flutter; Boris explained the equivalence on the 19 May call and Joseph opened to React Native. Paul Duncan (Technical Director) has not yet weighed in. The recommendation needs to be explicit in the proposal so Paul can approve it alongside commercial terms.
+- **Made by:** Boris Vida.
+- **Sources:** [`client-inputs/2026-05-19-call-transcript.md`](client-inputs/2026-05-19-call-transcript.md)
+- **Status:** active — content requirement for `/p7`
+
 ## 2026-05-19 — Flutter vs React Native: open decision, VL leans React Native
 
 - **Decision:** Not yet made. SocialRemit initially preferred Flutter; on the 19 May call Boris explained the equivalence of both frameworks and raised React Native's larger hiring pool and VL's greater experience. Joseph opened to React Native. Boris to consult VL mobile experts and include a recommendation in the proposal.
